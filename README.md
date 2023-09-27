@@ -1,9 +1,10 @@
 # Atelier de création de graphes de connaissances géohistoriques (2 au 6 octobre 2023)
 
-## Baseline
+## Baseline : travaux présentés à la conférence IC (Juillet 2023)
 
-- Article : 
-- [Dépôt de la chaîne de traitement proposée à IC 2023](https://github.com/soduco/ic_2023_photographes_parisiens/tree/main/doc)
+- [Article](https://hal.science/hal-04121643/)
+- [Dépôt de code la chaîne de traitement proposée à IC 2023](https://github.com/soduco/ic_2023_photographes_parisiens/tree/main/doc)
+- [Interface de visualisation](https://soduco.github.io/ic_2023_photographes_parisiens/)
 
 ## Outils et logiciels requis
 
@@ -20,4 +21,4 @@
 
 - Postgres : connexion à la base de donnée soduco (réseau IGN / réseau invité)
 - Graph DB : utiliser le triplestore
-- Silk Single Machine : utiliser Silk
+- Silk Single Machine : utiliser le .jar
