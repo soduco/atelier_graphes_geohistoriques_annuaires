@@ -1,6 +1,6 @@
-# Silk (lignes de commande)
+# Silk (single-machine)
 
-Ce document est un mémo d'utilisation pour Silk (single machine).
+Ce document est un mémo d'utilisation de Silk (single machine).
 
 ## Pré-requis
 
