@@ -10,7 +10,7 @@
 
 ### Installation (avant l'atelier)
 
-[Notice d'installation des logiciels suivants](https://docs.google.com/document/d/1toDmTdc2XMvecJQJZhU5ERwvb2qoIhzIRl5rI5HCcZk/edit) : 
+➡️ [Notice d'installation des logiciels suivants](https://docs.google.com/document/d/1toDmTdc2XMvecJQJZhU5ERwvb2qoIhzIRl5rI5HCcZk/edit) : 
 - JDK 8
 - PgAdmin 4 v7
 - GraphDB
@@ -25,7 +25,7 @@
 
 ## TODO
 - [X] Document d'installation/téléchargement des logiciels à utiliser
-- [] Documents d'aides pour la semaine prochaine
+- Documents d'aides pour la semaine prochaine
     - [X] Graph DB (version 9.10.3, a priori pas trop de changements)
     - [] Silk Workbench
-    - [X] Silk single machine (à détailler plus ?)
+    - [X] Silk single machine (*à détailler plus ?*)
