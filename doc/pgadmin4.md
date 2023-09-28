@@ -1,6 +1,6 @@
 # Connexion à la base de donnée SoDUCo avec PgAdmin 4 v7
 
-Cette étape permet de vous connecter à distance à la base de donnée SODUCO dans laquelle se trouvent les entrées d’annuaires.
+Cette étape permet de se connecter à distance à la base de données SODUCO dans laquelle se trouvent les entrées d’annuaires.
 
 ## Réseau invité
 
@@ -26,11 +26,11 @@ Cette étape permet de vous connecter à distance à la base de donnée SODUCO d
 ```
 ssh -L 5434:127.0.0.1:5432 -N -f ghdvmadmin@134.158.33.227
 ```
-- où 5434 est le port local sur lequel sera connectée la base de donnée distante ( = choisir un port libre du PC)
+- où 5434 est le port local sur lequel sera connectée la base de données distante ( = choisir un port libre du PC)
 
 3. Entrer le mot de passe du tunnel
 
-4. Laissez le terminal ouvert aussi longtemps que vous souhaitez travailler avec la base de données.
+4. Laisser le terminal ouvert aussi longtemps que vous souhaitez travailler avec la base de données.
 
 ### II. Paramétrer PgAdmin
 
