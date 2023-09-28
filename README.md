@@ -22,3 +22,10 @@
 - [PgAdmin v7](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/pgadmin4.md) : connexion à la base de donnée soduco (réseau IGN / réseau invité)
 - [Graph DB](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/Tutoriel_GraphDB.pdf) : utiliser le triplestore
 - [Silk Single Machine](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/silk_single_machine.md) : utiliser le .jar
+
+## TODO
+- [X] Document d'installation/téléchargement des logiciels à utiliser
+- [] Documents d'aides pour la semaine prochaine
+    - [X] Graph DB (version 9.10.3, a priori pas trop de changements)
+    - [] Silk Workbench
+    - [X] Silk single machine (à détailler plus ?)
