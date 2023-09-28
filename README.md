@@ -25,7 +25,8 @@
 
 ## TODO
 - [X] Document d'installation/téléchargement des logiciels à utiliser
+- [ ] Envoyer le doc d'installation
 - Documents d'aides pour la semaine prochaine
     - [X] Graph DB (version 9.10.3, a priori pas trop de changements)
-    - [] Silk Workbench
+    - [ ] Silk Workbench
     - [X] Silk single machine (*à détailler plus ?*)
