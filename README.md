@@ -10,7 +10,7 @@
 
 ### Installation (avant l'atelier)
 
-[Notice d'installation des logiciels requis : ](https://docs.google.com/document/d/1toDmTdc2XMvecJQJZhU5ERwvb2qoIhzIRl5rI5HCcZk/edit)
+[Notice d'installation des logiciels suivants](https://docs.google.com/document/d/1toDmTdc2XMvecJQJZhU5ERwvb2qoIhzIRl5rI5HCcZk/edit) : 
 - JDK 8
 - PgAdmin 4 v7
 - GraphDB
@@ -19,6 +19,6 @@
 
 ### Aides pour l'utilisation (pendant l'atelier)
 
-- Postgres : connexion à la base de donnée soduco (réseau IGN / réseau invité)
+- Pg Admin v7 : connexion à la base de donnée soduco (réseau IGN / réseau invité)
 - Graph DB : utiliser le triplestore
 - Silk Single Machine : utiliser le .jar
