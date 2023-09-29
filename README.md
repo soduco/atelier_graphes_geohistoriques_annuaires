@@ -3,6 +3,7 @@
 ## Baseline : travaux présentés à la conférence IC (Juillet 2023)
 
 - [Article](https://hal.science/hal-04121643/)
+- [Présentation](https://docs.google.com/presentation/d/1rwIu4ilWswUI7ltXQRd4-AUwcRffb8CQJ54chePoRQc/edit?usp=sharing)
 - [Dépôt de code de la chaîne de traitement proposée à IC 2023](https://github.com/soduco/ic_2023_photographes_parisiens/tree/main/doc)
 - [Interface de visualisation](https://soduco.github.io/ic_2023_photographes_parisiens/)
 
