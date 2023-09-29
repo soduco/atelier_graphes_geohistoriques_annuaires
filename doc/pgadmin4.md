@@ -8,12 +8,21 @@ Cette étape permet de se connecter à distance à la base de données SODUCO da
 2. Créer un nouveau serveur : Clic droit sur Serveur > Nouveau > Serveur...
     * Dans l’onglet Général > Donner un nom au serveur
     * Dans l’onglet Connexion :
-        - *Nom d'hôte* : geohistoricaldata.org
-        - *Port* : 5432
-        - *Nom d'utilisateur* : ?????????
-        - *Mot de passe* : ?????????
+        - Nom d'hôte : geohistoricaldata.org
+        - Port : 5432
+        - Nom d'utilisateur : ?????????
+        - Mot de passe : ?????????
     * Dans l'onglet Avancé :
-        - *Limité aux bases de données* :  soduco
+        - Limité aux bases de données :  soduco
+
+<img src="./img/pgadmin/image2.png">
+
+<img src="./img/pgadmin/image3.png" style="width:350;display:block;margin-left:auto;
+margin-right: auto;">
+<img src="./img/pgadmin/image4.png" style="width:350;display:block;margin-left:auto;
+margin-right: auto;">
+<img src="./img/pgadmin/image5.png" style="width:350;display:block;margin-left:auto;
+margin-right: auto;">
 
 ## Réseau IGN (avec le proxy)
 
@@ -39,7 +48,7 @@ ssh -L 5434:127.0.0.1:5432 -N -f ghdvmadmin@134.158.33.227
 * Dans l’onglet Général > Donner un nom au serveur
 * Dans l’onglet Connexion :
     - Nom d'hôte : localhost
-    - Port : 5434,
+    - Port : 5434
     - Nom d'utilisateur : ?????????
     - Mot de passe : ?????????
 * Dans l'onglet Avancé :
