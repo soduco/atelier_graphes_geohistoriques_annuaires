@@ -18,7 +18,7 @@ INSERT INTO directories_graph.directories_content
 	INNER JOIN directories.addresses AS s ON e.index = s.entry_id
 	INNER JOIN directories.titles AS t ON e.index = t.entry_id
 	WHERE (
-		-- Liste des mots-clés: à adapter!
+		-- Liste des mots-clés
 		act.ner_xml ILIKE '%ébéniste%' OR 
 		act.ner_xml ILIKE '%ebeniste%' OR 
 		act.ner_xml ILIKE '%ébeniste%' OR 
@@ -45,13 +45,14 @@ INSERT INTO directories_graph.geocoding
 	WHERE (
 		(g."precise.geo_response" not like '')
 		AND(
-		-- Liste des mots-clés: à adapter!
-		act.ner_xml ILIKE '%ébéniste%' OR 
+		-- Liste des mots-clés
+				act.ner_xml ILIKE '%ébéniste%' OR 
 		act.ner_xml ILIKE '%ebeniste%' OR 
 		act.ner_xml ILIKE '%ébeniste%' OR 
 		act.ner_xml ILIKE '%ebéniste%'))
 	ORDER BY e.index);
-
--- Liste des jeux de données: à adapter!
+	
 UPDATE directories_graph.directories_content SET graph_name ='ebenistes' WHERE graph_name ISNULL;
+UPDATE directories_graph.geocoding SET graph_name ='ebenistes' WHERE graph_name ISNULL;
 INSERT INTO directories_graph.dataset VALUES ('Ebenistes', '2023-09-27', 'ebenistes');
+	
