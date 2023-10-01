@@ -1,0 +1,88 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix : <http://example.org/voc#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix ex: <http://example.org/> .
+@prefix sf: <http://www.opengis.net/ont/sf#> .
+@prefix adb: <http://rdf.geohistoricaldata.org/def/directory#> .
+@prefix alg: <http://data.alegoria-project.fr/id/anf/> .
+@prefix cat: <http://catalog.geohistoricaldata.org/rdf/id/> .
+@prefix clt: <http://data.culture.fr/thesaurus/resource/> .
+@prefix gsp: <http://www.opengis.net/ont/geosparql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix rda: <http://rdaregistry.info/Elements/a/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix xys: <http://data.ign.fr/def/xysemantics#> .
+@prefix data: <http://rdf.geohistoricaldata.org/id/directories/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geom: <http://data.ign.fr/def/geometrie#> .
+@prefix html: <http://www.w3.org/1999/xhtml> .
+@prefix ignf: <http://data.ign.fr/def/ignf#> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix obda: <https://w3id.org/obda/vocabulary#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rico: <https://www.ica.org/standards/RiC/ontology#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ign-crs: <http://data.ign.fr/id/ignf/crs/> .
+@prefix ric-dft: <https://www.ica.org/standards/RiC/vocabularies/documentaryFormTypes#> .
+@prefix ric-rst: <https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#> .
+@prefix organization: <http://www.w3.org/ns/org#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+
+
+<urn:MAPID-348da7258faf42acaeb43491994444db-100320fe-995a-4e42-afc3-9523d69eea30>
+  a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:predicate prov:wasDerivedFrom;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:template "http://rdf.geohistoricaldata.org/id/directories/directory/{directory}";
+          rr:termType rr:IRI
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:column "entry_id";
+          rr:datatype xsd:integer;
+          rr:termType rr:Literal
+        ];
+      rr:predicate adb:numEntry
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:column "fulladd";
+          rr:datatype xsd:integer;
+          rr:termType rr:Literal
+        ];
+      rr:predicate locn:fullAddress
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate rda:P50104;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:column "activity";
+          rr:termType rr:Literal;
+          rr:datatype xsd:string
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:column "person";
+          rr:datatype xsd:string;
+          rr:termType rr:Literal
+        ];
+      rr:predicate rdfs:label
+    ];
+  rr:subjectMap [ a rr:TermMap, rr:SubjectMap;
+      rr:termType rr:IRI;
+      rr:class adb:Entry;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select entry_id, directory, person, activity, coalesce(fulladd, 'inconnue') as fulladd, graph_name from directories_graph.directories_content where fulladd not like ' ';"
+    ] .
