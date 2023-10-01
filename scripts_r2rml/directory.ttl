@@ -1,0 +1,347 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix : <http://example.org/voc#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix ex: <http://example.org/> .
+@prefix sf: <http://www.opengis.net/ont/sf#> .
+@prefix adb: <http://rdf.geohistoricaldata.org/def/directory#> .
+@prefix alg: <http://data.alegoria-project.fr/id/anf/> .
+@prefix cat: <http://catalog.geohistoricaldata.org/rdf/id/> .
+@prefix clt: <http://data.culture.fr/thesaurus/resource/> .
+@prefix gsp: <http://www.opengis.net/ont/geosparql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix rda: <http://rdaregistry.info/Elements/a/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix xys: <http://data.ign.fr/def/xysemantics#> .
+@prefix data: <http://rdf.geohistoricaldata.org/id/directories/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geom: <http://data.ign.fr/def/geometrie#> .
+@prefix html: <http://www.w3.org/1999/xhtml> .
+@prefix ignf: <http://data.ign.fr/def/ignf#> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix obda: <https://w3id.org/obda/vocabulary#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rico: <https://www.ica.org/standards/RiC/ontology#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ign-crs: <http://data.ign.fr/id/ignf/crs/> .
+@prefix ric-dft: <https://www.ica.org/standards/RiC/vocabularies/documentaryFormTypes#> .
+@prefix ric-rst: <https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#> .
+@prefix organization: <http://www.w3.org/ns/org#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+
+<urn:MAPID-2a851f885c024d0babf35f1a653339bc> a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:predicate rdfs:label;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:datatype xsd:string;
+          rr:column "directory";
+          rr:termType rr:Literal
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate pav:createdOn;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:datatype xsd:integer;
+          rr:column "published";
+          rr:termType rr:Literal
+        ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select distinct directory, published, graph_name from directories_graph.directories_content"
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:IRI;
+      rr:class adb:Directory;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/directory/{directory}";
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ] .
+
+<urn:MAPID-3b951f885c024d0babf35f1a653339bc> a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:predicate dcterms:title;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:datatype xsd:string;
+          rr:column "title";
+          rr:termType rr:Literal
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate sd:namedGraph;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+         rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}";
+         rr:termType rr:IRI
+        ]
+    ],[ a rr:PredicateObjectMap;
+      rr:predicate dcterms:issued;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:datatype xsd:date;
+          rr:column "issued";
+          rr:termType rr:Literal
+        ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select distinct dataset_id, title, issued, graph_name from directories_graph.dataset"
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:IRI;
+      rr:class dcat:Dataset;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/dataset/{dataset_id}";
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ] .
+
+<urn:MAPID-d5f34f2efdaf45278789bec6572853e3> a rr:TriplesMap;
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select distinct gcd.*, elt.graph_name as graph_name from directories_graph.geocoding gcd join directories_graph.directories_content elt on (gcd.entry_id=elt.index)"
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:IRI;
+      rr:class prov:Activity;
+      rr:constant <http://rdf.geohistoricaldata.org/id/directories/activity/0002>;
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:predicate prov:atTime;
+      rr:object "2022-08-31"^^xsd:dateTime
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
+          rr:termType rr:IRI
+        ];
+      rr:predicate prov:used
+    ], [ a rr:PredicateObjectMap;
+      rr:object "Géocodage historique"@fr;
+      rr:predicate rdfs:comment
+    ] .
+
+<urn:MAPID-348da7258faf42acaeb43491994444db-100320fe-995a-4e42-afc3-9523d69eea30>
+  a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:predicate prov:wasDerivedFrom;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:template "http://rdf.geohistoricaldata.org/id/directories/directory/{directory}";
+          rr:termType rr:IRI
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:column "entry_id";
+          rr:datatype xsd:integer;
+          rr:termType rr:Literal
+        ];
+      rr:predicate adb:numEntry
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:termType rr:BlankNode;
+          rr:template "address/{fulladd}"
+        ];
+      rr:predicate locn:address
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate rda:P50104;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:column "activity";
+          rr:termType rr:Literal;
+          rr:datatype xsd:string
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:column "person";
+          rr:datatype xsd:string;
+          rr:termType rr:Literal
+        ];
+      rr:predicate rdfs:label
+    ];
+  rr:subjectMap [ a rr:TermMap, rr:SubjectMap;
+      rr:termType rr:IRI;
+      rr:class adb:Entry;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select entry_id, directory, person, activity, loc, cardinal, coalesce(fulladd, 'inconnue') as fulladd, graph_name from directories_graph.directories_content where fulladd not like ' ';"
+    ] .
+
+<urn:MAPID-348da7258faf42acaeb43491994444db-daa8dc66-09bb-44c7-a25b-4219bf6e90ca>
+  a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:column "cardinal";
+          rr:termType rr:Literal;
+          rr:datatype xsd:string
+        ];
+      rr:predicate locn:locatorDesignator
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:column "loc";
+          rr:termType rr:Literal;
+          rr:language "fr"
+        ];
+      rr:predicate locn:thoroughfare
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate prov:wasGeneratedBy;
+      rr:object <http://rdf.geohistoricaldata.org/id/directories/activity/0001>
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate locn:fullAddress;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:column "fulladd";
+          rr:termType rr:Literal;
+          rr:language "fr"
+        ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select entry_id, directory, person, activity, loc, cardinal, coalesce(fulladd, 'inconnue') as fulladd, graph_name from directories_graph.directories_content where fulladd not like ' ';"
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:class locn:Address;
+      rr:template "address/{fulladd}";
+      rr:termType rr:BlankNode;
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ] .
+
+<urn:MAPID-3953b625580a41a5b09699f068cfbab6> a rr:TriplesMap;
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select distinct entry_id, directory, graph_name from directories_graph.directories_content"
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:IRI;
+      rr:class prov:Activity;
+      rr:constant <http://rdf.geohistoricaldata.org/id/directories/activity/0001>;
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:object "Segmentation des entrées, reconnaissance du texte et des entités nommées.";
+      rr:predicate rdfs:comment
+    ], [ a rr:PredicateObjectMap;
+      rr:object "2022-06-15"^^xsd:dateTime;
+      rr:predicate prov:atTime
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate prov:generated;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
+          rr:termType rr:IRI
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:IRI;
+          rr:template "http://rdf.geohistoricaldata.org/id/directories/directory/{directory}"
+        ];
+      rr:predicate prov:used
+    ] .
+
+<urn:MAPID-1f79d04717894630b2cd3416a05e706d-ec6164a7-d8e9-4e72-be1c-0b5ead825367>
+  a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:predicate locn:address;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:BlankNode;
+          rr:template "address_gcd/{entry_id}"
+        ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select elt.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, elt.graph_name  from directories_graph.geocoding gcd join directories_graph.directories_content elt on (gcd.entry_id=elt.index);"
+    ];
+  rr:subjectMap [ a rr:TermMap, rr:SubjectMap;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
+      rr:termType rr:IRI;
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ] .
+
+<urn:MAPID-1f79d04717894630b2cd3416a05e706d-5f21c178-41db-4dc1-a868-1fe21d7bcd02>
+  a rr:TriplesMap;
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:BlankNode;
+      rr:template "address_gcd/{entry_id}";
+      rr:class locn:Address;
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:BlankNode;
+          rr:template "geom/{rsp}"
+        ];
+      rr:predicate gsp:hasGeometry
+    ], [ a rr:PredicateObjectMap;
+      rr:predicate locn:fullAddress;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:Literal;
+          rr:language "fr";
+          rr:column "rsp"
+        ]
+    ], [ a rr:PredicateObjectMap;
+      rr:object <http://rdf.geohistoricaldata.org/id/directories/activity/0002>;
+      rr:predicate prov:wasGeneratedBy
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select elt.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, elt.graph_name as graph_name from directories_graph.geocoding gcd join directories_graph.directories_content elt on (gcd.entry_id=elt.index);"
+    ] .
+
+<urn:MAPID-1f79d04717894630b2cd3416a05e706d-17aa6dd3-4bc6-40ba-b563-2d466e67522b>
+  a rr:TriplesMap;
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:Literal;
+          rr:template "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> {geom}";
+          rr:datatype gsp:wktLiteral
+        ];
+      rr:predicate gsp:asWKT
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:BlankNode;
+      rr:class gsp:Geometry;
+      rr:template "geom/{rsp}";
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select elt.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, elt.graph_name as graph_name from directories_graph.geocoding gcd join directories_graph.directories_content elt on (gcd.entry_id=elt.index);"
+    ] .
+
+<urn:MAPID-73173d30b7d14afbb3274f588bc8ac6c> a rr:TriplesMap;
+  rr:subjectMap [ a rr:TermMap, rr:SubjectMap;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id1}";
+      rr:termType rr:IRI;
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select li.*, elt.graph_name from directories_graph.liens li join directories_graph.directories_content elt on (li.entry_id1=elt.entry_id)"
+    ];
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:termType rr:IRI;
+          rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id2}"
+        ];
+      rr:predicate owl:sameAs
+    ] .
+
+<urn:MAPID-7a855c40fa4d43eabcffcb242272ed94> a rr:TriplesMap;
+  rr:logicalTable [ a rr:R2RMLView;
+      rr:sqlQuery "select lie.*, elt.graph_name from directories_graph.liens_externes lie join directories_graph.directories_content elt on (lie.entry_id=elt.entry_id)"
+    ];
+  rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
+      rr:termType rr:IRI;
+      rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
+	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
+	  rr:graphMap [ rr:constant rr:defaultGraph ]
+    ];
+  rr:predicateObjectMap [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:ObjectMap, rr:TermMap;
+          rr:datatype xsd:anyURI;
+          rr:termType rr:Literal;
+          rr:column "uri"
+        ];
+      rr:predicate owl:sameAs
+    ] .
