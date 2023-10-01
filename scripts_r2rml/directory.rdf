@@ -1,0 +1,1391 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://example.org/voc#"
+     xml:base="http://example.org/voc"
+     xmlns:cc="http://creativecommons.org/ns#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:ex="http://example.org/"
+     xmlns:sd="http://www.w3.org/ns/sparql-service-description#"
+     xmlns:sf="http://www.opengis.net/ont/sf#"
+     xmlns:adb="http://rdf.geohistoricaldata.org/def/directory#"
+     xmlns:alg="http://data.alegoria-project.fr/id/anf/"
+     xmlns:cat="http://catalog.geohistoricaldata.org/rdf/id/"
+     xmlns:clt="http://data.culture.fr/thesaurus/resource/"
+     xmlns:gsp="http://www.opengis.net/ont/geosparql#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:pav="http://purl.org/pav/"
+     xmlns:rda="http://rdaregistry.info/Elements/a/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:xys="http://data.ign.fr/def/xysemantics#"
+     xmlns:data="http://rdf.geohistoricaldata.org/id/directories/"
+     xmlns:dcat="http://www.w3.org/ns/dcat#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:geom="http://data.ign.fr/def/geometrie#"
+     xmlns:html="http://www.w3.org/1999/xhtml"
+     xmlns:ignf="http://data.ign.fr/def/ignf#"
+     xmlns:locn="http://www.w3.org/ns/locn#"
+     xmlns:obda="https://w3id.org/obda/vocabulary#"
+     xmlns:prov="http://www.w3.org/ns/prov#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:rico="https://www.ica.org/standards/RiC/ontology#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:time="http://www.w3.org/2006/time#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:voaf="http://purl.org/vocommons/voaf#"
+     xmlns:dcterms="http://purl.org/dc/terms/"
+     xmlns:ign-crs="http://data.ign.fr/id/ignf/crs/"
+     xmlns:ric-dft="https://www.ica.org/standards/RiC/vocabularies/documentaryFormTypes#"
+     xmlns:ric-rst="https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#"
+     xmlns:organization="http://www.w3.org/ns/org#">
+    <owl:Ontology rdf:about="http://rdf.geohistoricaldata.org/def/directory">
+        <cc:license rdf:resource="http://creativecommons.org/licenses/by/2.0/"/>
+        <cc:license rdf:resource="http://opendatacommons.org/licenses/by/"/>
+        <cc:license rdf:resource="http://www.data.gouv.fr/Licence-Ouverte-Open-Licence"/>
+        <dcterms:creator>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+                <organization:hasMembership>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                        <organization:memberDuring>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                                <time:hasBeginning>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                        <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                                    </rdf:Description>
+                                </time:hasBeginning>
+                            </rdf:Description>
+                        </organization:memberDuring>
+                        <organization:organization rdf:resource="http://www.ign.fr/"/>
+                        <organization:role>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                            </rdf:Description>
+                        </organization:role>
+                    </rdf:Description>
+                </organization:hasMembership>
+                <foaf:family_name>Abadie</foaf:family_name>
+                <foaf:firstName>Nathalie</foaf:firstName>
+                <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+                <foaf:name>Nathalie Abadie</foaf:name>
+                <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+            </rdf:Description>
+        </dcterms:creator>
+        <dcterms:creator>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+                <organization:hasMembership>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                        <organization:memberDuring>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                                <time:hasBeginning>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                        <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                                    </rdf:Description>
+                                </time:hasBeginning>
+                            </rdf:Description>
+                        </organization:memberDuring>
+                        <organization:organization rdf:resource="http://www.ign.fr/"/>
+                        <organization:role>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                            </rdf:Description>
+                        </organization:role>
+                    </rdf:Description>
+                </organization:hasMembership>
+                <foaf:family_name>Tual</foaf:family_name>
+                <foaf:firstName>Solenn</foaf:firstName>
+                <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+                <foaf:name>Solenn Tual</foaf:name>
+                <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+            </rdf:Description>
+        </dcterms:creator>
+        <dcterms:description xml:lang="fr">Ontologie décrivant le contenu des séries d&apos;annuaires du commerce parisien du 19ème siècle</dcterms:description>
+        <dcterms:description xml:lang="en">Ontology describing the trade directory series published in Paris during theh 19th century.</dcterms:description>
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2022-08-31</dcterms:issued>
+        <dcterms:publisher rdf:resource="http://fr.dbpedia.org/resource/Institut_national_de_l%27information_g%C3%A9ographique_et_foresti%C3%A8r"/>
+        <dcterms:rights>Copyright 2022, IGN</dcterms:rights>
+        <dcterms:title xml:lang="fr">Ontologie des annuaires du commerce parisien du 19ème siècle.</dcterms:title>
+        <dcterms:title xml:lang="en">Ontology of 19th century Paris trade directories.</dcterms:title>
+        <vann:preferredNamespacePrefix>adb</vann:preferredNamespacePrefix>
+        <vann:preferredNamespaceUri rdf:resource="http://rdf.geohistoricaldata.org/def/directory#"/>
+        <owl:versionInfo>Version 0.1 - 2022-08-31</owl:versionInfo>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://creativecommons.org/ns#license -->
+
+    <owl:AnnotationProperty rdf:about="http://creativecommons.org/ns#license"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/creator -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/creator"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/issued -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/issued"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/publisher -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/publisher"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/rights -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/rights"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/title"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespacePrefix -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespaceUri -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespaceUri"/>
+    
+
+
+    <!-- http://www.w3.org/2006/time#hasBeginning -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2006/time#hasBeginning"/>
+    
+
+
+    <!-- http://www.w3.org/2006/time#inXSDDateTimeStamp -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2006/time#inXSDDateTimeStamp"/>
+    
+
+
+    <!-- http://www.w3.org/ns/org#hasMembership -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/org#hasMembership"/>
+    
+
+
+    <!-- http://www.w3.org/ns/org#memberDuring -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/org#memberDuring"/>
+    
+
+
+    <!-- http://www.w3.org/ns/org#organization -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/org#organization"/>
+    
+
+
+    <!-- http://www.w3.org/ns/org#role -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/org#role"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/family_name -->
+
+    <owl:AnnotationProperty rdf:about="http://xmlns.com/foaf/0.1/family_name"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/firstName -->
+
+    <owl:AnnotationProperty rdf:about="http://xmlns.com/foaf/0.1/firstName"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/mbox -->
+
+    <owl:AnnotationProperty rdf:about="http://xmlns.com/foaf/0.1/mbox"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/name -->
+
+    <owl:AnnotationProperty rdf:about="http://xmlns.com/foaf/0.1/name"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/workInfoHomepage -->
+
+    <owl:AnnotationProperty rdf:about="http://xmlns.com/foaf/0.1/workInfoHomepage"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.opengis.net/ont/geosparql#wktLiteral -->
+
+    <rdfs:Datatype rdf:about="http://www.opengis.net/ont/geosparql#wktLiteral"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.opengis.net/ont/geosparql#hasGeometry -->
+
+    <owl:ObjectProperty rdf:about="http://www.opengis.net/ont/geosparql#hasGeometry">
+        <rdfs:domain rdf:resource="http://www.opengis.net/ont/geosparql#Feature"/>
+        <rdfs:range rdf:resource="http://www.opengis.net/ont/geosparql#Geometry"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/locn#address -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/locn#address">
+        <rdfs:range rdf:resource="http://www.w3.org/ns/locn#Address"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#generated -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#generated">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#used -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#used">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#wasDerivedFrom -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#wasDerivedFrom">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#wasGeneratedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#wasGeneratedBy">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/sparql-service-description#namedGraph -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/sparql-service-description#namedGraph">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/pav/createdOn -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/pav/createdOn">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://rdaregistry.info/Elements/a/P50104 -->
+
+    <owl:DatatypeProperty rdf:about="http://rdaregistry.info/Elements/a/P50104">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://rdf.geohistoricaldata.org/def/directory#numEntry -->
+
+    <owl:DatatypeProperty rdf:about="http://rdf.geohistoricaldata.org/def/directory#numEntry">
+        <rdfs:domain rdf:resource="http://rdf.geohistoricaldata.org/def/directory#Entry"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.opengis.net/ont/geosparql#asWKT -->
+
+    <owl:DatatypeProperty rdf:about="http://www.opengis.net/ont/geosparql#asWKT">
+        <rdfs:domain rdf:resource="http://www.opengis.net/ont/geosparql#Geometry"/>
+        <rdfs:range rdf:resource="http://www.opengis.net/ont/geosparql#wktLiteral"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#comment -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#label -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#label"/>
+    
+
+
+    <!-- http://www.w3.org/ns/locn#fullAddress -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/ns/locn#fullAddress">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/locn#Address"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/locn#locatorDesignator -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/ns/locn#locatorDesignator">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/locn#Address"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/locn#thoroughfare -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/ns/locn#thoroughfare">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/locn#Address"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#atTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/ns/prov#atTime">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/vocommons/voaf#Vocabulary -->
+
+    <owl:Class rdf:about="http://purl.org/vocommons/voaf#Vocabulary"/>
+    
+
+
+    <!-- http://rdf.geohistoricaldata.org/def/directory#Directory -->
+
+    <owl:Class rdf:about="http://rdf.geohistoricaldata.org/def/directory#Directory"/>
+    
+
+
+    <!-- http://rdf.geohistoricaldata.org/def/directory#Entry -->
+
+    <owl:Class rdf:about="http://rdf.geohistoricaldata.org/def/directory#Entry"/>
+    
+
+
+    <!-- http://www.opengis.net/ont/geosparql#Feature -->
+
+    <owl:Class rdf:about="http://www.opengis.net/ont/geosparql#Feature"/>
+    
+
+
+    <!-- http://www.opengis.net/ont/geosparql#Geometry -->
+
+    <owl:Class rdf:about="http://www.opengis.net/ont/geosparql#Geometry"/>
+    
+
+
+    <!-- http://www.opengis.net/ont/sf#Point -->
+
+    <owl:Class rdf:about="http://www.opengis.net/ont/sf#Point"/>
+    
+
+
+    <!-- http://www.w3.org/2006/time#Instant -->
+
+    <owl:Class rdf:about="http://www.w3.org/2006/time#Instant"/>
+    
+
+
+    <!-- http://www.w3.org/2006/time#Interval -->
+
+    <owl:Class rdf:about="http://www.w3.org/2006/time#Interval"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#Dataset -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/dcat#Dataset"/>
+    
+
+
+    <!-- http://www.w3.org/ns/locn#Address -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/locn#Address"/>
+    
+
+
+    <!-- http://www.w3.org/ns/org#Membership -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/org#Membership"/>
+    
+
+
+    <!-- http://www.w3.org/ns/org#Role -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/org#Role"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#Activity -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/prov#Activity"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#Entity -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/prov#Entity"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Person"/>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2005-09-09</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Abadie</foaf:family_name>
+        <foaf:firstName>Nathalie</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:nathalie-f.abadie@ign.fr"/>
+        <foaf:name>Nathalie Abadie</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/nathalie-abadie/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <organization:hasMembership>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/ns/org#Membership"/>
+                <organization:memberDuring>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+                        <time:hasBeginning>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2006/time#Instant"/>
+                                <time:inXSDDateTimeStamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2022-04-01</time:inXSDDateTimeStamp>
+                            </rdf:Description>
+                        </time:hasBeginning>
+                    </rdf:Description>
+                </organization:memberDuring>
+                <organization:organization rdf:resource="http://www.ign.fr/"/>
+                <organization:role>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/ns/org#Role"/>
+                    </rdf:Description>
+                </organization:role>
+            </rdf:Description>
+        </organization:hasMembership>
+        <foaf:family_name>Tual</foaf:family_name>
+        <foaf:firstName>Solenn</foaf:firstName>
+        <foaf:mbox rdf:resource="mailto:solenn.tual@ign.fr"/>
+        <foaf:name>Solenn Tual</foaf:name>
+        <foaf:workInfoHomepage rdf:resource="https://www.umr-lastig.fr/solenn-tual/"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdfs:label xml:lang="en">Survey engineer and Scientist</rdfs:label>
+    </rdf:Description>
+    <rdf:Description>
+        <rdfs:label xml:lang="en">Intern student</rdfs:label>
+    </rdf:Description>
+    <rdf:Description>
+        <rdfs:label xml:lang="fr">Stagiaire</rdfs:label>
+    </rdf:Description>
+    <rdf:Description>
+        <rdfs:label xml:lang="fr">Chargée de recherche</rdfs:label>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
