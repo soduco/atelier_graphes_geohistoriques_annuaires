@@ -15,7 +15,7 @@ WITH per_count AS (
 	INNER JOIN directories.addresses AS s ON e.index = s.entry_id
 	INNER JOIN directories.titles AS t ON e.index = t.entry_id
 	WHERE (
-		-- Liste des mots-clés
+		-- Liste des mots-clés: à adapter!
 		act.ner_xml ILIKE '%ébéniste%' OR 
 		act.ner_xml ILIKE '%ebeniste%' OR 
 		act.ner_xml ILIKE '%ébeniste%' OR 
