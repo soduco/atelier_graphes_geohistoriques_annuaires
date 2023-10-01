@@ -1,0 +1,115 @@
+<Silk>
+	<!--Prefixes-->
+    <Prefixes>
+      <Prefix id="rdf" namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+	  <Prefix id="rr" namespace="http://www.w3.org/ns/r2rml#."/>
+	  <Prefix id="dul" namespace="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#."/>
+	  <Prefix id="gsp" namespace="http://www.opengis.net/ont/geosparql#."/>
+	  <Prefix id="gfl" namespace="http://data.ign.fr/def/geofla#."/>
+	  <Prefix id="owl" namespace="http://www.w3.org/2002/07/owl#http://www.w3.org/2002/07/owl#"/>
+	  <Prefix id="skos" namespace="http://www.w3.org/2004/02/skos/core#."/>
+	  <Prefix id="adb" namespace="http://data.soduco.fr/def/annuaire#"/>
+	  <Prefix id="rdfs" namespace="http://www.w3.org/2000/01/rdf-schema#"/>
+	  <Prefix id="nym" namespace="http://data.ign.fr/def/nyme#."/>
+	  <Prefix id="xsd" namespace="http://www.w3.org/2001/XMLSchema#"/>
+	  <Prefix id="pleiades" namespace="http://pleiades.stoa.org/places/vocab#."/>
+	  <Prefix id="topo" namespace="http://data.ign.fr/def/topo#."/>
+	  <Prefix id="geom" namespace="http://data.ign.fr/def/geometrie#."/>
+    </Prefixes>
+	<!--Datasets-->
+	<DataSources>
+	  <DataSource id="photographes-cardloc_source" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
+		  <Param name="pageSize" value="1000"></Param>
+		  <Param name="pauseTime" value="0"></Param>
+		  <Param name="retryCount" value="3"></Param>
+		  <Param name="endpointURI" value="http://localhost:7200/repositories/photographes-silk-2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouve les données des annuaires-->
+		  <Param name="retryPause" value="1000"></Param>
+		  <Param name="graph" value=""></Param>
+		  <Param name="queryParameters" value=""/>
+		  <Param name="login" value=""/>
+		  <Param name="entityList" value=""/>
+		  <Param name="parallel" value="true"/>
+		  <Param name="password" value=""/>
+	  </DataSource>
+	  <DataSource id="photographes-cardloc_target" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
+		  <Param name="pageSize" value="1000"></Param>
+		  <Param name="pauseTime" value="0"></Param>
+		  <Param name="retryCount" value="3"></Param>
+		  <Param name="endpointURI" value="http://localhost:7200/repositories/photographes-silk-2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouve les données des annuaires-->
+		  <Param name="retryPause" value="1000"></Param>
+		  <Param name="graph" value=""></Param>
+		  <Param name="queryParameters" value=""/>
+		  <Param name="login" value=""/>
+		  <Param name="entityList" value=""/>
+		  <Param name="parallel" value="true"/>
+		  <Param name="password" value=""/>
+	  </DataSource>
+	</DataSources>
+	<!--Links-->
+    <Interlinks>
+        <Interlink id="by-keys">
+		<LinkType>owl:sameAs</LinkType>
+		<SourceDataset dataSource="photographes-cardloc_source" var="a">
+		<RestrictTo>{ ?a rdf:type adb:Entry } .</RestrictTo>
+		</SourceDataset>
+		<TargetDataset dataSource="photographes-cardloc_target" var="b">
+		<RestrictTo>{ ?b rdf:type adb:Entry } .</RestrictTo>
+		</TargetDataset>
+        <LinkageRule>
+		<!--Key 1 : label and address-->
+			<!--Conserve tous les cas où le score minimal de la combinaison de propriété Label-Address est supérieur à 0-->
+			<Aggregate id="min_label_add" required="true"  weight="1" type="min">
+				<!-- Score intermédiaire : Address => Combinaison numVoie and Voie -->
+				<Aggregate id="average_voie_numvoie" required="true" weight="1" type="average">
+					<!--Pour deux entrées : calcule la distance d'édition Tokenwise entre les valeurs de la propriété Voie-->
+					<Compare id="tokenwiseDistance_voie" required="true" weight="3" metric="tokenwiseDistance" threshold="0.4">
+						<!--Transformation des valeurs : suppression des caractères spéciaux)-->
+						<TransformInput id="transfo_voie_source" function="removeSpecialChars">
+							<Input id="source_voie_1" path="?a/adb:voie"/>
+						</TransformInput>
+						<!--Transformation des valeurs : suppression des caractères spéciaux)-->
+						<TransformInput id="transfo_voie_target_1" function="removeSpecialChars">
+							<Input id="target_voie_1" path="?b/adb:voie"/>
+						</TransformInput>
+					</Compare>
+					<!--Pour deux entrées : calcule la distance d'édition Tokenwise entre les valeurs de la propriété numVoie-->
+					<Compare id="tokenwiseDistance_numvoie_1" required="false" weight="1" metric="tokenwiseDistance" threshold="0.5">
+						<!--Transformation des valeurs : suppression des caractères spéciaux)-->
+						<TransformInput id="transfo_numvoie_source" function="removeSpecialChars">
+							<Input id="source_numvoie_1" path="?a/adb:numVoie"/>
+						</TransformInput>
+						<!--Transformation des valeurs : suppression des caractères spéciaux)-->
+						<TransformInput id="transfo_numvoie_target" function="removeSpecialChars">
+							<Input id="target_numvoie_1" path="?b/adb:numVoie"/>
+						</TransformInput>
+					</Compare>
+				</Aggregate>
+				<!--Label-->
+				<Compare id="tokenwiseDistance_label_1" required="true" weight="1" metric="tokenwiseDistance" threshold="0.4">
+					<!--Transformation des valeurs : suppression des caractères spéciaux)-->
+					<TransformInput id="transfo_label_source_1" function="removeSpecialChars">
+						<Input id="source_label_1" path="?a/rdfs:label"/>
+					</TransformInput>
+					<!--Transformation des valeurs : suppression des caractères spéciaux)-->
+					<TransformInput id="transfo_label_target_1" function="removeSpecialChars">
+						<Input id="target_label_1" path="?b/rdfs:label"/>
+					</TransformInput>	
+				</Compare>
+			</Aggregate>
+		</LinkageRule>
+		<Filter limit="100"/>
+		<Outputs>
+			<Output type="file" minConfidence="0.80">
+				<!--Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8-->
+				<Param name="file" value="labeladdress_accepted_links.nt"/>
+				<Param name="format" value="ntriples"/>
+			</Output>
+			<Output type="file" minConfidence="0.71" maxConfidence="0.80">
+				<!--Fichier RDF où sont sauvegardés les liens sameAS "à vérifier" pour lesquels la confiance est comprise entre 0.71 et 0.8-->
+				<Param name="file" value="labeladdress_verify_links.nt"/>
+				<Param name="format" value="ntriples"/>
+			</Output>
+		</Outputs>
+		</Interlink>
+		</Interlinks>
+</Silk>
