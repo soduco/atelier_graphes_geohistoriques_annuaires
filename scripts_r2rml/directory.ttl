@@ -100,7 +100,7 @@
 
 <urn:MAPID-d5f34f2efdaf45278789bec6572853e3> a rr:TriplesMap;
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select distinct gcd.*, elt.graph_name as graph_name from directories_graph.geocoding gcd join directories_graph.directories_content elt on (gcd.entry_id=elt.index)"
+      rr:sqlQuery "select distinct gcd.* from directories_graph.geocoding gcd"
     ];
   rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
       rr:termType rr:IRI;
