@@ -57,10 +57,17 @@
     ], [ a rr:PredicateObjectMap;
       rr:objectMap [ a rr:TermMap, rr:ObjectMap;
           rr:column "fulladd";
-          rr:datatype xsd:integer;
+          rr:datatype xsd:string;
           rr:termType rr:Literal
         ];
       rr:predicate locn:fullAddress
+    ], [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:column "published";
+          rr:datatype xsd:integer;
+          rr:termType rr:Literal
+        ];
+      rr:predicate dcterms:issued
     ], [ a rr:PredicateObjectMap;
       rr:predicate rda:P50104;
       rr:objectMap [ a rr:ObjectMap, rr:TermMap;
