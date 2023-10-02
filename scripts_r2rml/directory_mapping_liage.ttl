@@ -91,5 +91,5 @@
 	  rr:graphMap [ rr:constant rr:defaultGraph ]
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select entry_id, directory, person, activity, coalesce(fulladd, 'inconnue') as fulladd, graph_name from directories_graph.directories_content where fulladd not like ' ';"
+      rr:sqlQuery "select entry_id, directory, published, person, activity, coalesce(fulladd, 'inconnue') as fulladd, graph_name from directories_graph.directories_content where fulladd not like ' ';"
     ] .
