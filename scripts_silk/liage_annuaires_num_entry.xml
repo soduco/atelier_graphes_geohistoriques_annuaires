@@ -2,42 +2,36 @@
 	<!--Prefixes-->
     <Prefixes>
       <Prefix id="rdf" namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
-	  <Prefix id="rr" namespace="http://www.w3.org/ns/r2rml#."/>
-	  <Prefix id="dul" namespace="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#."/>
-	  <Prefix id="gsp" namespace="http://www.opengis.net/ont/geosparql#."/>
-	  <Prefix id="gfl" namespace="http://data.ign.fr/def/geofla#."/>
-	  <Prefix id="owl" namespace="http://www.w3.org/2002/07/owl#http://www.w3.org/2002/07/owl#"/>
-	  <Prefix id="skos" namespace="http://www.w3.org/2004/02/skos/core#."/>
-	  <Prefix id="adb" namespace="http://data.soduco.fr/def/annuaire#"/>
+	  <Prefix id="owl" namespace="http://www.w3.org/2002/07/owl#"/>
+	  <Prefix id="adb" namespace="http://rdf.geohistoricaldata.org/def/directory#"/>
 	  <Prefix id="rdfs" namespace="http://www.w3.org/2000/01/rdf-schema#"/>
-	  <Prefix id="nym" namespace="http://data.ign.fr/def/nyme#."/>
+	  <Prefix id="locn" namespace="http://www.w3.org/ns/locn#"/>
 	  <Prefix id="xsd" namespace="http://www.w3.org/2001/XMLSchema#"/>
-	  <Prefix id="pleiades" namespace="http://pleiades.stoa.org/places/vocab#."/>
-	  <Prefix id="topo" namespace="http://data.ign.fr/def/topo#."/>
-	  <Prefix id="geom" namespace="http://data.ign.fr/def/geometrie#."/>
+	  <Prefix id="dcterms" namespace="http://purl.org/dc/terms/"/>
+	  <Prefix id="rda" namespace="http://rdaregistry.info/Elements/a/"/>
     </Prefixes>
 	<!--Datasets-->
 	<DataSources>
-	  <DataSource id="annuaires_source" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
+	  <DataSource id="graveurs1" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://localhost:7200/repositories/photographes-silk-2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouve les données des annuaires-->
+		  <Param name="endpointURI" value="http://DEL1709P004:7200/repositories/graveurs"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/graveurs_de_cartes"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
-		  <Param name="graph" value=""></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
 		  <Param name="entityList" value=""/>
 		  <Param name="parallel" value="true"/>
 		  <Param name="password" value=""/>
 	  </DataSource>
-	  <DataSource id="annuaires_target" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
+	  <DataSource id="graveurs2" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://localhost:7200/repositories/photographes-silk-2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouve les données des annuaires-->
+		  <Param name="endpointURI" value="http://DEL1709P004:7200/repositories/graveurs"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/graveurs_de_cartes"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
-		  <Param name="graph" value=""></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
 		  <Param name="entityList" value=""/>
@@ -49,10 +43,10 @@
     <Interlinks>
         <Interlink id="by-keys">
 			<LinkType>owl:sameAs</LinkType>
-			<SourceDataset dataSource="annuaires_source" var="a">
+			<SourceDataset dataSource="graveurs1" var="a">
 				<RestrictTo>{ ?a rdf:type adb:Entry } .</RestrictTo>
 			</SourceDataset>
-			<TargetDataset dataSource="annuaires_target" var="b">
+			<TargetDataset dataSource="graveurs2" var="b">
 				<RestrictTo>{ ?b rdf:type adb:Entry } .</RestrictTo>
 			</TargetDataset>
 			<LinkageRule>
@@ -66,9 +60,10 @@
 					<TransformInput id="transfo_2" function="numReduce">
 						<Input id="target_numEntry" path="?b/adb:numEntry"/>
 					</TransformInput>
+				</Compare>
 				</Aggregate>
 			</LinkageRule>
-			<Filter limit="100"/>
+			<Filter limit="150"/>
 			<Outputs>
 				<Output type="file" minConfidence="0.80">
 				<!--Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8-->
