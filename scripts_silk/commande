@@ -1,0 +1,2 @@
+java -DconfigFile=monFichierDeConfig.xml -jar silk.jar
+  
