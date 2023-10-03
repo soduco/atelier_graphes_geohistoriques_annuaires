@@ -100,7 +100,7 @@
 
 <urn:MAPID-d5f34f2efdaf45278789bec6572853e3> a rr:TriplesMap;
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select distinct gcd.* from directories_graph.geocoding gcd"
+      rr:sqlQuery "select distinct gcd.* as graph_name from directories_graph.geocoding gcd"
     ];
   rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
       rr:termType rr:IRI;
@@ -167,7 +167,7 @@
 	  rr:graphMap [ rr:constant rr:defaultGraph ]
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select entry_id, directory, person, activity, loc, cardinal, coalesce(fulladd, 'inconnue') as fulladd, graph_name from directories_graph.directories_content where fulladd not like ' ';"
+      rr:sqlQuery "select entry_id, directory, person, activity, loc, cardinal, fulladd, graph_name from directories_graph.directories_content where fulladd not like '';"
     ] .
 
 <urn:MAPID-348da7258faf42acaeb43491994444db-daa8dc66-09bb-44c7-a25b-4219bf6e90ca>
@@ -198,7 +198,7 @@
         ]
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select entry_id, directory, person, activity, loc, cardinal, coalesce(fulladd, 'inconnue') as fulladd, graph_name from directories_graph.directories_content where fulladd not like ' ';"
+      rr:sqlQuery "select entry_id, directory, person, activity, loc, cardinal, fulladd, graph_name from directories_graph.directories_content where fulladd not like '';"
     ];
   rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
       rr:class locn:Address;
@@ -249,7 +249,7 @@
         ]
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select elt.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, elt.graph_name  from directories_graph.geocoding gcd join directories_graph.directories_content elt on (gcd.entry_id=elt.index);"
+      rr:sqlQuery "select gcd.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, gcd.graph_name  from directories_graph.geocoding gcd;"
     ];
   rr:subjectMap [ a rr:TermMap, rr:SubjectMap;
       rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
@@ -285,7 +285,7 @@
       rr:predicate prov:wasGeneratedBy
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select elt.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, elt.graph_name as graph_name from directories_graph.geocoding gcd join directories_graph.directories_content elt on (gcd.entry_id=elt.index);"
+      rr:sqlQuery "select gcd.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, gcd.graph_name as graph_name from directories_graph.geocoding gcd;"
     ] .
 
 <urn:MAPID-1f79d04717894630b2cd3416a05e706d-17aa6dd3-4bc6-40ba-b563-2d466e67522b>
@@ -306,7 +306,7 @@
 	  rr:graphMap [ rr:constant rr:defaultGraph ]
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select elt.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, elt.graph_name as graph_name from directories_graph.geocoding gcd join directories_graph.directories_content elt on (gcd.entry_id=elt.index);"
+      rr:sqlQuery "select gcd.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, gcd.graph_name as graph_name from directories_graph.geocoding gcd;"
     ] .
 
 <urn:MAPID-73173d30b7d14afbb3274f588bc8ac6c> a rr:TriplesMap;
