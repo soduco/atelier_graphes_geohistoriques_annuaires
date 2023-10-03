@@ -263,7 +263,7 @@
   a rr:TriplesMap;
   rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
       rr:termType rr:BlankNode;
-      rr:template "address_gcd/{entry_id}";
+      rr:template "address_gcd/{element_index}";
       rr:class locn:Address;
 	  rr:graphMap [ rr:template "http://rdf.geohistoricaldata.org/id/directories/{graph_name}" ];
 	  rr:graphMap [ rr:constant rr:defaultGraph ]
@@ -286,7 +286,7 @@
       rr:predicate prov:wasGeneratedBy
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select elt.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, elt.graph_name as graph_name  from extractions.geocoding gcd join extractions.directories_content elt on (gcd.entry_id=elt.index);"
+      rr:sqlQuery "select elt.index AS element_index, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, elt.graph_name as graph_name  from extractions.geocoding gcd join extractions.directories_content elt on (gcd.entry_id=elt.index);"
     ] .
 
 <urn:MAPID-1f79d04717894630b2cd3416a05e706d-17aa6dd3-4bc6-40ba-b563-2d466e67522b>
