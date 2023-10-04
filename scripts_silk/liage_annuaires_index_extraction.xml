@@ -53,12 +53,12 @@
 			<!--Score maximal-->
 				<Aggregate id="max_score" required="true"  weight="1" type="max">
 				<!-- : Compare les numéro d'extraction des entrées (utile dans le cas où l'entrée extraite comporte plusieurs adresses ou activités) -->
-				<Compare id="numericEquality_numEntry" required="true" weight="1" metric="equality" threshold="0.0">
+				<Compare id="numericEquality_indexExt" required="true" weight="1" metric="equality" threshold="0.0">
 					<TransformInput id="transfo_1" function="numReduce">
-						<Input id="source_numEntry" path="?a/adb:indexExt"/>
+						<Input id="source_indexExt" path="?a/adb:indexExt"/>
 					</TransformInput>
 					<TransformInput id="transfo_2" function="numReduce">
-						<Input id="target_numEntry" path="?b/adb:indexExt"/>
+						<Input id="target_indexExt" path="?b/adb:indexExt"/>
 					</TransformInput>
 				</Compare>
 				</Aggregate>
