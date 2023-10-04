@@ -49,18 +49,18 @@
         ]
     ], [ a rr:PredicateObjectMap;
       rr:objectMap [ a rr:TermMap, rr:ObjectMap;
-          rr:column "published";
-          rr:datatype xsd:integer;
-          rr:termType rr:Literal
-        ];
-      rr:predicate adb:directoryDate
-    ], [ a rr:PredicateObjectMap;
-      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
           rr:column "entry_id";
           rr:datatype xsd:integer;
           rr:termType rr:Literal
         ];
       rr:predicate adb:numEntry
+    ],  [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:column "index";
+          rr:datatype xsd:integer;
+          rr:termType rr:Literal
+        ];
+      rr:predicate adb:indexExt
     ], [ a rr:PredicateObjectMap;
       rr:objectMap [ a rr:TermMap, rr:ObjectMap;
           rr:column "fulladd";
@@ -68,6 +68,20 @@
           rr:termType rr:Literal
         ];
       rr:predicate locn:fullAddress
+    ],  [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:column "loc";
+          rr:datatype xsd:string;
+          rr:termType rr:Literal
+        ];
+      rr:predicate locn:thoroughfare
+    ],  [ a rr:PredicateObjectMap;
+      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
+          rr:column "cardinal";
+          rr:datatype xsd:string;
+          rr:termType rr:Literal
+        ];
+      rr:predicate locn:locatorDesignator
     ], [ a rr:PredicateObjectMap;
       rr:objectMap [ a rr:TermMap, rr:ObjectMap;
           rr:column "published";
@@ -98,5 +112,5 @@
 	  rr:graphMap [ rr:constant rr:defaultGraph ]
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select entry_id, directory, published, person, activity, fulladd, graph_name from directories_graph.directories_content where fulladd not like '';"
+      rr:sqlQuery "select entry_id, index, directory, published, person, activity, fulladd, loc, cardinal, graph_name from directories_graph.directories_content where fulladd not like '';"
     ] .
