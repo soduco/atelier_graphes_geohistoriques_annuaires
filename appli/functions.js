@@ -8,7 +8,7 @@ var inputNumberMax = document.getElementById('input-number-max');
 function createlinkDataSoduco(uri){
 
       var query2 = "PREFIX adb: <http://data.soduco.fr/def/annuaire#> "+
-      "PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#> "+
+      "PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#> "+
       "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "+
       "PREFIX owl: <http://www.w3.org/2002/07/owl#> "+
       "PREFIX fn: <http://www.w3.org/2005/xpath-functions#> "+
