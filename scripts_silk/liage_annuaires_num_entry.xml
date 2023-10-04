@@ -12,12 +12,12 @@
     </Prefixes>
 	<!--Datasets-->
 	<DataSources>
-	  <DataSource id="graveurs1" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
+	  <DataSource id="dataset1" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://DEL1709P004:7200/repositories/graveurs"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/graveurs_de_cartes"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://localhost:7200/repositories/liage"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value=""></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -25,12 +25,12 @@
 		  <Param name="parallel" value="true"/>
 		  <Param name="password" value=""/>
 	  </DataSource>
-	  <DataSource id="graveurs2" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
+	  <DataSource id="dataset2" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://DEL1709P004:7200/repositories/graveurs"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/graveurs_de_cartes"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://localhost:7200/repositories/liage"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value=""></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -43,10 +43,10 @@
     <Interlinks>
         <Interlink id="by-keys">
 			<LinkType>owl:sameAs</LinkType>
-			<SourceDataset dataSource="graveurs1" var="a">
+			<SourceDataset dataSource="dataset1" var="a">
 				<RestrictTo>{ ?a rdf:type adb:Entry } .</RestrictTo>
 			</SourceDataset>
-			<TargetDataset dataSource="graveurs2" var="b">
+			<TargetDataset dataSource="dataset2" var="b">
 				<RestrictTo>{ ?b rdf:type adb:Entry } .</RestrictTo>
 			</TargetDataset>
 			<LinkageRule>
@@ -55,10 +55,10 @@
 				<!-- : Compare les numéro d'extraction des entrées (utile dans le cas où l'entrée extraite comporte plusieurs adresses ou activités) -->
 				<Compare id="numericEquality_numEntry" required="true" weight="1" metric="equality" threshold="0.0">
 					<TransformInput id="transfo_1" function="numReduce">
-						<Input id="source_numEntry" path="?a/adb:numEntry"/>
+						<Input id="source_numEntry" path="?a/adb:indexExt"/>
 					</TransformInput>
 					<TransformInput id="transfo_2" function="numReduce">
-						<Input id="target_numEntry" path="?b/adb:numEntry"/>
+						<Input id="target_numEntry" path="?b/adb:indexExt"/>
 					</TransformInput>
 				</Compare>
 				</Aggregate>
@@ -67,12 +67,7 @@
 			<Outputs>
 				<Output type="file" minConfidence="0.80">
 				<!--Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8-->
-					<Param name="file" value="numEntry_accepted_links.nt"/>
-					<Param name="format" value="ntriples"/>
-				</Output>
-				<Output type="file" minConfidence="0.71" maxConfidence="0.80">
-				<!--Fichier RDF où sont sauvegardés les liens sameAS "à vérifier" pour lesquels la confiance est comprise entre 0.71 et 0.8-->
-					<Param name="file" value="numEntry_verify_links.nt"/>
+					<Param name="file" value="indexExt_accepted_links.nt"/>
 					<Param name="format" value="ntriples"/>
 				</Output>
 			</Outputs>
