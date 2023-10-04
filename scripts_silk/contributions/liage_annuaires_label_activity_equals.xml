@@ -1,4 +1,13 @@
 <Silk>
+<!--
+	Paramètres : label / activity
+	Normalisation : 
+		- alphaReduce (supprime tout ce qui n'est pas alphabétique)
+		- lowerCase
+	Comparaison : 
+		- equals
+	Seuil de confiance : 1
+	-->
 <!--Prefixes-->
     <Prefixes>
       <Prefix id="rdf" namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
@@ -104,19 +113,13 @@
 	</LinkageRule>
 	<Filter limit="150"/>
 		<Outputs>
-			<Output type="file" minConfidence="0.80">
+			<Output type="file" minConfidence="1">
 			<!--
 			Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8
 			-->
-				<Param name="file" value="labelactivity_accepted_links_photographes_equality.nt"/>
+				<Param name="file" value="labelactivity_equals_accepted_links.nt"/>
 				<Param name="format" value="ntriples"/>
 			</Output>
-		<Output type="file" minConfidence="0.71" maxConfidence="0.80">
-		<!--
-		Fichier RDF où sont sauvegardés les liens sameAS "à vérifier" pour lesquels la confiance est comprise entre 0.71 et 0.8
-		-->
-				<Param name="file" value="labelactivity_verify_links_photographes_equality.nt"/>
-				<Param name="format" value="ntriples"/>
 			</Output>
 		</Outputs>
 	</Interlink>
