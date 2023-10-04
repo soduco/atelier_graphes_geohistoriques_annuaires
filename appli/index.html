@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!--Encodage-->
+    <meta title="Visualisation des données extraites des annuaires du commerce parisien">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./libs/jquery-3.6.1.min.js"></script>
+    <script src="./libs/jquery.geo.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/wkx@0.5.0/dist/wkx.min.js"></script>
+    <!--Slider-->
+    <script src="./libs/wnumb-1.2.0/wNumb.min.js"></script>
+    <link rel="stylesheet" href="./libs/noUiSlider/nouislider.min.css" />
+   <script src="./libs/noUiSlider/nouislider.min.js"></script>
+    <!--Leaflet-->
+    <link rel="stylesheet" href="./libs/leaflet/leaflet.css" />
+    <script src="./libs/leaflet/leaflet.js"></script>
+    <!--Leaflet Full Screen-->
+    <link rel="stylesheet" href="./libs/leaflet.fullscreen-master/Control.FullScreen.css"/>
+    <script src="./libs/leaflet.fullscreen-master/Control.FullScreen.js"></script>
+    <!--Leaflet.draw-->
+    <script src="./libs/leaflet_draw/src/Leaflet.draw.js"></script>
+    <script src="./libs/leaflet_draw/src/Leaflet.Draw.Event.js"></script>
+    <link rel="stylesheet" href="./libs/leaflet_draw/src/leaflet.draw.css"/>
+
+    <script src="./libs/leaflet_draw/src/Toolbar.js"></script>
+    <script src="./libs/leaflet_draw/src/Tooltip.js"></script>
+
+    <script src="./libs/leaflet_draw/src/ext/GeometryUtil.js"></script>
+    <script src="./libs/leaflet_draw/src/ext/LatLngUtil.js"></script>
+    <script src="./libs/leaflet_draw/src/ext/LineUtil.Intersect.js"></script>
+    <script src="./libs/leaflet_draw/src/ext/Polygon.Intersect.js"></script>
+    <script src="./libs/leaflet_draw/src/ext/Polyline.Intersect.js"></script>
+    <script src="./libs/leaflet_draw/src/ext/TouchEvents.js"></script>
+
+    <script src="./libs/leaflet_draw/src/draw/DrawToolbar.js"></script>
+    <script src="./libs/leaflet_draw/src/draw/handler/Draw.Feature.js"></script>
+    <script src="./libs/leaflet_draw/src/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="./libs/leaflet_draw/src/draw/handler/Draw.Polyline.js"></script>
+    <script src="./libs/leaflet_draw/src/draw/handler/Draw.Marker.js"></script>
+    <script src="./libs/leaflet_draw/src/draw/handler/Draw.Circle.js"></script>
+    <script src="./libs/leaflet_draw/src/draw/handler/Draw.CircleMarker.js"></script>
+    <script src="./libs/leaflet_draw/src/draw/handler/Draw.Polygon.js"></script>
+    <script src="./libs/leaflet_draw/src/draw/handler/Draw.Rectangle.js"></script>
+
+
+    <script src="./libs/leaflet_draw/src/edit/EditToolbar.js"></script>
+    <script src="./libs/leaflet_draw/src/edit/handler/EditToolbar.Edit.js"></script>
+    <script src="./libs/leaflet_draw/src/edit/handler/EditToolbar.Delete.js"></script>
+
+    <script src="./libs/leaflet_draw/src/Control.Draw.js"></script>
+
+    <script src="./libs/leaflet_draw/src/edit/handler/Edit.Poly.js"></script>
+    <script src="./libs/leaflet_draw/src/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="./libs/leaflet_draw/src/edit/handler/Edit.Rectangle.js"></script>
+    <script src="./libs/leaflet_draw/src/edit/handler/Edit.Marker.js"></script>
+    <script src="./libs/leaflet_draw/src/edit/handler/Edit.CircleMarker.js"></script>
+    <script src="./libs/leaflet_draw/src/edit/handler/Edit.Circle.js"></script>
+    <!--Leaflet clusters-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.4/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.4/MarkerCluster.Default.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
+    <!--Control Panel-->
+    <link rel="stylesheet" href="./libs/leaflet-panel-layers/src/leaflet-panel-layers.css">
+    <script src="./libs/leaflet-panel-layers/src/leaflet-panel-layers.js"></script>
+    <!--Timeline JS-->
+    <!--<link title="timeline-styles" rel="stylesheet" href="http://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+    <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>-->
+    <link title="timeline-styles" rel="stylesheet" href="./libs/timelineJS/timeline.css">
+    <script src="./libs/timelineJS/timeline.js"></script>
+    <!--Style-->
+    <link rel="stylesheet" href="libs/w3.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Visualisation des données extraites des annuaires du commerce parisien</title>
+  </head>
+  <body>
+    <article>
+
+      <!--START : Container-->
+      <div class="container">
+        <!--START : Map-->
+        <div id="map"></div>
+        <!--END : Map-->
+        <div id="layers"></div>
+
+        <!--START : Controls-->
+        <div id="controls">
+          <h2>Entrées extraites des annuaires du commerce de Paris (XIXème siècle) relatives aux photographes et aux professions associées</h2>
+          
+          <h3>Dataset</h3>
+          <div id="namedgraphs">
+            <select name="selectgraphs" id="selectgraphs">
+            </select>
+          </div>
+
+          <h3 id="titrecontrols">Filtres</h3> 
+          
+        <!--#START : Advanced research panel-->
+        <div id="av">
+          <div class="searchtool">
+            <fieldset>
+              <legend>Propriétés</legend>
+              <form id="frm1">
+                <label for="per">Raison sociale</label><br>
+                <input type="text" name="per" id="per" placeholder="Ex : nadar" title="Tout ou partie d'un nom"><br>
+                <label for="act">Description</label><br>
+                <input type="text" name="act" id="act" placeholder="Ex : photo" title="Tout ou partie d'un mot-clé"><br>
+                <label for="spat">Adresse</label><br>
+                <input type="text" name="spat" id="spat" placeholder="Ex : rivoli" title="Tout ou partie d'une adresse"><br>
+              </form>
+            </fieldset>
+          </div>
+
+          <div id="time">
+            <fieldset>
+              <legend>Période</legend>
+              <div style="margin-right: auto; margin-left: auto; width: 95%; margin-bottom: 10px; text-align: center; height: fit-content;">
+              <input type="number" min='1857' max='1908' id="input-number-min">
+              <input type="number" min='1857' max='1908' id="input-number-max">
+              <div id="slider" style="top: 0px; right: 1px; margin: 10px 20px;"></div><br>
+              <p id="loadedperiod" style="text-align: justify; height: fit-content;"><small>❓ Le filtre temporel permet de faire varier l'affichage des points préalablement chargés sur la carte sans lancer une nouvelle recherche.</small></p>
+            </fieldset>
+          </div>
+
+          <div id="spatialfilter">
+            <fieldset>
+              <legend>Localisation</legend>
+              <p style="text-align: justify; height: fit-content;"><small>Dessinez l'emprise de votre zone de recherche avec l'outil de dessin disponible sur la carte.</small></p>
+            </fieldset>
+          </div>
+    
+          <div id="search">
+            <center><input type="button" onclick="requestData()" value="Lancer la recherche" class="button"></center>
+            <div id="message"></div>
+          </div>
+        <!--END : Advanced research tabber-->
+      </div>
+    </div>
+  </div>
+
+  <div id="linkeddata">
+    <p id="bnfdata"></p>
+  </div>
+  
+  <div id='timeline-embed' style="height:0px"></div>
+  <div id="ancretimeline"></div>
+
+  <button onclick="topFunction()" id="goToTop" title="Go to top">Carte</button> 
+  </article>
+  </body>
+  <script src="parameters.js"></script>
+  <script src="draw.js"></script>
+  <script src="anim.js"></script>
+  <script src="tile.js"></script>
+  <script src="named_graphs.js"></script>
+  <script src="functions.js"></script>
+  <script src="features-endpoint.js"></script>
+  <script src="features-ref.js"></script>
+  <script src="map.js"></script>
+</html>

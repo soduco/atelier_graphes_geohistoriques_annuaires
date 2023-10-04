@@ -1,0 +1,259 @@
+.body{
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {  
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "map map controls"
+    "map map controls"
+    "map map controls";
+}
+
+h2{
+  font-size: 23px;
+}
+
+h3{
+  font-size: 20px;
+}
+  
+  #map { 
+    grid-area: map;
+    width: 100%;
+    height: 100vh;
+ }
+  
+  #controls {  
+    margin-left: 10px;
+    margin-right: 10px;
+    grid-area:controls;
+    grid-template-areas:
+      "titrecontrols"
+      "av";
+    height:100vh;
+    overflow-y: scroll;
+    font-family: Arial, sans-serif;
+    font-size: medium;
+  }
+
+  #titre-controls{
+    grid-area:titrecontrols;
+  }
+
+  #av {
+    grid-template-areas:
+      "searchtool"
+      "time"
+      "search";
+    grid-area: av;
+    margin-bottom: 15px;
+  }
+
+  #content {
+    height: fit-content;
+    width: auto;
+}
+  
+  #time { 
+    grid-area: time; 
+    height: fit-content;
+  }
+
+  #loadedperiod {
+    height: fit-content;
+  }
+
+  #message{
+    grid-area: message; 
+    height: fit-content;
+  }
+
+  .logo{
+    height: 30px;
+  }
+
+/*2nd part of the app : Timeline JS*/
+  #timeline-embed{
+    grid-area:timeline;
+    width: 100%;
+    height:800px;
+    overflow-y: scroll;
+  }
+
+/*3td part of the app : BNF Linked Data*/
+
+  #linkeddata{
+    grid-area:bnfdata;
+    background-color: antiquewhite;
+    width: 100%;
+    height: fit-content;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+/*Checkbox style*/
+#checkbox{
+  width: fit-content;
+}
+
+/*Dot used in the legend*/
+.dot {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.noentry{
+  text-align: center;
+}
+
+.clusters{
+  display: block;
+  padding: 1px;
+  text-align: center;
+  background-color: #0351f9;
+  font-size: smaller;
+  font-weight: bold;
+  color:#fff;
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+}
+
+/*Button style*/
+.button {
+  background-color: #1c244b; /* SODUCO color */
+  border: none;
+  color: white;
+  margin-top: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: #45518e; /* SODUCO color */
+}
+
+.button:active {
+  background-color: #36b88f; /* SODUCO color */
+}
+
+/*Got to top button*/
+
+#goToTop {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #404b7f; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#goToTop:hover {
+  background-color: #e9dc15; /* Add a dark-grey background on hover */
+}
+
+/*Timeline style update*/
+.tl-timegroup-message{
+  color:black;
+}
+
+/*Control panels icons*/
+.icon {
+	display: inline-block;
+	height: 12px;
+	width: 12px;
+}
+
+/* ICONS */
+.icon-vector {
+	background: url('data/icons/vector.png');
+}
+.icon-tile {
+	background: url('images/icons/tile.png');
+}
+
+/* Leaflet Panel Layer*/
+
+.leaflet-panel-layers-icon {
+	text-align: center;
+	float: center;
+}
+
+/*Form tooltip : https://jquerytools.github.io/demos/tooltip/form.html */
+
+/* simple css-based tooltip */
+.tooltip {
+  background-color:#000;
+  border:1px solid #fff;
+  padding:10px 15px;
+  width:200px;
+  display:none;
+  color:#fff;
+  text-align:left;
+  font-size:12px;
+
+  /* outline radius for mozilla/firefox only */
+  -moz-box-shadow:0 0 10px #000;
+  -webkit-box-shadow:0 0 10px #000;
+}
+
+/*Leaflet draw */
+ul.leaflet-draw-actions.leaflet-draw-actions-bottom li a[title="Save changes"],
+ul.leaflet-draw-actions.leaflet-draw-actions-bottom li a[title="Cancel editing, discards all changes"] {
+    display: none;
+}
+
+/******************************** SMALL SCREEN CSS **********************************/
+
+@media all and (max-width: 1024px)
+{
+  .container {  
+    display: grid; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: 60vh 40vh; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "map"
+      "controls"
+  }
+
+  #map { 
+    grid-area: map;
+    width: auto;
+    height: 60vh;
+ }
+  
+  #controls {  
+    margin-left: 10px;
+    margin-right: 10px;
+    grid-area:controls;
+    grid-template-areas:
+      "titrecontrols"
+      "av";
+    width:auto;
+    height:40vh;
+    overflow-y: scroll;
+    font-family: Arial, sans-serif;
+    font-size: medium;
+  }
+}
