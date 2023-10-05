@@ -36,7 +36,7 @@ function createlinkDataSoduco(uri){
       "OPTIONAL{?uri <http://rdaregistry.info/Elements/a/P50104> ?activity.}"+
       "} GROUP BY ?uri ?index ?person ?address ?directoryName ?directoryDate"+
       " ORDER BY ASC(?index) ASC(?directoryDate)"
-      
+      console.log(query2)
     //console.log(query2)
     var queryURL2 = repertoireGraphDB + "?query="+encodeURIComponent(query2)+"&?outputFormat=rawResponse";
 
