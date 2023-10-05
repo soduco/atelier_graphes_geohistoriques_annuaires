@@ -14,7 +14,7 @@ var select = "PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#> "+
 "PREFIX gsp: <http://www.opengis.net/ont/geosparql#> "+
 "PREFIX geof: <http://www.opengis.net/def/function/geosparql/>"+
 "PREFIX rda: <http://rdaregistry.info/Elements/a/>"+
-'SELECT distinct ?uri ?index ?person ?activity ?address ?address_geocoding ?geom_wkt ?directoryName ?directoryDate '
+'SELECT distinct ?uri ?index ?person (GROUP_CONCAT(DISTINCT ?activity ; SEPARATOR=" et ") as ?activities) (GROUP_CONCAT(DISTINCT ?address ; SEPARATOR=" et ") as ?addresses) (GROUP_CONCAT(DISTINCT ?address_geocoding ; SEPARATOR=" et ") as ?addresses_geocoding) ?geom_wkt ?directoryName ?directoryDate '
 
 var where = "WHERE { "+
 "?uri a adb:Entry."+
@@ -205,7 +205,9 @@ function requestData() {
   var graphname_ = s.options[s.selectedIndex].value;
   console.log(graphname_)
   var from = 'FROM  <' + graphname_ + '> '
-  finalquery = select + from + where + compquery + periodfilter + bb_filter + '} '//;ORDER BY ASC(?directoryDate)';
+  finalquery = select + from + where + compquery + periodfilter + bb_filter + '} ' +
+  'GROUP BY ?uri ?index ?person ?geom_wkt ?directoryName ?directoryDate ' +
+  'ORDER BY ASC(?directoryDate) ASC(?index)'
   console.log(finalquery)
   //Create the query URL				
   queryURL = repertoireGraphDB + "?query="+encodeURIComponent(finalquery)+"&?application/json";
