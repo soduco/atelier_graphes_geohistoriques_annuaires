@@ -23,7 +23,7 @@ function createlinkDataSoduco(uri){
       "PREFIX gsp: <http://www.opengis.net/ont/geosparql#> "+
       'SELECT distinct ?uri ?index ?person (GROUP_CONCAT(DISTINCT ?activity ; SEPARATOR=" |||et||| ") as ?activities) ?address ?directoryName ?directoryDate '+
       from +
-      "WHERE { <http://rdf.geohistoricaldata.org/id/directories/entry/" + uri + "> owl:sameAs ?uri."+
+      "WHERE { <" + uri + "> owl:sameAs ?uri."+
       "?uri a adb:Entry."+
       "?uri adb:numEntry ?index."+
       "?uri rdfs:label ?person."+
@@ -36,6 +36,7 @@ function createlinkDataSoduco(uri){
       "OPTIONAL{?uri <http://rdaregistry.info/Elements/a/P50104> ?activity.}"+
       "} GROUP BY ?uri ?index ?person ?address ?directoryName ?directoryDate"+
       " ORDER BY ASC(?index) ASC(?directoryDate)"
+      console.log()
       console.log(query2)
     //console.log(query2)
     var queryURL2 = repertoireGraphDB + "?query="+encodeURIComponent(query2)+"&?outputFormat=rawResponse";
@@ -238,8 +239,9 @@ function iconByName(name) {
   texte += '<b>Année de publication</b> : ' + feature.properties.directoryDate + '<br>'+
   '<b>Annuaire</b> : ' + feature.properties.directoryName + '</br>'+
   "<b>Identifiant de l'entrée </b> : " + feature.properties.index + '</br></p>';
+  //+"<b>URI</b> : " + feature.properties.uri + '</br></p>';
   layer.bindPopup(texte);
-  createlinkDataSoduco(feature.properties.index);
+  createlinkDataSoduco(feature.properties.uri);
 }
 
 function onEachFeature(feature, layer) {
@@ -253,7 +255,7 @@ function onEachFeature(feature, layer) {
         searchLinkedDataWithBNF(feature.properties.index)
         message.innerHTML = '<p class="noentry">Requête en cours d\'exécution : entrées liées à ' + feature.properties.person + ' (ID ' + feature.properties.index + ') <img src="./img/loading_cut.gif">.</p>';
         //Create timeline
-        createlinkDataSoduco(feature.properties.index)
+        createlinkDataSoduco(feature.properties.uri)
       });
         
     } else if (feature.properties.secteur) {
