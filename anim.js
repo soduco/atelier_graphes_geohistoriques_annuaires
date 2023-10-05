@@ -19,23 +19,3 @@ function topFunction() {
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 } 
-
-
-/* From tooltips*/
-// select all desired input fields and attach tooltips to them
-$("#myform :input").tooltip({
-
-  // place tooltip on the right edge
-  position: "center right",
-
-  // a little tweaking of the position
-  offset: [-2, 10],
-
-  // use the built-in fadeIn/fadeOut effect
-  effect: "fade",
-
-  // custom opacity setting
-  opacity: 0.7
-
-  });
-    
