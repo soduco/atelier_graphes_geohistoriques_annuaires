@@ -3,6 +3,7 @@ doc/silk-workbench.md
 test/
 appli/
 .DS_Store
+scripts_silk/contributions/
 scripts_silk/contributions/appariement_Annuaires_notairesU.xml
 scripts_silk/contributions/exportLinkSpec.xml
 scripts_silk/contributions/liage_annuaires_index_extraction_greater_than.xml
