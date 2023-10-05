@@ -9,7 +9,7 @@ function createlinkDataSoduco(uri){
 
       var s = document.getElementById("selectgraphs");
       var graphname_ = s.options[s.selectedIndex].value;
-      console.log(graphname_)
+      //console.log(graphname_)
       var from = 'FROM  <' + graphname_ + '> '
 
       var query2 = "PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#> "+
@@ -22,25 +22,24 @@ function createlinkDataSoduco(uri){
       "PREFIX locn: <http://www.w3.org/ns/locn#> "+
       "PREFIX gsp: <http://www.opengis.net/ont/geosparql#> "+
       'SELECT distinct ?uri ?index ?person (GROUP_CONCAT(DISTINCT ?activity ; SEPARATOR=" |||et||| ") as ?activities) ?address ?directoryName ?directoryDate '+
-      from +
-      "WHERE { <" + uri + "> owl:sameAs ?uri."+
-      "?uri a adb:Entry."+
-      "?uri adb:numEntry ?index."+
-      "?uri rdfs:label ?person."+
-      "?uri prov:wasDerivedFrom ?directory."+
-      "?directory rdfs:label ?directoryName."+
-      "?directory pav:createdOn ?directoryDate."+
-      "?uri locn:address ?add2."+
-      "?add2 locn:fullAddress ?address."+
-      "?add2 prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>."+
-      "OPTIONAL{?uri <http://rdaregistry.info/Elements/a/P50104> ?activity.}"+
-      "} GROUP BY ?uri ?index ?person ?address ?directoryName ?directoryDate"+
-      " ORDER BY ASC(?index) ASC(?directoryDate)"
-      console.log()
-      console.log(query2)
-    //console.log(query2)
+      //from +
+      "WHERE { "+
+        "GRAPH <" +  graphname_ + ">{" +
+        "<" + uri + "> owl:sameAs ?uri."+
+        "?uri a adb:Entry."+
+        "?uri adb:numEntry ?index."+
+        "?uri rdfs:label ?person."+
+        "?uri prov:wasDerivedFrom ?directory."+
+        "?directory rdfs:label ?directoryName."+
+        "?directory pav:createdOn ?directoryDate."+
+        "?uri locn:address ?add2."+
+        "?add2 locn:fullAddress ?address."+
+        "?add2 prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>."+
+        "OPTIONAL{?uri <http://rdaregistry.info/Elements/a/P50104> ?activity.}"+
+        "} } GROUP BY ?uri ?index ?person ?address ?directoryName ?directoryDate"+
+        " ORDER BY ASC(?index) ASC(?directoryDate)"
     var queryURL2 = repertoireGraphDB + "?query="+encodeURIComponent(query2)+"&?outputFormat=rawResponse";
-
+    console.log(query2)
     //console.log(queryURL2)
     var timelinejson = {"title": {"text":{"headline":'Données liées'}}, "events": []}
 
@@ -111,7 +110,6 @@ function createlinkDataSoduco(uri){
 
 /////////// Search link with BNF data //////
 
-
 async function searchLinkedDataWithBNF(id) {
   // HTML content to print data from bnf 
   var html = document.getElementById('bnfdata')
@@ -139,7 +137,6 @@ async function searchLinkedDataWithBNF(id) {
   }).done((promise) => {
     // If linked data with data.bnf.fr
     if (promise.results.bindings.length > 0){
-      console.log(promise.results.bindings)
       $.each(promise.results.bindings, function(i,bindings){
 
         var simple_uri = bindings.uri.value.replace('#about', '')
@@ -156,7 +153,6 @@ async function searchLinkedDataWithBNF(id) {
         " OPTIONAL{<" + bindings.uri.value + "> 	bnf-onto:firstYear ?fy.} "+
         " OPTIONAL{<" + bindings.uri.value + "> bnf-onto:lastYear ?ly}. "+
         "}"
-        console.log(query4)
         var queryURL4 = "https://data.bnf.fr/sparql?query="+encodeURIComponent(query4)+"&format=application/json"
         console.log(queryURL4)
         $.ajax({
@@ -238,10 +234,10 @@ function iconByName(name) {
   };
   texte += '<b>Année de publication</b> : ' + feature.properties.directoryDate + '<br>'+
   '<b>Annuaire</b> : ' + feature.properties.directoryName + '</br>'+
-  "<b>Identifiant de l'entrée </b> : " + feature.properties.index + '</br></p>';
-  //+"<b>URI</b> : " + feature.properties.uri + '</br></p>';
+  "<b>Identifiant de l'entrée </b> : " + feature.properties.index + '</br></p>'+
+  '<button onclick="createlinkDataSoduco(feature.properties.uri)">Frise chronologique</button>';
   layer.bindPopup(texte);
-  createlinkDataSoduco(feature.properties.uri);
+  //createlinkDataSoduco(feature.properties.uri);
 }
 
 function onEachFeature(feature, layer) {
@@ -252,10 +248,8 @@ function onEachFeature(feature, layer) {
       layer.on('click', function(e) {
         //Search external resources
         $('#bnfdata').empty();
-        searchLinkedDataWithBNF(feature.properties.index)
-        message.innerHTML = '<p class="noentry">Requête en cours d\'exécution : entrées liées à ' + feature.properties.person + ' (ID ' + feature.properties.index + ') <img src="./img/loading_cut.gif">.</p>';
-        //Create timeline
-        createlinkDataSoduco(feature.properties.uri)
+        //searchLinkedDataWithBNF(feature.properties.index)
+        //message.innerHTML = '<p class="noentry">Requête en cours d\'exécution : entrées liées à ' + feature.properties.person + ' (ID ' + feature.properties.index + ') <img src="./img/loading_cut.gif">.</p>';  
       });
         
     } else if (feature.properties.secteur) {

@@ -16,7 +16,7 @@ var select = "PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#> "+
 "PREFIX rda: <http://rdaregistry.info/Elements/a/>"+
 'SELECT distinct ?uri ?index ?person (GROUP_CONCAT(DISTINCT ?activity ; SEPARATOR=" et ") as ?activities) (GROUP_CONCAT(DISTINCT ?address ; SEPARATOR=" et ") as ?addresses) (GROUP_CONCAT(DISTINCT ?address_geocoding ; SEPARATOR=" et ") as ?addresses_geocoding) ?geom_wkt ?directoryName ?directoryDate '
 
-var where = "WHERE { "+
+var where =
 "?uri a adb:Entry."+
 "?uri adb:numEntry ?index."+
 "?uri rdfs:label ?person."+
@@ -204,8 +204,9 @@ function requestData() {
   var s = document.getElementById("selectgraphs");
   var graphname_ = s.options[s.selectedIndex].value;
   console.log(graphname_)
-  var from = 'FROM  <' + graphname_ + '> '
-  finalquery = select + from + where + compquery + periodfilter + bb_filter + '} ' +
+  var completewhere = "WHERE { GRAPH <" + graphname_ + "> {"
+  //var from = 'FROM  <' + graphname_ + '> '
+  finalquery = select + completewhere + where + compquery + periodfilter + bb_filter + '} }' +
   'GROUP BY ?uri ?index ?person ?geom_wkt ?directoryName ?directoryDate ' +
   'ORDER BY ASC(?directoryDate) ASC(?index)'
   console.log(finalquery)
