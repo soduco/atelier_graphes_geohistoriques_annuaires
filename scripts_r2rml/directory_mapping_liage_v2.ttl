@@ -49,19 +49,13 @@
         ]
     ], [ a rr:PredicateObjectMap;
       rr:objectMap [ a rr:TermMap, rr:ObjectMap;
-          rr:column "entry_id";
-          rr:datatype xsd:integer;
-          rr:termType rr:Literal
-        ];
-      rr:predicate adb:numEntry
-    ],  [ a rr:PredicateObjectMap;
-      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
           rr:column "index";
           rr:datatype xsd:integer;
           rr:termType rr:Literal
         ];
-      rr:predicate adb:indexExt
-    ], [ a rr:PredicateObjectMap;
+      rr:predicate adb:numEntry
+    ],
+    [ a rr:PredicateObjectMap;
       rr:objectMap [ a rr:TermMap, rr:ObjectMap;
           rr:column "fulladd";
           rr:datatype xsd:string;

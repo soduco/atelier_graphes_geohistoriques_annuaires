@@ -49,13 +49,6 @@
         ]
     ], [ a rr:PredicateObjectMap;
       rr:objectMap [ a rr:TermMap, rr:ObjectMap;
-          rr:column "published";
-          rr:datatype xsd:integer;
-          rr:termType rr:Literal
-        ];
-      rr:predicate adb:directoryDate
-    ], [ a rr:PredicateObjectMap;
-      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
           rr:column "entry_id";
           rr:datatype xsd:integer;
           rr:termType rr:Literal

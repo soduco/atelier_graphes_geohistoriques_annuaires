@@ -7,8 +7,12 @@ var inputNumberMax = document.getElementById('input-number-max');
 
 function createlinkDataSoduco(uri){
 
-      var query2 = "PREFIX adb: <http://data.soduco.fr/def/annuaire#> "+
-      "PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#> "+
+      var s = document.getElementById("selectgraphs");
+      var graphname_ = s.options[s.selectedIndex].value;
+      console.log(graphname_)
+      var from = 'FROM  <' + graphname_ + '> '
+
+      var query2 = "PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#> "+
       "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "+
       "PREFIX owl: <http://www.w3.org/2002/07/owl#> "+
       "PREFIX fn: <http://www.w3.org/2005/xpath-functions#> "+
@@ -18,9 +22,10 @@ function createlinkDataSoduco(uri){
       "PREFIX locn: <http://www.w3.org/ns/locn#> "+
       "PREFIX gsp: <http://www.opengis.net/ont/geosparql#> "+
       'SELECT distinct ?uri ?index ?person (GROUP_CONCAT(DISTINCT ?activity ; SEPARATOR=" |||et||| ") as ?activities) ?address ?directoryName ?directoryDate '+
+      from +
       "WHERE { <http://rdf.geohistoricaldata.org/id/directories/entry/" + uri + "> owl:sameAs ?uri."+
-      "?uri a ont:Entry."+
-      "?uri ont:numEntry ?index."+
+      "?uri a adb:Entry."+
+      "?uri adb:numEntry ?index."+
       "?uri rdfs:label ?person."+
       "?uri prov:wasDerivedFrom ?directory."+
       "?directory rdfs:label ?directoryName."+
@@ -93,9 +98,7 @@ function createlinkDataSoduco(uri){
       divtimeline.setAttribute('style', 'height:800px;');
       window.timeline = new TL.Timeline('timeline-embed', timelinejson, options);
       message.innerHTML = '';
-      //window.location.href="#ancretimeline"
     } else {
-      //console.log("No timeline")
       divtimeline.setAttribute('style', 'height:0px;');
       message.innerHTML = '<p class="noentry">Aucune d\'entrée liée à ' + uri + '.</p>';
     }
@@ -227,10 +230,10 @@ function iconByName(name) {
 
  function popUpDirectories(feature, layer) {
   texte = '<h4>'+ feature.properties.person +'</h4>'+
-  '<p><b>Adresse (annuaire)</b> : ' + feature.properties.address + '<br>'+ 
-  '<b>Adresse (géocodeur)</b> : ' + feature.properties.address_geocoding + '<br>';
-  if (feature.properties.activity){
-      texte += '<b>Activité</b> : ' + feature.properties.activity + '<br>';
+  '<p><b>Adresse (annuaire)</b> : ' + feature.properties.addresses + '<br>'+ 
+  '<b>Adresse (géocodeur)</b> : ' + feature.properties.addresses_geocoding + '<br>';
+  if (feature.properties.activities){
+      texte += '<b>Activité</b> : ' + feature.properties.activities + '<br>';
   };
   texte += '<b>Année de publication</b> : ' + feature.properties.directoryDate + '<br>'+
   '<b>Annuaire</b> : ' + feature.properties.directoryName + '</br>'+
