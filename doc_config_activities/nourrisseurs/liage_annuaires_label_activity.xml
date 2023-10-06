@@ -1,0 +1,118 @@
+<Silk>
+<!--Prefixes-->
+    <Prefixes>
+      <Prefix id="rdf" namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+	  <Prefix id="owl" namespace="http://www.w3.org/2002/07/owl#"/>
+	  <Prefix id="adb" namespace="http://rdf.geohistoricaldata.org/def/directory#"/>
+	  <Prefix id="rdfs" namespace="http://www.w3.org/2000/01/rdf-schema#"/>
+	  <Prefix id="locn" namespace="http://www.w3.org/ns/locn#"/>
+	  <Prefix id="xsd" namespace="http://www.w3.org/2001/XMLSchema#"/>
+	  <Prefix id="dcterms" namespace="http://purl.org/dc/terms/"/>
+	  <Prefix id="rda" namespace="http://rdaregistry.info/Elements/a/"/>
+    </Prefixes>
+	<!--Datasets-->
+	<DataSources>
+	  <DataSource id="ebenistes1" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
+		  <Param name="pageSize" value="1000"></Param>
+		  <Param name="pauseTime" value="0"></Param>
+		  <Param name="retryCount" value="3"></Param>
+		  <Param name="endpointURI" value="http://MacBook-Pro-di-admin.local:7200/repositories/nourisseurs"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/nourrisseurs"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="retryPause" value="1000"></Param>
+		  <Param name="queryParameters" value=""/>
+		  <Param name="login" value=""/>
+		  <Param name="entityList" value=""/>
+		  <Param name="parallel" value="true"/>
+		  <Param name="password" value=""/>
+	  </DataSource>
+	  <DataSource id="ebenistes2" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
+		  <Param name="pageSize" value="1000"></Param>
+		  <Param name="pauseTime" value="0"></Param>
+		  <Param name="retryCount" value="3"></Param>
+		  <Param name="endpointURI" value="http://MacBook-Pro-di-admin.local:7200/repositories/nourisseurs"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/nourrisseurs"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="retryPause" value="1000"></Param>
+		  <Param name="queryParameters" value=""/>
+		  <Param name="login" value=""/>
+		  <Param name="entityList" value=""/>
+		  <Param name="parallel" value="true"/>
+		  <Param name="password" value=""/>
+	  </DataSource>
+	</DataSources>
+<!--Links-->
+<Interlinks>
+	<Interlink id="by-keys">
+		<LinkType>owl:sameAs</LinkType>
+			<SourceDataset dataSource="ebenistes1" var="a">
+				<RestrictTo>{ ?a rdf:type adb:Entry } .</RestrictTo>
+			</SourceDataset>
+			<TargetDataset dataSource="ebenistes2" var="b">
+				<RestrictTo>{ ?b rdf:type adb:Entry } .</RestrictTo>
+			</TargetDataset>
+<LinkageRule>
+<!--Key 2 : label and activity-->
+<!--
+Conserve tous les cas où le score minimal de la combinaison de propriété Label-Activité est supérieur à 0
+-->
+<Aggregate id="min_label_activity" required="true" weight="1" type="min">
+<!--
+Pour deux entrées : calcule la distance character jaccard entre les valeurs de la propriété Activité
+-->
+	<Compare id="levenshtein_activity" required="true" weight="1" metric="jaccard" threshold="0.4">
+<!--Distance maximale = 0.8-->
+<!--
+Transformation des valeurs : suppression des caractères spéciaux, des blancs en début et fin et passage en minuscules)
+-->
+		<TransformInput id="transfo_activity_source_1_lower" function="lowerCase">
+				<Input id="source_activity_1" path="?a/rda:P50104"/>
+			</TransformInput>
+		<!--
+		Transformation des valeurs : suppression des caractères spéciaux, des blancs en début et fin et passage en minuscules)
+		-->
+		<TransformInput id="transfo_activity_target_2_lower" function="lowerCase">
+				<Input id="target_activity_1" path="?b/rda:P50104"/>
+			</TransformInput>
+
+	</Compare>
+	<!--
+	Pour deux entrées : calcule la distance d'édition levenshtein entre les valeurs de la propriété Label
+	-->
+	<Compare id="levenshtein_persons" required="true" weight="1" metric="levenshtein" threshold="0.25">
+	<!--Distance maximale = 0.4-->
+		<!--
+		Transformation des valeurs : suppression des caractères spéciaux, des blancs en début et fin et passage en minuscules)
+		-->
+		<TransformInput id="transfo_label_source_2_lower" function="lowerCase">
+				<Input id="source_label_2" path="?a/rdfs:label"/>
+			</TransformInput>
+		<!--
+		Transformation des valeurs : suppression des caractères spéciaux)
+		-->
+		<TransformInput id="transfo_label_target_2_lower" function="lowerCase">
+				<Input id="target_label_2" path="?b/rdfs:label"/>
+			</TransformInput>
+	</Compare>
+</Aggregate>
+</LinkageRule>
+<Filter limit="80"/>
+<Outputs>
+	<Output type="file" minConfidence="0.6">
+	 <!-- TEST > need to change after at 0.41
+	<!-
+	Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.41
+	-->
+		<Param name="file" value="/Users/admin/Documents/syncperso/Sync/post_doc_soduco/reunions/2023_10_semaine_ign/graphes/atelier_IGN_graphes_geohistoriques/nourrisseur/labelactivity_nourrisseur_accepted_links.nt"/>
+		<Param name="format" value="ntriples"/>
+	</Output>
+
+		<Output type="file" minConfidence="0.42" maxConfidence="0.59">
+		<!--
+		Fichier RDF où sont sauvegardés les liens sameAS "à vérifier" pour lesquels la confiance est comprise entre 0.12 et 0.40
+		-->
+		<Param name="file" value="/Users/admin/Documents/syncperso/Sync/post_doc_soduco/reunions/2023_10_semaine_ign/graphes/atelier_IGN_graphes_geohistoriques/nourrisseur/labelactivity_nourrisseur_verify_links.nt"/>
+		<Param name="format" value="ntriples"/>
+		</Output>
+</Outputs>
+</Interlink>
+</Interlinks>
+</Silk>
