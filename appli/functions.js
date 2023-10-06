@@ -5,8 +5,7 @@ var divmessage = document.getElementById('message')
 var inputNumberMin = document.getElementById('input-number-min');
 var inputNumberMax = document.getElementById('input-number-max');
 
-function createlinkDataSoduco(uri){
-
+function createlinkDataSoduco(uri_){
       var s = document.getElementById("selectgraphs");
       var graphname_ = s.options[s.selectedIndex].value;
       //console.log(graphname_)
@@ -24,8 +23,8 @@ function createlinkDataSoduco(uri){
       'SELECT distinct ?uri ?index ?person (GROUP_CONCAT(DISTINCT ?activity ; SEPARATOR=" |||et||| ") as ?activities) ?address ?directoryName ?directoryDate '+
       //from +
       "WHERE { "+
-        "GRAPH <" +  graphname_ + ">{" +
-        "<" + uri + "> owl:sameAs ?uri."+
+        "GRAPH <" +  graphname_ + "> {" +
+        "<http://rdf.geohistoricaldata.org/id/directories/entry/" + uri_ + "> owl:sameAs ?uri."+
         "?uri a adb:Entry."+
         "?uri adb:numEntry ?index."+
         "?uri rdfs:label ?person."+
@@ -83,7 +82,7 @@ function createlinkDataSoduco(uri){
           },
           "group":bindings.address.value,
           "background":{"color":"#1c244b"},
-          "unique_id":uri
+          "unique_id":bindings.activities.uri
           }
         //console.log(feature)
         timelinejson.events.push(feature);
@@ -226,6 +225,9 @@ function iconByName(name) {
  ****************/
 
  function popUpDirectories(feature, layer) {
+  console.log(feature.properties.uri)
+  var valuri = feature.properties.uri.replace('http://rdf.geohistoricaldata.org/id/directories/entry/', '')
+
   texte = '<h4>'+ feature.properties.person +'</h4>'+
   '<p><b>Adresse (annuaire)</b> : ' + feature.properties.addresses + '<br>'+ 
   '<b>Adresse (géocodeur)</b> : ' + feature.properties.addresses_geocoding + '<br>';
@@ -234,9 +236,11 @@ function iconByName(name) {
   };
   texte += '<b>Année de publication</b> : ' + feature.properties.directoryDate + '<br>'+
   '<b>Annuaire</b> : ' + feature.properties.directoryName + '</br>'+
-  "<b>Identifiant de l'entrée </b> : " + feature.properties.index + '</br></p>'+
-  '<button onclick="createlinkDataSoduco(feature.properties.uri)">Frise chronologique</button>';
+  '<b>Identifiant de l\'entrée </b> : ' + feature.properties.index + '</br></p>'+
+  '<b>Uri </b> : ' + feature.properties.uri + '</br></p>'
+  +'<button onclick="createlinkDataSoduco(' + valuri +')">Frise chronologique</button>';
   layer.bindPopup(texte);
+  console.log(texte)
   //createlinkDataSoduco(feature.properties.uri);
 }
 
@@ -248,7 +252,7 @@ function onEachFeature(feature, layer) {
       layer.on('click', function(e) {
         //Search external resources
         $('#bnfdata').empty();
-        //searchLinkedDataWithBNF(feature.properties.index)
+        //searchLinkedDataWithBNF(feature.properties.uri)
         //message.innerHTML = '<p class="noentry">Requête en cours d\'exécution : entrées liées à ' + feature.properties.person + ' (ID ' + feature.properties.index + ') <img src="./img/loading_cut.gif">.</p>';  
       });
         
