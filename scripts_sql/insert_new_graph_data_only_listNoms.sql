@@ -24,14 +24,14 @@ INSERT INTO directories_graph.directories_content (index, person, activity,loc, 
 		-- Liste des mots-clés: à adapter!
 		(e.view BETWEEN w.npage_pdf_d AND w.npage_pdf_f) AND
         (w.liste_type ILIKE '%ListNoms%') AND
-		(act.ner_xml ILIKE '%ébeniste%' OR 
+		((act.ner_xml ILIKE '%ébeniste%' OR 
 		act.ner_xml ILIKE '%ebeniste%' OR 
 		act.ner_xml ILIKE '%ébéniste%' OR 
 		act.ner_xml ILIKE '%ebéniste%' OR 
 		act.ner_xml ILIKE '%cbéniste%' OR 
 		act.ner_xml ILIKE '%bemste%' OR 
 		act.ner_xml ILIKE '%bémste%' OR 
-		act.ner_xml ILIKE '%cbeniste%')
+		act.ner_xml ILIKE '%cbeniste%'))
 		)
 	ORDER BY e.index, e.published ASC);
 	
