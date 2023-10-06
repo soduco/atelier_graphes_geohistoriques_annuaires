@@ -1,4 +1,15 @@
-## Compter le nombre d'uri distincte dans un répertoire
+## Exporter les liens sameAs: les importer dans un repository (case à cocher Disable sameAs désactivée), exécuter la requête ci-dessous et exporter le résultat en CSV
+
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+
+select ?s ?p
+where {?s owl:sameAs ?p.
+	FILTER (?s != ?p)}
+```
+
+
+## Compter le nombre d'uri distinctes dans un répertoire
 ```sparql
 PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#>
 PREFIX rda: <http://rdaregistry.info/Elements/a/>
