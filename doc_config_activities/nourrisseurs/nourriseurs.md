@@ -1,4 +1,4 @@
-#### Les ebenistes entre 1845 et 1885 dans les listes alphabetiques
+#### Les nourrisseurs dans les listes alphabetiques, toutes dates
 Config de Julie.
 
 ##### init query: creation du graphe
