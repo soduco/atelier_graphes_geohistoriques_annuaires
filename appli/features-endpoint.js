@@ -166,9 +166,9 @@ function requestData() {
   }
   
   //Get value in form fields
-  per = document.getElementById("per").value;
-  act = document.getElementById("act").value;
-  spat = document.getElementById("spat").value;
+  per = document.getElementById("per").value.toLowerCase();
+  act = document.getElementById("act").value.toLowerCase();
+  spat = document.getElementById("spat").value.toLowerCase();
   //Complete SPARQL query
   /// Empty inputs
   if (per.length > 0 && act.length == 0 && spat.length == 0) {
@@ -203,7 +203,6 @@ function requestData() {
   //Create the final query
   var s = document.getElementById("selectgraphs");
   var graphname_ = s.options[s.selectedIndex].value;
-  console.log(graphname_)
   var completewhere = "WHERE { GRAPH <" + graphname_ + "> {"
   //var from = 'FROM  <' + graphname_ + '> '
   finalquery = select + completewhere + where + compquery + periodfilter + bb_filter + '} }' +
