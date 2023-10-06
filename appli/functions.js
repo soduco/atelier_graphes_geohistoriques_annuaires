@@ -237,7 +237,7 @@ function iconByName(name) {
   texte += '<b>Année de publication</b> : ' + feature.properties.directoryDate + '<br>'+
   '<b>Annuaire</b> : ' + feature.properties.directoryName + '</br>'+
   '<b>Identifiant de l\'entrée </b> : ' + feature.properties.index + '</br></p>'+
-  '<b>Uri </b> : ' + feature.properties.uri + '</br></p>'
+  //'<b>Uri </b> : ' + feature.properties.uri + '</br></p>'
   +'<button onclick="createlinkDataSoduco(' + valuri +')">Frise chronologique</button>';
   layer.bindPopup(texte);
   console.log(texte)
