@@ -3,7 +3,7 @@
 ```sparql
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 
-select ?s ?p
+select distinct ?s ?p
 where {?s owl:sameAs ?p.
 	FILTER (?s != ?p)}
 ```
