@@ -106,5 +106,5 @@
 	  rr:graphMap [ rr:constant rr:defaultGraph ]
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select entry_id, index, directory, published, person, activity, fulladd, loc, cardinal, graph_name from directories_graph.directories_content where fulladd not like '';"
+      rr:sqlQuery "select entry_id, index, directory, published, person, activity, fulladd, loc, cardinal, graph_name from directories_graph.directories_content where length(loc) >2 and length(fulladd) >3;"
     ] .
