@@ -87,24 +87,18 @@ function createlinkDataSoduco(uri_){
         //console.log(feature)
         timelinejson.events.push(feature);
         });
-
-      //console.log(timelinejson)
         
   }).done((promise) => {
-    //console.log("####");
-    //console.log(timelinejson.events.length);
     if (timelinejson.events.length > 1){
       divtimeline.setAttribute('style', 'height:800px;');
       window.timeline = new TL.Timeline('timeline-embed', timelinejson, options);
       message.innerHTML = '';
     } else {
       divtimeline.setAttribute('style', 'height:0px;');
-      message.innerHTML = '<p class="noentry">Aucune d\'entrée liée à ' + uri + '.</p>';
+      message.innerHTML = '<p class="noentry">Aucune entrée liée.</p>';
     }
    
 }); // AJAX END
-  
-
   };//FUNCTION END
 
 /////////// Search link with BNF data //////
@@ -236,12 +230,9 @@ function iconByName(name) {
   };
   texte += '<b>Année de publication</b> : ' + feature.properties.directoryDate + '<br>'+
   '<b>Annuaire</b> : ' + feature.properties.directoryName + '</br>'+
-  '<b>Identifiant de l\'entrée </b> : ' + feature.properties.index + '</br></p>'+
-  //'<b>Uri </b> : ' + feature.properties.uri + '</br></p>'
-  +'<button onclick="createlinkDataSoduco(' + valuri +')">Frise chronologique</button>';
+  '<b>Identifiant de l\'entrée </b> : ' + feature.properties.index + '</p>'+
+  '<button class="button" style="font-size: 12px; margin-right:auto; margin-left:auto;" onclick="createlinkDataSoduco(' + valuri +')">Frise chronologique</button>';
   layer.bindPopup(texte);
-  console.log(texte)
-  //createlinkDataSoduco(feature.properties.uri);
 }
 
 function onEachFeature(feature, layer) {
