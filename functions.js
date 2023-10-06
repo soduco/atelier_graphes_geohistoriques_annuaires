@@ -93,6 +93,7 @@ function createlinkDataSoduco(uri_){
       divtimeline.setAttribute('style', 'height:800px;');
       window.timeline = new TL.Timeline('timeline-embed', timelinejson, options);
       message.innerHTML = '';
+      window.scrollTo(0, document.body.scrollHeight);
     } else {
       divtimeline.setAttribute('style', 'height:0px;');
       message.innerHTML = '<p class="noentry">Aucune entrée liée.</p>';
