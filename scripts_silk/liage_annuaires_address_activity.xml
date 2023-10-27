@@ -1,5 +1,5 @@
 <Silk>
-	<!--Prefixes-->
+<!--Prefixes-->
     <Prefixes>
       <Prefix id="rdf" namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
 	  <Prefix id="owl" namespace="http://www.w3.org/2002/07/owl#"/>
@@ -12,26 +12,26 @@
     </Prefixes>
 	<!--Datasets-->
 	<DataSources>
-	  <DataSource id="dataset1" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
+	  <DataSource id="graveurs1" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://Mehdi:7200/repositories/Soduco_notaires_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouve les données des annuaires-->
+		  <Param name="endpointURI" value="http://DEL1709P004:7200/repositories/imprimeurs_cartes2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_geographiques"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
-		  <Param name="graph" value=""></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
 		  <Param name="entityList" value=""/>
 		  <Param name="parallel" value="true"/>
 		  <Param name="password" value=""/>
 	  </DataSource>
-	  <DataSource id="dataset2" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
+	  <DataSource id="graveurs2" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://Mehdi:7200/repositories/Soduco_notaires_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouve les données des annuaires-->
+		  <Param name="endpointURI" value="http://DEL1709P004:7200/repositories/imprimeurs_cartes2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_geographiques"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
-		  <Param name="graph" value=""></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
 		  <Param name="entityList" value=""/>
@@ -39,62 +39,61 @@
 		  <Param name="password" value=""/>
 	  </DataSource>
 	</DataSources>
-	<!--Links-->
-    <Interlinks>
-        <Interlink id="by-keys">
+<!--Links-->
+<Interlinks>
+	<Interlink id="by-keys">
 		<LinkType>owl:sameAs</LinkType>
-		<SourceDataset dataSource="dataset1" var="a">
-		<RestrictTo>{ ?a rdf:type adb:Entry } .</RestrictTo>
-		</SourceDataset>
-		<TargetDataset dataSource="dataset2" var="b">
-		<RestrictTo>{ ?b rdf:type adb:Entry } .</RestrictTo>
-		</TargetDataset>
-        <LinkageRule>
-		<!--Min score between entry index and by keys comparisons-->
+			<SourceDataset dataSource="graveurs1" var="a">
+				<RestrictTo>{ ?a rdf:type adb:Entry } .</RestrictTo>
+			</SourceDataset>
+			<TargetDataset dataSource="graveurs2" var="b">
+				<RestrictTo>{ ?b rdf:type adb:Entry } .</RestrictTo>
+			</TargetDataset>
+<LinkageRule>
+<!--Min score between entry index and by keys comparisons-->
 			<Aggregate id="min_activity_address" required="true"  weight="1" type="min">
 				<!-- : Address : Street name and building number -->
-				<Aggregate id="min_streetname_num" required="true" weight="1" type="average">
+				<Aggregate id="min_streetname_num" required="true" weight="1" type="min">
 					<!--Compare streetname property-->
-					<Compare id="tokenwiseDistance_streetname" required="true" weight="1" metric="tokenwiseDistance" threshold="0.1">
-						<TransformInput id="transfo_streetname_source" function="removeSpecialChars">
+					<Compare id="levenshtein_streetname" required="true" weight="1" metric="levenshtein" threshold="0.3">
+						<TransformInput id="lowerCase_source" function="lowerCase">
 							<Input id="source_streetname" path="?a/locn:thoroughfare"/>
 						</TransformInput>
-						<TransformInput id="transfo_streetname_target" function="removeSpecialChars">
+						<TransformInput id="lowerCase_target" function="lowerCase">
 							<Input id="target_streetname" path="?b/locn:thoroughfare"/>
 						</TransformInput>
 					</Compare>
 					<!--Compare street number property-->
-					<Compare id="tokenwiseDistance_num" required="true" weight="1" metric="tokenwiseDistance" threshold="0.0">
-						<TransformInput id="transfo_num_source" function="removeSpecialChars">
+					<Compare id="levenshtein_num" required="true" weight="1" metric="levenshtein" threshold="0.0">
+						<TransformInput id="transfo_num_source" function="lowerCase">
 							<Input id="source_numvoie" path="?a/locn:locatorDesignator"/>
 						</TransformInput>
-						<TransformInput id="transfo_num_target" function="removeSpecialChars">
-							<Input id="target_num" path="?b/locn:locatorDesignator"/>
+						<TransformInput id="transfo_num_target" function="lowerCase">
+							<Input id="target_numvoie" path="?b/locn:locatorDesignator"/>
 						</TransformInput>
 					</Compare>
 				</Aggregate>
 				<!--Activity-->
-				<Compare id="tokenwiseDistance_activity" required="true" weight="1" metric="tokenwiseDistance" threshold="0.1">
-					<TransformInput id="transfo_activity_source" function="removeSpecialChars">
+				<Compare id="tokenwiseDistance_activity" required="true" weight="1" metric="tokenwiseDistance" threshold="0.3">
+					<TransformInput id="transfo_activity_source" function="lowerCase">
 						<Input id="source_activity" path="?a/rda:P50104"/>
 					</TransformInput>	
-					<TransformInput id="transfo_activity_target" function="removeSpecialChars">
+					<TransformInput id="transfo_activity_target" function="lowerCase">
 						<Input id="target_activity" path="?b/rda:P50104"/>
 					</TransformInput>
 				</Compare>
 			</Aggregate>
-		</LinkageRule>
-		<Filter limit="100"/>
-		<Outputs>
-			<Output type="file" minConfidence="0.80">
-				<Param name="file" value="addressactivity_accepted_links.nt"/>
-				<Param name="format" value="ntriples"/>
-			</Output>
-			<Output type="file" minConfidence="0.71" maxConfidence="0.80">
-				<Param name="file" value="addressactivity_verify_links.nt"/>
-				<Param name="format" value="ntriples"/>
-			</Output>
-		</Outputs>
-		</Interlink>
-		</Interlinks>
+</LinkageRule>
+<Filter limit="50"/>
+<Outputs>
+<Output type="file" minConfidence="0.00">
+<!--
+Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8
+-->
+<Param name="file" value="activityaddress_accepted_links.nt"/>
+<Param name="format" value="ntriples"/>
+</Output>
+</Outputs>
+</Interlink>
+</Interlinks>
 </Silk>
