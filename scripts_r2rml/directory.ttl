@@ -141,13 +141,6 @@
       rr:predicate adb:numEntry
     ], [ a rr:PredicateObjectMap;
       rr:objectMap [ a rr:TermMap, rr:ObjectMap;
-          rr:column "index";
-          rr:datatype xsd:integer;
-          rr:termType rr:Literal
-        ];
-      rr:predicate adb:indexExt
-    ], [ a rr:PredicateObjectMap;
-      rr:objectMap [ a rr:TermMap, rr:ObjectMap;
           rr:termType rr:BlankNode;
           rr:template "address/{id_address}"
         ];
@@ -181,7 +174,7 @@
 	  rr:graphMap [ rr:constant rr:defaultGraph ]
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select entry_id, index, directory, person, activity, loc, cardinal, fulladd, graph_name, id_address from directories_graph.directories_content where fulladd not like '';"
+      rr:sqlQuery "select entry_id, directory, person, activity, loc, cardinal, fulladd, graph_name, id_address from directories_graph.directories_content where fulladd not like '';"
     ] .
 
 <urn:MAPID-348da7258faf42acaeb43491994444db-daa8dc66-09bb-44c7-a25b-4219bf6e90ca>
