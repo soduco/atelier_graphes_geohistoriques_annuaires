@@ -12,12 +12,12 @@
     </Prefixes>
 	<!--Datasets-->
 	<DataSources>
-	  <DataSource id="dataset1" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
+	  <DataSource id="graveurs1" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://Mehdi:7200/repositories/Soduco_notaires_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value=""></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://DEL1709P004:7200/repositories/imprimeurs_cartes2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_geographiques"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -25,12 +25,12 @@
 		  <Param name="parallel" value="true"/>
 		  <Param name="password" value=""/>
 	  </DataSource>
-	  <DataSource id="dataset2" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
+	  <DataSource id="graveurs2" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://Mehdi:7200/repositories/Soduco_notaires_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value=""></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://DEL1709P004:7200/repositories/imprimeurs_cartes2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_geographiques"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -43,54 +43,66 @@
 <Interlinks>
 	<Interlink id="by-keys">
 		<LinkType>owl:sameAs</LinkType>
-			<SourceDataset dataSource="dataset1" var="a">
+			<SourceDataset dataSource="graveurs1" var="a">
 				<RestrictTo>{ ?a rdf:type adb:Entry } .</RestrictTo>
 			</SourceDataset>
-			<TargetDataset dataSource="dataset2" var="b">
+			<TargetDataset dataSource="graveurs2" var="b">
 				<RestrictTo>{ ?b rdf:type adb:Entry } .</RestrictTo>
 			</TargetDataset>
-        <LinkageRule>
-		<!--Key 1 : label and address-->
-			<!--Conserve tous les cas où le score minimal de la combinaison de propriété Label-Address est supérieur à 0-->
-			<Aggregate id="min_label_add" required="true"  weight="1" type="min">
-				<!-- Score intermédiaire : Address => Combinaison numVoie and Voie -->
-					<!--Pour deux entrées : calcule la distance d'édition Tokenwise entre les valeurs de la propriété Voie-->
-					<Compare id="tokenwiseDistance_voie" required="true" weight="1" metric="tokenwiseDistance" threshold="0.4">
-						<!--Transformation des valeurs : suppression des caractères spéciaux)-->
-						<TransformInput id="transfo_voie_source" function="removeSpecialChars">
-							<Input id="source_voie" path="?a/locn:fullAddress"/>
-						</TransformInput>
-						<!--Transformation des valeurs : suppression des caractères spéciaux)-->
-						<TransformInput id="transfo_voie_target" function="removeSpecialChars">
-							<Input id="target_voie" path="?b/locn:fullAddress"/>
-						</TransformInput>
-					</Compare>
-				<!--Label-->
-				<Compare id="tokenwiseDistance_label_1" required="true" weight="1" metric="levenshtein" threshold="0.1">
-					<!--Transformation des valeurs : suppression des caractères spéciaux)-->
-					<TransformInput id="transfo_label_source_1" function="removeSpecialChars">
-						<Input id="source_label" path="?a/rdfs:label"/>
-					</TransformInput>
-					<!--Transformation des valeurs : suppression des caractères spéciaux)-->
-					<TransformInput id="transfo_label_target_1" function="removeSpecialChars">
-						<Input id="target_label" path="?b/rdfs:label"/>
-					</TransformInput>	
-				</Compare>
-			</Aggregate>
-		</LinkageRule>
-		<Filter limit="100"/>
-		<Outputs>
-			<Output type="file" minConfidence="0.80">
-				<!--Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8-->
-				<Param name="file" value="labeladdress_accepted_links.nt"/>
-				<Param name="format" value="ntriples"/>
-			</Output>
-			<Output type="file" minConfidence="0.71" maxConfidence="0.80">
-				<!--Fichier RDF où sont sauvegardés les liens sameAS "à vérifier" pour lesquels la confiance est comprise entre 0.71 et 0.8-->
-				<Param name="file" value="labeladdress_verify_links.nt"/>
-				<Param name="format" value="ntriples"/>
-			</Output>
-		</Outputs>
-		</Interlink>
-		</Interlinks>
+<LinkageRule>
+<!--Key 2 : label and activity-->
+<!--
+Conserve tous les cas où le score minimal de la combinaison de propriété Label-Activité est supérieur à 0
+-->
+<Aggregate id="min_label_address" required="true" weight="1" type="min">
+<Aggregate id="average_num_voie" required="true" weight="1" type="min">
+<!--
+Pour deux entrées : calcule la distance entre les adresses
+-->
+<Compare id="tokenwiseDistance_address_1" required="true" weight="1" metric="levenshtein" threshold="0.3">
+		<TransformInput id="lowerCase1" function="lowerCase">
+			<Input id="address1" path="?a/locn:thoroughfare"/>
+		</TransformInput>
+
+		<TransformInput id="lowerCase2" function="lowerCase">
+			<Input id="address2" path="?b/locn:thoroughfare"/>
+		</TransformInput>
+</Compare>
+
+<Compare id="equality_address_1" required="true" weight="1" metric="levenshtein" threshold="0.0">
+		<TransformInput id="lowerCase11" function="lowerCase">
+			<Input id="numaddress1" path="?a/locn:locatorDesignator"/>
+		</TransformInput>
+
+		<TransformInput id="lowerCase22" function="lowerCase">
+			<Input id="numaddress2" path="?b/locn:locatorDesignator"/>
+		</TransformInput>
+</Compare>
+</Aggregate>
+<!--
+Pour deux entrées : calcule la distance d'édition entre les valeurs de la propriété Label
+-->
+<Compare id="levenshteinDistance_label_2" required="true" weight="1" metric="levenshtein" threshold="0.2">
+<TransformInput id="lowerCase3" function="lowerCase">
+<Input id="label3" path="?a/rdfs:label"/>
+</TransformInput>
+
+<TransformInput id="lowerCase4" function="lowerCase">
+<Input id="label4" path="?b/rdfs:label"/>
+</TransformInput>
+</Compare>
+</Aggregate>
+</LinkageRule>
+<Filter limit="50"/>
+<Outputs>
+<Output type="file" minConfidence="0.00">
+<!--
+Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8
+-->
+<Param name="file" value="labeladdress_accepted_links.nt"/>
+<Param name="format" value="ntriples"/>
+</Output>
+</Outputs>
+</Interlink>
+</Interlinks>
 </Silk>
