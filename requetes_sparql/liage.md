@@ -8,6 +8,15 @@ SELECT * WHERE {
 } limit 100 
 ```
 
+## Exporter les données d'un graphe nommé donné
+```sparql
+PREFIX dir: <http://rdf.geohistoricaldata.org/def/directory#>
+CONSTRUCT {?s ?p ?o} 
+WHERE { 
+    GRAPH <http://rdf.geohistoricaldata.org/id/directories/cartes_et_plans>
+    { ?s ?p ?o .}
+} 
+```
 
 ## Exporter les liens sameAs: les importer dans un repository (case à cocher Disable sameAs désactivée), exécuter la requête ci-dessous et exporter le résultat en CSV
 
