@@ -12,12 +12,12 @@
     </Prefixes>
 	<!--Datasets-->
 	<DataSources>
-	  <DataSource id="dataset1" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
+	  <DataSource id="graveurs1" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://localhost:7200/repositories/liage"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value=""></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://DEL1709P004:7200/repositories/imprimeurs_cartes2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_geographiques"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -25,12 +25,12 @@
 		  <Param name="parallel" value="true"/>
 		  <Param name="password" value=""/>
 	  </DataSource>
-	  <DataSource id="dataset2" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
+	  <DataSource id="graveurs2" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://localhost:7200/repositories/liage"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value=""></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://DEL1709P004:7200/repositories/imprimeurs_cartes2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_geographiques"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -43,31 +43,31 @@
     <Interlinks>
         <Interlink id="by-keys">
 			<LinkType>owl:sameAs</LinkType>
-			<SourceDataset dataSource="dataset1" var="a">
+			<SourceDataset dataSource="graveurs1" var="a">
 				<RestrictTo>{ ?a rdf:type adb:Entry } .</RestrictTo>
 			</SourceDataset>
-			<TargetDataset dataSource="dataset2" var="b">
+			<TargetDataset dataSource="graveurs2" var="b">
 				<RestrictTo>{ ?b rdf:type adb:Entry } .</RestrictTo>
 			</TargetDataset>
 			<LinkageRule>
 			<!--Score maximal-->
 				<Aggregate id="max_score" required="true"  weight="1" type="max">
 				<!-- : Compare les numéro d'extraction des entrées (utile dans le cas où l'entrée extraite comporte plusieurs adresses ou activités) -->
-				<Compare id="numericEquality_indexExt" required="true" weight="1" metric="equality" threshold="0.0">
+				<Compare id="numericEquality_numEntry" required="true" weight="1" metric="equality" threshold="0.0">
 					<TransformInput id="transfo_1" function="numReduce">
-						<Input id="source_indexExt" path="?a/adb:indexExt"/>
+						<Input id="source_numEntry" path="?a/adb:numEntry"/>
 					</TransformInput>
 					<TransformInput id="transfo_2" function="numReduce">
-						<Input id="target_indexExt" path="?b/adb:indexExt"/>
+						<Input id="target_numEntry" path="?b/adb:numEntry"/>
 					</TransformInput>
 				</Compare>
 				</Aggregate>
 			</LinkageRule>
 			<Filter limit="150"/>
 			<Outputs>
-				<Output type="file" minConfidence="0.80">
+				<Output type="file" minConfidence="0.00">
 				<!--Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8-->
-					<Param name="file" value="indexExt_accepted_links.nt"/>
+					<Param name="file" value="numEntry_accepted_links.nt"/>
 					<Param name="format" value="ntriples"/>
 				</Output>
 			</Outputs>
