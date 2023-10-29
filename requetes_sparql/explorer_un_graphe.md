@@ -8,7 +8,8 @@ PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX pav: <http://purl.org/pav/>
-select distinct ?e ?label ?fullAdd where { 
+select distinct ?e ?label ?fullAdd
+where { 
     graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
     {
      ?e a ont:Entry.
@@ -30,7 +31,8 @@ PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX pav: <http://purl.org/pav/>
-select (count(?e) as ?nombre) where { 
+select (count(?e) as ?nombre)
+where { 
  graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
     {
     ?e a ont:Entry.
@@ -51,7 +53,8 @@ PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX pav: <http://purl.org/pav/>
 PREFIX gsp: <http://www.opengis.net/ont/geosparql#>
 PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
-select distinct ?label ?directory ?fullAdd where { 
+select distinct ?label ?directory ?fullAdd
+where { 
      graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
     {
     ?e a ont:Entry.
@@ -80,20 +83,20 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 select distinct ?label ?voie ?voieo 
 where { 
      graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
-    {
-	?e a ont:Entry.
-	?e rdfs:label ?label.
+{
+    ?e a ont:Entry.
+    ?e rdfs:label ?label.
     ?e prov:wasDerivedFrom ?directory.
     ?directory pav:createdOn ?date. 
     ?e locn:address ?add.
     ?add locn:thoroughfare ?voie.
-	?e owl:sameAs ?o.
-	?o rdfs:label ?labelo.
+    ?e owl:sameAs ?o.
+    ?o rdfs:label ?labelo.
     ?o prov:wasDerivedFrom ?directoryo.
     ?directoryo pav:createdOn ?dateo. 
-	?o locn:address ?addo.
+    ?o locn:address ?addo.
     ?addo locn:thoroughfare ?voieo.
-        Filter ((?date >= 1850) && (?dateo <= 1860) && (?date<?dateo)).
- 	Filter (!sameTerm(?voie, ?voieo))
+    Filter ((?date >= 1850) && (?dateo <= 1860) && (?date<?dateo)).
+    Filter (!sameTerm(?voie, ?voieo))
     }}
 ```sparql
