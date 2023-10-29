@@ -22,11 +22,12 @@ WHERE {
 
 ```sparql
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-select distinct ?entry_id1 ?entry_id2
+select distinct ?entry_id1 ?entry_id2 ?named_graph
 where {?s owl:sameAs ?p.
 	FILTER (?s != ?p).
     BIND(STRAFTER(STR(?s), 'http://rdf.geohistoricaldata.org/id/directories/entry/') AS ?entry_id1).
-    BIND(STRAFTER(STR(?p), 'http://rdf.geohistoricaldata.org/id/directories/entry/') AS ?entry_id2).}
+    BIND(STRAFTER(STR(?p), 'http://rdf.geohistoricaldata.org/id/directories/entry/') AS ?entry_id2).
+    BIND('nouveautes_test' AS ?named_graph).}
 ```
 
 
