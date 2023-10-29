@@ -100,7 +100,7 @@
 
 <urn:MAPID-d5f34f2efdaf45278789bec6572853e3> a rr:TriplesMap;
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select distinct elt.entry_id, elt.graph_name as graph_name from directories_graph.geocoding gcd join directories_graph.directories_content elt on (gcd.id_address=elt.id_address)"
+      rr:sqlQuery "select distinct elt.id_address, elt.graph_name as graph_name from directories_graph.geocoding gcd join directories_graph.directories_content elt on (gcd.address_id=elt.id_address)"
 
     ];
   rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
@@ -112,11 +112,11 @@
     ];
   rr:predicateObjectMap [ a rr:PredicateObjectMap;
       rr:predicate prov:atTime;
-      rr:object "2022-08-31"^^xsd:dateTime
+      rr:object "2023-10-28"^^xsd:dateTime
     ], [ a rr:PredicateObjectMap;
       rr:objectMap [ a rr:TermMap, rr:ObjectMap;
-          rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
-          rr:termType rr:IRI
+          rr:template "address_gcd/{id_address}";
+          rr:termType rr:BlankNode;
         ];
       rr:predicate prov:used
     ], [ a rr:PredicateObjectMap;
@@ -134,8 +134,8 @@
         ]
     ], [ a rr:PredicateObjectMap;
       rr:objectMap [ a rr:TermMap, rr:ObjectMap;
-          rr:column "entry_id";
-          rr:datatype xsd:integer;
+          rr:column "uuid";
+          rr:datatype xsd:string;
           rr:termType rr:Literal
         ];
       rr:predicate adb:numEntry
@@ -174,7 +174,7 @@
 	  rr:graphMap [ rr:constant rr:defaultGraph ]
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select entry_id, directory, person, activity, loc, cardinal, fulladd, graph_name, id_address from directories_graph.directories_content where fulladd not like '';"
+      rr:sqlQuery "select uuid, entry_id, directory, person, activity, loc, cardinal, fulladd, graph_name, id_address from directories_graph.directories_content where fulladd not like '';"
     ] .
 
 <urn:MAPID-348da7258faf42acaeb43491994444db-daa8dc66-09bb-44c7-a25b-4219bf6e90ca>
@@ -217,7 +217,7 @@
 
 <urn:MAPID-3953b625580a41a5b09699f068cfbab6> a rr:TriplesMap;
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select distinct entry_id, directory, graph_name from directories_graph.directories_content"
+      rr:sqlQuery "select distinct id_address, directory, graph_name from directories_graph.directories_content"
     ];
   rr:subjectMap [ a rr:SubjectMap, rr:TermMap;
       rr:termType rr:IRI;
@@ -230,13 +230,13 @@
       rr:object "Segmentation des entrées, reconnaissance du texte et des entités nommées.";
       rr:predicate rdfs:comment
     ], [ a rr:PredicateObjectMap;
-      rr:object "2022-06-15"^^xsd:dateTime;
+      rr:object "2023-09-11"^^xsd:dateTime;
       rr:predicate prov:atTime
     ], [ a rr:PredicateObjectMap;
       rr:predicate prov:generated;
       rr:objectMap [ a rr:ObjectMap, rr:TermMap;
-          rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
-          rr:termType rr:IRI
+          rr:template "address/{id_address}";
+          rr:termType rr:BlankNode;
         ]
     ], [ a rr:PredicateObjectMap;
       rr:objectMap [ a rr:ObjectMap, rr:TermMap;
@@ -252,11 +252,11 @@
       rr:predicate locn:address;
       rr:objectMap [ a rr:ObjectMap, rr:TermMap;
           rr:termType rr:BlankNode;
-          rr:template "address_gcd/{entry_id}"
+          rr:template "address_gcd/{address_id}"
         ]
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select gcd.entry_id, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, gcd.graph_name as graph_name from directories_graph.geocoding gcd;"
+      rr:sqlQuery "select gcd.entry_id, gcd.address_id, gcd.graph_name as graph_name from directories_graph.geocoding gcd;"
     ];
   rr:subjectMap [ a rr:TermMap, rr:SubjectMap;
       rr:template "http://rdf.geohistoricaldata.org/id/directories/entry/{entry_id}";
@@ -292,7 +292,7 @@
       rr:predicate prov:wasGeneratedBy
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select gcd.id_address as id_address, gcd.precise_geo_response as rsp, gcd.precise_geom as geom, gcd.graph_name as graph_name from directories_graph.geocoding gcd;"
+      rr:sqlQuery "select gcd.address_id as id_address, gcd.housenumber||' '||gcd.street||', '||gcd.locality||' (Source: '||gcd.source||')' as rsp, gcd.precise_geom as geom, gcd.graph_name as graph_name from directories_graph.geocoding gcd;"
     ] .
 
 <urn:MAPID-1f79d04717894630b2cd3416a05e706d-17aa6dd3-4bc6-40ba-b563-2d466e67522b>
@@ -320,7 +320,7 @@
 	  rr:graphMap [ rr:constant rr:defaultGraph ]
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select gcd.id_address, gcd.precise_geo_response as rsp, st_astext(gcd.precise_geom) as wkt, gcd.precise_geom as wkb, gcd.graph_name as graph_name from directories_graph.geocoding gcd;"
+      rr:sqlQuery "select gcd.address_id as id_address, st_astext(gcd.precise_geom) as wkt, gcd.precise_geom as wkb, gcd.graph_name as graph_name from directories_graph.geocoding gcd;"
     ] .
 
 <urn:MAPID-73173d30b7d14afbb3274f588bc8ac6c> a rr:TriplesMap;
