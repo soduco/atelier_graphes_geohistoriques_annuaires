@@ -2,7 +2,7 @@
 
 ## On cherche la ou les adresses de la société anonyme du GagnePetit en 1894
 
-'''sparql
+```sparql
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -20,11 +20,11 @@ select distinct ?e ?label ?fullAdd where {
     ?add prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>.
      Filter regex(?label, 'GagnePetit')
 }}
-'''
+```
 
 ## On cherche combien de magasins de nouveautés sont localisés boulevard Poissonnière en 1842
 
-'''sparql
+```sparql
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -40,10 +40,10 @@ select (count(?e) as ?nombre) where {
     ?add locn:thoroughfare ?voie.
     Filter regex(?voie, "Poissonnière").
 }}
-'''
+```
 ## On cherche les magasins de nouveautés situés dans le quartier Richelieu entre 1835 et 1845
 
-'''sparql
+```
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -65,4 +65,4 @@ select distinct ?label ?directory ?fullAdd where {
     FILTER(?date>1835 && ?date<1845).
     FILTER (geof:sfIntersects(?wkt, "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> Polygon((2.3351 48.8640, 2.3325 48.8700, 2.3328 48.8702, 2.3328 48.8707, 2.3400 48.8719, 2.3430 48.8715, 2.3409 48.8662, 2.3413 48.8661, 2.3418 48.8658, 2.3415 48.8654, 2.3407 48.8653, 2.3394 48.8629, 2.3351 48.8640))"^^gsp:wktLiteral))
     }} ORDER BY ?label ?directory
-    '''
+```
