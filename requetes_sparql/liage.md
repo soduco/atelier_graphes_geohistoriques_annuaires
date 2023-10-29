@@ -18,14 +18,15 @@ WHERE {
 } 
 ```
 
-## Exporter les liens sameAs: les importer dans un repository (case à cocher Disable sameAs désactivée), exécuter la requête ci-dessous et exporter le résultat en CSV
+## Exporter les liens sameAs: les importer dans un repository (case à cocher Disable sameAs désactivée), exécuter la requête ci-dessous et exporter le résultat en CSV pour le pousser dans la base de données
 
 ```sparql
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-
-select distinct ?s ?p
+select distinct ?entry_id1 ?entry_id2
 where {?s owl:sameAs ?p.
-	FILTER (?s != ?p)}
+	FILTER (?s != ?p).
+    BIND(STRAFTER(STR(?s), 'http://rdf.geohistoricaldata.org/id/directories/entry/') AS ?entry_id1).
+    BIND(STRAFTER(STR(?p), 'http://rdf.geohistoricaldata.org/id/directories/entry/') AS ?entry_id2).}
 ```
 
 
