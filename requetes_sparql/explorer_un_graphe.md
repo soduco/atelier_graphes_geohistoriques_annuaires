@@ -49,11 +49,9 @@ GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
   ?s prov:wasDerivedFrom ?annuaire.
 }
 }order by ?label
-```sparql
-
+```
 
 ## On cherche la ou les adresses de la société anonyme du GagnePetit en 1894
-
 ```sparql
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
@@ -76,7 +74,6 @@ where {
 ```
 
 ## On cherche combien de magasins de nouveautés sont localisés boulevard Poissonnière en 1842
-
 ```sparql
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
@@ -95,8 +92,8 @@ where {
     Filter regex(?voie, "Poissonnière").
 }}
 ```
-## On cherche les magasins de nouveautés situés dans le quartier Richelieu entre 1835 et 1845, en utilisant les coordonnées que leur attribué le géocodeur
 
+## On cherche les magasins de nouveautés situés dans le quartier Richelieu entre 1835 et 1845, en utilisant les coordonnées que leur attribué le géocodeur
 ```sparql
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
@@ -124,7 +121,6 @@ where {
 ```
 
 ## On cherche quels magasins de nouveautés ont changé de rue entre 1850 et 1860
-
 ```sparql
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
@@ -155,7 +151,6 @@ where {
 ```
 
 ## On cherche quels magasins de nouveauté ont changé de nom (et donc potentiellement de propriétaire)
-
 ```sparql
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
