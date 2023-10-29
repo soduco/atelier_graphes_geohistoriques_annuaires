@@ -99,4 +99,30 @@ where {
     Filter ((?date >= 1850) && (?dateo <= 1860) && (?date<?dateo)).
     Filter (!sameTerm(?voie, ?voieo))
     }}
+```
+
+## On cherche quels magasins de nouveauté ont changé de nom (et donc potentiellement de propriétaire)
+
 ```sparql
+PREFIX locn: <http://www.w3.org/ns/locn#>
+PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX pav: <http://purl.org/pav/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+select distinct ?e ?label ?labelo ?o
+where { 
+     graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+{
+	?e a ont:Entry.
+	?e rdfs:label ?label.
+    ?e locn:address ?add.
+     ?add locn:fullAddress ?fadd.
+	?e owl:sameAs ?o.
+	?o rdfs:label ?labelo.
+	?o locn:address ?addo.
+    ?addo locn:fullAddress ?faddo.
+ 	Filter (!sameTerm(?label, ?labelo) && sameTerm(?fadd, ?faddo) )
+    }} order by ?label
+```
