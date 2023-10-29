@@ -1,5 +1,57 @@
 # Quelques requêtes type pour explorer un graphe (ici le graphe des magasins de nouveautés)
 
+## On cherche les noms des magasins de nouveautés, classés par ordre alphabétique
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
+select distinct ?label 
+where {
+GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+  {?s a ont:Entry.
+  ?s rdfs:label ?label.}
+} order by ?label
+```
+
+## On cherche les noms des magasins de nouveautés et leurs adresses, telles qu'elles figurent dans les annuaires
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+select distinct ?label ?fullAdd 
+where { 
+GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+{ ?s a ont:Entry.
+  ?s rdfs:label ?label.
+  ?s locn:address ?add.
+  ?add prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>.
+  ?add locn:fullAddress ?fullAdd.}
+}order by ?label
+```
+
+## On cherche les noms des magasins de nouveautés et leurs adresses, telles qu'elles figurent dans les annuaires, et les annuaires dont ils sont issus
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+select distinct ?label ?fullAdd ?annuaire
+where { 
+GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+ {?s a ont:Entry.
+  ?s rdfs:label ?label.
+  ?s locn:address ?add.
+  ?add prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>.
+  ?add locn:fullAddress ?fullAdd.
+  ?s prov:wasDerivedFrom ?annuaire.
+}
+}order by ?label
+```sparql
+
+
 ## On cherche la ou les adresses de la société anonyme du GagnePetit en 1894
 
 ```sparql
@@ -43,7 +95,7 @@ where {
     Filter regex(?voie, "Poissonnière").
 }}
 ```
-## On cherche les magasins de nouveautés situés dans le quartier Richelieu entre 1835 et 1845
+## On cherche les magasins de nouveautés situés dans le quartier Richelieu entre 1835 et 1845, en utilisant les coordonnées que leur attribué le géocodeur
 
 ```sparql
 PREFIX locn: <http://www.w3.org/ns/locn#>
@@ -63,6 +115,7 @@ where {
     ?directory pav:createdOn ?date. 
     ?e locn:address ?add.
     ?add locn:fullAddress ?fullAdd.
+    ?add prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0002>.
     ?add gsp:hasGeometry ?geom.
     ?geom gsp:asWKT ?wkt.
     FILTER(?date>1835 && ?date<1845).
