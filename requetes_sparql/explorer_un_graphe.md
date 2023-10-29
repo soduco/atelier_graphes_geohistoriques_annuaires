@@ -43,7 +43,7 @@ select (count(?e) as ?nombre) where {
 ```
 ## On cherche les magasins de nouveautés situés dans le quartier Richelieu entre 1835 et 1845
 
-```
+```sparql
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
