@@ -117,12 +117,12 @@ where {
 {
 	?e a ont:Entry.
 	?e rdfs:label ?label.
-    ?e locn:address ?add.
-     ?add locn:fullAddress ?fadd.
+    	?e locn:address ?add.
+	?add locn:fullAddress ?fadd.
 	?e owl:sameAs ?o.
 	?o rdfs:label ?labelo.
 	?o locn:address ?addo.
-    ?addo locn:fullAddress ?faddo.
+    	?addo locn:fullAddress ?faddo.
  	Filter (!sameTerm(?label, ?labelo) && sameTerm(?fadd, ?faddo) )
     }} order by ?label
 ```
