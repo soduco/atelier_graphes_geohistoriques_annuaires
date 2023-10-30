@@ -154,7 +154,7 @@ where {
     }}
 ```
 
-## On cherche quels magasins de nouveauté ont changé de nom (et donc potentiellement de propriétaire)
+## On cherche quels magasins de nouveautés ont changé de nom (et donc potentiellement de propriétaire)
 ```sparql
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
