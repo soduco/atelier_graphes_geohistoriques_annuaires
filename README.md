@@ -129,7 +129,7 @@ Le liage des entrées d'annuaires représentant un même commerce est fait avec 
 ....
  </Silk>
 ```
-3) Placer les 4 fichiers de LinkSpec dans le dossier silk avec silk.jar et lancer le liage en exécutant successivement les 4 commandes suivantes:
+3) Placer les 4 fichiers de LinkSpec dans le dossier silk avec silk.jar, ouvrir une invite de commandes dans ce dossier et lancer le liage en exécutant successivement les 4 commandes suivantes:
    
 ```cmd
 java -DconfigFile=liage_annuaire_address_activity.xml -jar silk.jar
