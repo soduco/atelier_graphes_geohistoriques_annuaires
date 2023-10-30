@@ -139,7 +139,7 @@ java -DconfigFile=liage_annuaire_label_address.xml -jar silk.jar
 ```
 :warning: Selon la quantité de données et le paramétrage choisi dans la LinkSpec, ces opérations peuvent prendre plus ou moins de temps, allant de quelques secondes à plusieurs heures.
 
-4) Récupérer les fichiers de liens produits sur C:\Users\votre_nom\.silk\output
+4) Récupérer les fichiers de liens produits sur C:\Users\votre_nom\.silk\output (sous Windows)
    
 ### 4. Inférer plus de liens et exporter les liens obtenus
 ### 5. Importer les liens dans la base, créer et requêter le graphe
