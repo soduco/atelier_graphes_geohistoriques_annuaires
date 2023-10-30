@@ -31,6 +31,9 @@
  Nous allons travailler sur les entrées représentant les graveurs et les marchands de cartes et plans. Vous pouvez librement adapter la méthodologie présentée ici à d'autres types d'activités figurant dans les annuaires: ébénistes, architectes, photographes, dentelières, etc. 
 
 ### 1. Extraire les entrées d'annuaires sur les graveurs et les marchands de cartes et plans
+
+Cette étape peut être réalisée en suivant les procédures présentées dans le dossier *scripts_sql*. Si vous n'avez pas de compte utilisateur pour la base de données soduco, suivez la procédure présentée dans *scripts_sql/local_database*.
+
 ### 2. Convertir les données en RDF
 ### 3. Lier les entrées d'annuaires qui représentent un même commerce de gravure ou de vente de cartes et plans
 ### 4. Inférer plus de liens et exporter les liens obtenus
