@@ -16,7 +16,9 @@ WITH per_count AS (
 	INNER JOIN directories_v2.titles AS t ON e.uuid = t.entry_uuid
 	INNER JOIN directories_v2.sources AS src ON e.source_uuid = src.uuid
 	WHERE (
-		-- Liste des mots-clés: à adapter!
+	/* ************************************************************* */
+        /* Modifier la liste des mots-clés selon les données à extraire  */
+        /* ************************************************************* */
 		act.act ILIKE '%photo%' OR
 		act.act ILIKE '%daguer%' OR
 		act.act ILIKE '%opti%'
