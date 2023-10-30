@@ -137,6 +137,7 @@ java -DconfigFile=liage_annuaire_index_extraction.xml -jar silk.jar
 java -DconfigFile=liage_annuaire_label_activity.xml -jar silk.jar
 java -DconfigFile=liage_annuaire_label_address.xml -jar silk.jar
 ```
+:warning: Selon la quantité de données et le paramétrage choisi dans la LinkSpec, ces opérations peuvent prendre plus ou moins de temps, allant de quelques secondes à plusieurs heures.
 
 4) Récupérer les fichiers de liens produits sur C:\Users\votre_nom\.silk\output
    
