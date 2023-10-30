@@ -67,8 +67,10 @@
     <!--Timeline JS-->
     <!--<link title="timeline-styles" rel="stylesheet" href="http://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
     <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link title="timeline-styles" rel="stylesheet" href="./libs/timelineJS/timeline.css">
     <script src="./libs/timelineJS/timeline.js"></script>
+
     <!--Style-->
     <link rel="stylesheet" href="libs/w3.css">
     <link rel="stylesheet" href="style.css">
@@ -92,6 +94,7 @@
           <div id="namedgraphs">
             <select name="selectgraphs" id="selectgraphs">
             </select>
+            <center><input type="button" onclick="getStats()" value="Statistiques du dataset" class="button w3-tiny"></center>
           </div>
 
           <h3 id="titrecontrols">Filtres</h3> 
@@ -145,11 +148,13 @@
   
   <div id='timeline-embed' style="height:0px"></div>
   <div id="ancretimeline"></div>
+  <div id="statistiques"></div>
 
   <button onclick="topFunction()" id="goToTop" title="Go to top">Carte</button> 
   </article>
   </body>
   <script src="parameters.js"></script>
+  <script src="stats.js"></script>
   <script src="draw.js"></script>
   <script src="anim.js"></script>
   <script src="tile.js"></script>
