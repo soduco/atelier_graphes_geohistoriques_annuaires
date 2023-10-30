@@ -75,6 +75,61 @@ Valider le formulaire pour créer le dépôt.
    * Graphes cibles: http://rdf.geohistoricaldata.org/id/directories/cartes_et_plans
 
 ### 3. Lier les entrées d'annuaires qui représentent un même commerce de gravure ou de vente de cartes et plans
+
+Le liage des entrées d'annuaires représentant un même commerce est fait avec le logiciel libre Silk-single-machine. Il permet d'évaluer le degré de similarité entre ressources en comparant leurs valeurs de propriétés avec des fonctions de similarité adaptées (mesures de similarité de chaînes de caractères, comparaison de valeurs numériques, etc.) et en agrégeant les résultats obtenus pour chauqe paire de propriétés comparées pour produire un score de similarité global. Le choix des propriétés à comparer et des fonctions et agrégateurs à utiliser est défini dans un fichier XML (dit *LinkSpec*). Il permet de lancer Silk en ligne de commande.
+
+1) Copier l'adresse du point d'accès SPARQL de votre dépôt GraphDB local : aller dans "Configurer / Dépôts" et cliquer sur l'icône dédiée (voir ci-dessous)
+   ![URI SPARQL endpoint GraphDB](./img/URL_Depot.png "URI SPARQL endpoint GraphDB")
+2) Adapter les fichiers de configuration de Silk en collant l'adresse du dépôt GraphDB de vos données.
+```xml
+  <Silk>
+<!--Prefixes-->
+    <Prefixes>
+      <Prefix id="rdf" namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+	  <Prefix id="owl" namespace="http://www.w3.org/2002/07/owl#"/>
+	  <Prefix id="adb" namespace="http://rdf.geohistoricaldata.org/def/directory#"/>
+	  <Prefix id="rdfs" namespace="http://www.w3.org/2000/01/rdf-schema#"/>
+	  <Prefix id="locn" namespace="http://www.w3.org/ns/locn#"/>
+	  <Prefix id="xsd" namespace="http://www.w3.org/2001/XMLSchema#"/>
+	  <Prefix id="dcterms" namespace="http://purl.org/dc/terms/"/>
+	  <Prefix id="rda" namespace="http://rdaregistry.info/Elements/a/"/>
+    </Prefixes>
+	<!--Datasets-->
+<DataSources>
+	  <DataSource id="graveurs1" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
+		  <Param name="pageSize" value="1000"></Param>
+		  <Param name="pauseTime" value="0"></Param>
+		  <Param name="retryCount" value="3"></Param>
+		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/graveurs_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_et_plans"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="retryPause" value="1000"></Param>
+		  <Param name="queryParameters" value=""/>
+		  <Param name="login" value=""/>
+		  <Param name="entityList" value=""/>
+		  <Param name="parallel" value="true"/>
+		  <Param name="password" value=""/>
+	  </DataSource>
+	  <DataSource id="graveurs2" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
+		  <Param name="pageSize" value="1000"></Param>
+		  <Param name="pauseTime" value="0"></Param>
+		  <Param name="retryCount" value="3"></Param>
+		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/graveurs_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_et_plans"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="retryPause" value="1000"></Param>
+		  <Param name="queryParameters" value=""/>
+		  <Param name="login" value=""/>
+		  <Param name="entityList" value=""/>
+		  <Param name="parallel" value="true"/>
+		  <Param name="password" value=""/>
+	  </DataSource>
+	</DataSources>
+<!--Links-->
+<Interlinks>
+	<Interlink id="by-keys">
+....
+ </Silk>
+    ```
+
 ### 4. Inférer plus de liens et exporter les liens obtenus
 ### 5. Importer les liens dans la base, créer et requêter le graphe
 ### 6. Visualiser le graphe
