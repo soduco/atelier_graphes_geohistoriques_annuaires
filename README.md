@@ -128,7 +128,7 @@ Le liage des entrées d'annuaires représentant un même commerce est fait avec 
 	<Interlink id="by-keys">
 ....
  </Silk>
-    ```
+```
 
 ### 4. Inférer plus de liens et exporter les liens obtenus
 ### 5. Importer les liens dans la base, créer et requêter le graphe
