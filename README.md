@@ -80,7 +80,7 @@ Le liage des entrées d'annuaires représentant un même commerce est fait avec 
 
 1) Copier l'adresse du point d'accès SPARQL de votre dépôt GraphDB local : aller dans "Configurer / Dépôts" et cliquer sur l'icône dédiée (voir ci-dessous)
    ![URI SPARQL endpoint GraphDB](./img/URL_Depot.png "URI SPARQL endpoint GraphDB")
-2) Adapter les fichiers de configuration de Silk en collant l'adresse du dépôt GraphDB de vos données.
+2) Adapter les fichiers de configuration de Silk en collant l'adresse du dépôt GraphDB de vos données et en modifiant si besoin l'URI du graphe nommé: paramètres endpointURI et graph.
 ```xml
   <Silk>
 <!--Prefixes-->
