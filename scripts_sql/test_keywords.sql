@@ -17,10 +17,8 @@ WITH per_count AS (
 	INNER JOIN directories_v2.sources AS src ON e.source_uuid = src.uuid
 	WHERE (
 		-- Liste des mots-clés: à adapter!
-		act.act ILIKE '%ébéniste%' OR 
-		act.act ILIKE '%ebeniste%' OR 
-		act.act ILIKE '%ébeniste%' OR 
-		act.act ILIKE '%ebéniste%' 
+		act.act ILIKE '%photo%' OR
+		act.act ILIKE '%daguer%' OR
+		act.act ILIKE '%opti%'
 		)
 	ORDER BY src.liste_annee ASC;
-

@@ -63,6 +63,11 @@ Plusieurs dénominations sucessives/parallèles associées à l'évolution de la
     - Ratio liens calculés/ liens gardés : 
     - 0%-50% : 436 869 liens ; 50%-75% : 55 993 liens; 75%-99% : 22407 liens ; 100% : 42906 liens.
 
+## Questions intéressantes
+- Maréchal-expert devenu vétérinaire ? (changements de titres de manière plus générale)
+- Déménagements ?
+- Transmission dans une même famille (comme les médecins/notaires) ?
+
 ## TODO
 - Avec la nouvelle extraction
     - [ ] Prévoir l'ajout des maréchaux-experts

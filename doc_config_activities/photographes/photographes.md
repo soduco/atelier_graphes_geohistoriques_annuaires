@@ -21,5 +21,10 @@ Détail :
 
 ## Liage (2ème extraction)
 
+## Questions intéressantes 
+- Déménagements
+- Transmissions d'ateliers / reprises par d'autres photographes
+- Partage d'ateliers
+
 ## TODO
 - [ ] Liage sur les données avec la nouvelle extraction
