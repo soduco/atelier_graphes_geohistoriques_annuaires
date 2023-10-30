@@ -19,9 +19,9 @@ WHERE (
 		act.act ILIKE '%opti%'
 		)
 ```
-Dans le fichier Test_keywords.sql on teste seulement trois mots-clés: photo, daguer et opti, précédés ou suivis de n'importe quelle chaîne de caractères. Des exemples plus élaborés sont proposés dans les fichiers *Create_local_tables.sql* et *Insert_into_local_tables.sql*. 
+Dans le fichier Test_keywords.sql on teste seulement trois mots-clés: photo, daguer et opti, précédés ou suivis de n'importe quelle chaîne de caractères. Des exemples plus élaborés sont proposés dans les fichiers *Create_tables_in_directories_graph.sql* et *Insert_into_tables_in_directories_graph.sql*. 
 
-4) Créez votre base locale et importez-y les données correspondant aux mots-clés que vous avez préalablement identifiés comme valides. Pour cela, ouvrez le fichier *Create_local_tables.sql* dans l'éditeur de requêtes, modifiez les parties indiquées sous les commentaires encadrés par des étoiles, et exécutez le. Parmi les modifications à effectuer, il faut:
+4) Créez votre base locale et importez-y les données correspondant aux mots-clés que vous avez préalablement identifiés comme valides. Pour cela, ouvrez le fichier *Create_tables_in_directories_graph.sql* dans l'éditeur de requêtes, modifiez les parties indiquées sous les commentaires encadrés par des étoiles, et exécutez le. Parmi les modifications à effectuer, il faut:
    * changer les mots-clés à deux endroits (mettre les mêmes à chaque fois!)
    * compléter les métadonnées du jeu de données:
      * son identifiant, "cartes_et_plans" dans le fichier exemple, à remplacer par un nom court correspondant à votre jeu de données;
@@ -39,4 +39,4 @@ INSERT INTO directories_graph.dataset VALUES ('Graveurs et marchands de cartes e
 
 5) De façon optionnelle, si vous souhaitez travailler sur plusieurs jeux de données relatifs à différents types d'activités:
 * testez de nouveaux mots clés comme à l'étape 4;
-* insérez les données correspondantes dans votre base de données locale à l'aide du fichier *Insert_into_local_tables.sql*: ouvrez-le dans l'éditeur de requêtes, modifiez les parties indiquées sous les commentaires encadrés par des étoiles (mots-clés et métadonnées du jeu de données), et exécutez le.
+* insérez les données correspondantes dans votre base de données locale à l'aide du fichier *Insert_into_tables_in_directories_graph.sql*: ouvrez-le dans l'éditeur de requêtes, modifiez les parties indiquées sous les commentaires encadrés par des étoiles (mots-clés et métadonnées du jeu de données), et exécutez le.
