@@ -31,7 +31,14 @@ Dans le fichier Test_keywords.sql on teste seulement trois mots-clés: photo, da
      * son titre, "Graveurs et marchands de cartes et plans" dans le fichier exemple, à remplacer par un titre court correspondant à votre jeu de données;
      * sa date d'extraction, "2023-10-29" dans le fichier exemple, à remplacer par celle où vous crez votre jeu de données.
 
-   
+```sql
+/* ****************************************************************************************************************************** */
+/* Modifier les propriétés du graphe nommmé selon les données extraites: identifiant, titre du jeu de données, date d'extraction  */
+/* ****************************************************************************************************************************** */
+UPDATE directories_graph.directories_content SET graph_name ='cartes_et_plans';
+UPDATE directories_graph.geocoding SET graph_name ='cartes_et_plans';
+INSERT INTO directories_graph.dataset VALUES ('Graveurs et marchands de cartes et plans', '2023-10-29', 'cartes_et_plans', gen_random_uuid ());
+```  
 
 7) De façon optionnelle, si vous souhaitez travailler sur plusieurs jeux de données relatifs à différents types d'activités:
 * testez de nouveaux mots clés comme à l'étape 4;
