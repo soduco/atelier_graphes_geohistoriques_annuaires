@@ -7,6 +7,9 @@ scripts_silk/contributions/
 scripts_silk/contributions/appariement_Annuaires_notairesU.xml
 scripts_silk/contributions/exportLinkSpec.xml
 scripts_silk/contributions/liage_annuaires_index_extraction_greater_than.xml
-notaires/
-photographes/
+doc_config_activities/notaires/
+doc_config_activities/photographes/data/
+doc_config_activities/veterinaires/data/
+doc_config_activities/medecin_1800_1855/data/
 requetes_sparql/
+appli2/
