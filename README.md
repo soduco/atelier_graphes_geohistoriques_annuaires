@@ -18,17 +18,22 @@
 - Silk single machine
 - Silk Workbench
 
-### Aides pour l'utilisation (pendant l'atelier)
+### Aides pour l'utilisation des logiciels (pendant l'atelier)
 
 - [PgAdmin v7](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/pgadmin4.md) : connexion à la base de donnée soduco (réseau IGN / réseau invité)
 - [Graph DB](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/Tutoriel_GraphDB.pdf) : utiliser le triplestore
 - [Silk Single Machine](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/silk_single_machine.md) : utiliser le .jar
 
-## TODO
-- [X] Document d'installation/téléchargement des logiciels à utiliser
-- [ ] Envoyer le doc d'installation aux participants
-- Documents d'aides pour la semaine prochaine
-    - [X] Graph DB (version 9.10.3, a priori pas trop de changements)
-    - [ ] Silk Workbench
-    - [X] Silk single machine (*à détailler plus ?*)
-- [ ] Slides
+## Méthodologie de création de graphes de connaissances géohistoriques à partir des annuaires du commerce parisien du XIXème siècle
+
+ L'objectif de ce tutoriel est de créer des graphes de connaissances géohistoriques à partir des entrées d'annuaires du commerce du XIXème siècle extraites par le projet ANR SODUCO.
+
+ Nous allons travailler sur les entrées représentant les graveurs et les marchands de cartes et plans. Vous pouvez librement adapter la méthodologie présentée ici à d'autres types d'activités figurant dans les annuaires: ébénistes, architectes, photographes, dentelières, etc. 
+
+### 1. Extraire les entrées d'annuaires sur les graveurs et les marchands de cartes et plans
+### 2. Convertir les données en RDF
+### 3. Lier les entrées d'annuaires qui représentent un même commerce de gravure ou de vente de cartes et plans
+### 4. Inférer plus de liens par transitivité et exporter les liens obtenus
+### 5. Importer les liens dans la base, créer et requêter le graphe
+### 6. Visualiser le graphe
+ 
