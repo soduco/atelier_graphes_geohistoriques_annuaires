@@ -81,3 +81,35 @@ Ensuite, cliquer sur Connexion et choisir le fond de carte souhaité (Ortho ou P
 
 ![Les magasins de nouveauté du quartier Richelieu, visualisés sour QGIS.](Richelieu.png "Les magasins de nouveauté du quartier Richelieu, visualisés sour QGIS. Fond: BDORTHO IGN")
 
+## Export des liens sameAs en CSV
+
+La requête suivante exporte les entrées liées les unes aux autres par des liens de correspondance et affiche les valeurs de nom de commerce, activité et adresse côte à cote de sorte à pouvoir vérifier si les liens créés sont corrects ou non
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX rda: <http://rdaregistry.info/Elements/a/>
+select distinct ?s ?o ?nom_annuaires ?nom_annuaireo ?labels ?labelo ?activitys ?activityo ?adresse_annuaires ?adresse_annuaireo 
+where { 
+GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+ {?s a ont:Entry.
+  ?s rdfs:label ?labels.
+  ?s rda:P50104 ?activitys.
+  ?s locn:address ?adds.
+  ?adds prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>.
+  ?adds locn:fullAddress ?adresse_annuaires.
+  ?s prov:wasDerivedFrom/rdfs:label ?nom_annuaires.
+  ?s owl:sameAs ?o.
+  ?o a ont:Entry.
+  ?o rdfs:label ?labelo.
+  ?o rda:P50104 ?activityo.
+  ?o locn:address ?addo.
+  ?addo prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>.
+  ?addo locn:fullAddress ?adresse_annuaireo.
+  ?o prov:wasDerivedFrom/rdfs:label ?nom_annuaireo.
+        FILTER (?s != ?o)
+}
+}order by ?labels ?labelo
+```
