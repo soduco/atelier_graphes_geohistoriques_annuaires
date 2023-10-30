@@ -1,5 +1,7 @@
 # Quelques requêtes pour exporter les données, sous diverses formes selon les usages
 
+Les requêtes ci-dessous s'appliquent sur les données générées par le mapping r2rml directory.ttl.
+
 ## Sauvegarde d'un graphe complet
 
 Sous GraphDB, aller dans Explorez / Aperçu des graphes puis choisir le format d'export dans Dépôt d'exportation (par exemple Turtle). Cliquer sur "Oui" si un avertissement au sujet du support des graphes apparait. Les données sont automatique exportées dans le dossier de téléchargement de votre navigateur. Elles pourront être rechargées à tout moment dans un nouveau dépôt GraphDB (ou dans un autre triplestore de votre choix), en allant dans le menu Importer / Télécharger des fichiers RDF.
