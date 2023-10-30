@@ -49,7 +49,7 @@ INSERT INTO directories_graph.geocoding
 	FROM short_list AS l
 	INNER JOIN directories_local.entries AS e ON l.uuid = e.uuid
 	INNER JOIN directories_local.addresses AS s ON s.entry_uuid = e.uuid
-    INNER JOIN directories_local.geocoded_address_gazetteer AS gcd ON gcd.uuid = s.geocoded_gazetteer_ref_uuid
+    INNER JOIN directories_local.geocoded_address_gazetteer AS gcd ON gcd.uuid = s.geocoded_gazetteer_uuid
     INNER JOIN directories_local.sources AS src ON e.source_uuid = src.uuid
 	INNER JOIN directories_local.activities AS act ON e.uuid = act.entry_uuid
 	WHERE (
