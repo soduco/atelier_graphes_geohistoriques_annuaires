@@ -93,7 +93,7 @@ where {
 }}
 ```
 
-## On cherche les magasins de nouveautés situés dans le quartier Richelieu entre 1835 et 1845, en utilisant les coordonnées que leur attribué le géocodeur
+## On cherche les magasins de nouveautés situés dans le quartier Richelieu entre 1835 et 1845, en utilisant les coordonnées que leur a attribué le géocodeur
 ```sparql
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
