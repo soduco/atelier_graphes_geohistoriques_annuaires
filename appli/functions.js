@@ -9,7 +9,6 @@ function createlinkDataSoduco(uri_){
       var s = document.getElementById("selectgraphs");
       var graphname_ = s.options[s.selectedIndex].value;
       //console.log(graphname_)
-      var from = 'FROM  <' + graphname_ + '> '
 
       var query2 = "PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#> "+
       "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "+
@@ -219,10 +218,16 @@ function iconByName(name) {
  *** Pop Up *****
  ****************/
 
+ function generateButton(valuri) {
+  var htmlString = `<button class="button" style="font-size: 12px; margin-right:auto; margin-left:auto;" onclick="createlinkDataSoduco('${valuri.toString()}')">Frise chronologique</button>`;
+  return htmlString;
+}
+
  function popUpDirectories(feature, layer) {
   console.log(feature.properties.uri)
   var valuri = feature.properties.uri.replace('http://rdf.geohistoricaldata.org/id/directories/entry/', '')
-
+  console.log(typeof valuri);
+  console.log(valuri);
   texte = '<h4>'+ feature.properties.person +'</h4>'+
   '<p><b>Adresse (annuaire)</b> : ' + feature.properties.addresses + '<br>'+ 
   '<b>Adresse (géocodeur)</b> : ' + feature.properties.addresses_geocoding + '<br>';
@@ -231,8 +236,10 @@ function iconByName(name) {
   };
   texte += '<b>Année de publication</b> : ' + feature.properties.directoryDate + '<br>'+
   '<b>Annuaire</b> : ' + feature.properties.directoryName + '</br>'+
-  '<b>Identifiant de l\'entrée </b> : ' + feature.properties.index + '</p>'+
-  '<button class="button" style="font-size: 12px; margin-right:auto; margin-left:auto;" onclick="createlinkDataSoduco(' + valuri +')">Frise chronologique</button>';
+  '<b>Identifiant de l\'entrée </b> : ' + feature.properties.index + '</p>'
+
+  //var button = '<button class="button" style="font-size: 12px; margin-right:auto; margin-left:auto;" onclick="createlinkDataSoduco('+ valuri.toString()+')">Frise chronologique</button>';
+  texte += generateButton(valuri)
   layer.bindPopup(texte);
 }
 

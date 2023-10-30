@@ -21,7 +21,7 @@ function createNamedGraphJson(JSobject){
      * Output : Geojson
      * Source : https://github.com/dhlab-epfl/leaflet-sparql/blob/master/index.html
      */
-  
+    
     //Init geojson
     var namedgraphjson = {"features": []}
     //Iter on features

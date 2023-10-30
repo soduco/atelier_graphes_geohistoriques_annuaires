@@ -254,7 +254,8 @@ $.ajax({
     //there are many markers inside "a". to be exact: a.layer._childCount much ;-)
     //let's work with the data:
     for (feat in a.layer._markers){
-        var line = '<u onclick=openPopUp(' + a.layer._markers[feat]._leaflet_id + ','+ a.layer._leaflet_id +');createlinkDataSoduco('+ a.layer._markers[feat].feature.properties['index'] +')>' + a.layer._markers[feat].feature.properties['person'] + '</u>';
+      console.log(a.layer._markers[feat].feature.properties['index'])
+        var line = '<u onclick=openPopUp(' + a.layer._markers[feat]._leaflet_id + ','+ a.layer._leaflet_id +');createlinkDataSoduco("'+ a.layer._markers[feat].feature.properties['index'] +'")>' + a.layer._markers[feat].feature.properties['person'] + '</u>';
         popUpText+= "<tr><td>"+line+"</td>"+
                     "<td>"+a.layer._markers[feat].feature.properties['directoryName']+"</td>"+
                     "<td>"+a.layer._markers[feat].feature.properties['directoryDate']+"</td></tr>"
