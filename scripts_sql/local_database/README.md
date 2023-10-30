@@ -42,4 +42,4 @@ INSERT INTO directories_graph.dataset VALUES ('Graveurs et marchands de cartes e
 
 7) De façon optionnelle, si vous souhaitez travailler sur plusieurs jeux de données relatifs à différents types d'activités:
 * testez de nouveaux mots clés comme à l'étape 4;
-* insérez les données correspondantes dans votre base de données locale à l'aide du fichier *Insert_into_local_tables.sql*: ouvrez-le dans l'éditeur de requêtes, modifiez les parties indiquées sous les commentaires encadrés par des étoiles, et exécutez le.
+* insérez les données correspondantes dans votre base de données locale à l'aide du fichier *Insert_into_local_tables.sql*: ouvrez-le dans l'éditeur de requêtes, modifiez les parties indiquées sous les commentaires encadrés par des étoiles (mots-clés et métadonnées du jeu de données), et exécutez le.
