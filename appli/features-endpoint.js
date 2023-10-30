@@ -124,7 +124,7 @@ function requestData() {
 
   divtimeline.setAttribute('style', 'height:0px;');
   message.innerHTML = '<p class="noentry">Chargement <img src="./img/loading_cut.gif"></p>';
-  
+  document.getElementById('statistiques').innerHTML = ''
   var bb_filter
   // Deal with bbox on the map
   var tempJson = drawnItems.toGeoJSON();

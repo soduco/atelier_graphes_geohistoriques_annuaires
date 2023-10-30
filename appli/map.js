@@ -81,7 +81,7 @@ map.on(L.Draw.Event.CREATED, function (e) {
 
 var overLayers = {
     "Sélection spatiale":drawnItems,
-    "Référence - Durand et Al. (2015)":refgroup,
+    "Photographes - Liste de Durand et al. (2015)":refgroup,
 }
 
 var layerControl = L.control.layers(baseLayers, overLayers,{
