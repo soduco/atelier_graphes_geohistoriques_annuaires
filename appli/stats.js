@@ -1,6 +1,6 @@
 function totalNumEntries(graphname_){
     var totalEntries;
-    var totalRessources;
+    var statsdiv = document.getElementById('totalstats')
 
     //SPARQL request to get total number of entries
     var query = "PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#> "+
@@ -27,11 +27,18 @@ function totalNumEntries(graphname_){
     dataType:"json",
     data:''
   }).done((promise) => {
-    totalEntries = promise.results.bindings.count.value
-    statsdiv.innerHTML += '<p>Nombre total d\'entrées distinctes extraites des annuaires : ' +  totalEntries + '<p>'
-  })
+    console.log(promise)
+    totalEntries = promise.results.bindings[0].count.value
+    statsdiv.innerHTML += '<p style="text-align:center;">Nombre d\'entrées<br><span style="color:purple;font-size: medium">' +  totalEntries + '<span></p>'
+})
+                            
+};
 
-    //SPARQL request to get total number of ressources
+function totalNumRessources(graphname_){
+    var totalRessources;
+    var statsdiv = document.getElementById('totalstats')
+
+    //SPARQL request to get total number of entries
     var query = "PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#> "+
     "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "+
     "PREFIX owl: <http://www.w3.org/2002/07/owl#> "+
@@ -43,24 +50,24 @@ function totalNumEntries(graphname_){
     "PREFIX gsp: <http://www.opengis.net/ont/geosparql#> "+
     'SELECT (count(distinct ?uri) as ?count) '+
     "WHERE { "+
-    "GRAPH <" +  graphname_ + "> {" +
-    "?uri a adb:Entry.}}"
-    var queryURL = repertoireGraphDB + "?query="+encodeURIComponent(query)+"&?outputFormat=rawResponse";
-    console.log(query)
+      "GRAPH <" +  graphname_ + "> {" +
+      "?uri a adb:Entry."+
+      "?uri adb:numEntry ?index.}}"
+  var queryURL = repertoireGraphDB + "?query="+encodeURIComponent(query)+"&?outputFormat=rawResponse";
+  console.log(query)
 
-    $.ajax({
+  $.ajax({
     url: queryURL,
     Accept: "application/sparql-results+json",
     contentType:"application/sparql-results+json",
     dataType:"json",
     data:''
-    }).done((promise) => {
-        totalRessources = promise.results.bindings.count.value
-        'Nombre total de ressources construites à partir des entrées : ' + totalRessources.toString() + '</p>'
-    })
+  }).done((promise) => {
+    totalRessources = promise.results.bindings[0].count.value
+    statsdiv.innerHTML += '<p style="text-align:center;">Nombre de ressources RDF<br><span style="color:purple;font-size: medium">' +  totalRessources + '<span></p>'
+  })
                             
 };
-
 
 function statsCountByYear(graphname_){
     //SPARQL request
@@ -104,7 +111,6 @@ function statsCountByYear(graphname_){
       });
       
     }).done((promise) => {
-        console.log(json)
         const dates = json.map(item => item.date);
         const counts = json.map(item => item.count);
 
@@ -139,6 +145,7 @@ function getStats(){
     statsdiv.innerHTML += '<h3 style="margin:10px;">Statistiques du jeu de données ' + '"'+ graphlabel_ + '"' + '</h3>'+
     '<div id="totalstats"></div>'+
     '<div id="barplot"></div>'
-    //totalNumEntries(graphname_)
+    totalNumEntries(graphname_)
+    totalNumRessources(graphname_)
     statsCountByYear(graphname_)
 }
