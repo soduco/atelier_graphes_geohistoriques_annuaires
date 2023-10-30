@@ -113,3 +113,25 @@ GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
 }
 }order by ?labels ?labelo
 ```
+
+## Export en CSV des entrées pour lesquelles on n'a pas trouvé de liens sameAs automatiquement. Les noms, activités et adresses sont affichés pour permettre de retrouver manuellement d'éventuels liens supplémentaires.
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX rda: <http://rdaregistry.info/Elements/a/>
+select distinct ?s ?nom_annuaire ?label ?activity ?adresse_annuaire 
+where { 
+GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+ {?s a ont:Entry.
+  ?s rdfs:label ?label.
+  ?s rda:P50104 ?activity.
+  ?s locn:address ?add.
+  ?add prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>.
+  ?add locn:fullAddress ?adresse_annuaire.
+  ?s prov:wasDerivedFrom/rdfs:label ?nom_annuaire.
+  MINUS {?s owl:sameAs ?o}
+}
+}```
