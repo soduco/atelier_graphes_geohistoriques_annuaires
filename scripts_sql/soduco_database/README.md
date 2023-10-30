@@ -1,6 +1,6 @@
 # Extraction des entrées d'annuaires relatives à un type d'activité, vers un schéma dédié de la base soduco
 
-Pour suivre cette procédure, vous devez disposer d'un compte utilisateur avec des droits de lecture et écriture sur les schémas de la base soduco utilisés. Si ce n'est pas le cas, reportez-vous à la procédure décrite dans local_database.
+Pour suivre cette procédure, vous devez disposer d'un compte utilisateur avec des droits de lecture et écriture sur les schémas de la base soduco utilisés. Si ce n'est pas le cas, reportez-vous à la procédure décrite dans *local_database*.
 
 1) Lancez pgAdmin 4 et ouvrez un serveur connecté à geohistoricaldata.org.
 
