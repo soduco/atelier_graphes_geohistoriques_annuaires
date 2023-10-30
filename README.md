@@ -33,7 +33,7 @@
 ### 1. Extraire les entrées d'annuaires sur les graveurs et les marchands de cartes et plans
 ### 2. Convertir les données en RDF
 ### 3. Lier les entrées d'annuaires qui représentent un même commerce de gravure ou de vente de cartes et plans
-### 4. Inférer plus de liens par transitivité et exporter les liens obtenus
+### 4. Inférer plus de liens et exporter les liens obtenus
 ### 5. Importer les liens dans la base, créer et requêter le graphe
 ### 6. Visualiser le graphe
  
