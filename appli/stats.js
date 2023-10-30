@@ -132,12 +132,13 @@ function statsCountByYear(graphname_){
 
 function getStats(){
     var s = document.getElementById("selectgraphs");
+    var graphlabel_ = s.options[s.selectedIndex].text;
     var graphname_ = s.options[s.selectedIndex].value;
-
     var statsdiv = document.getElementById("statistiques")
-    statsdiv.innerHTML += '<h3 style="margin:10px;">Statistiques du jeu de données</h3>'+
+    statsdiv.innerHTML = ''
+    statsdiv.innerHTML += '<h3 style="margin:10px;">Statistiques du jeu de données ' + '"'+ graphlabel_ + '"' + '</h3>'+
     '<div id="totalstats"></div>'+
-    '<div id="barplot"></div>'+
+    '<div id="barplot"></div>'
     //totalNumEntries(graphname_)
     statsCountByYear(graphname_)
 }
