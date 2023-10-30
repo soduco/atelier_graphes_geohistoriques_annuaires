@@ -1,4 +1,4 @@
-# Atelier de création de graphes de connaissances géohistoriques (2 au 6 octobre 2023)
+# Atelier de création de graphes de connaissances géohistoriques
 
 ## Baseline : travaux présentés à la conférence IC (Juillet 2023)
 
