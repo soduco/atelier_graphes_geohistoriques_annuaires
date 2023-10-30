@@ -117,11 +117,18 @@ function statsCountByYear(graphname_){
         const data = [{
             x: dates,
             y: counts,
-            type: 'bar'
+            type: 'bar',
+            marker: {color: 'purple'},
         }];
 
         const layout = {
-            title: 'Nombre d\'entrées d\'annuaires extraites par année',
+            title: {text:'Nombre d\'entrées d\'annuaires extraites par année',
+                    font:{
+                        family:'Verdana',
+                        size:15,
+                        color:'black'
+                    }
+            },
             xaxis: {
                 title: 'Année'
             },
