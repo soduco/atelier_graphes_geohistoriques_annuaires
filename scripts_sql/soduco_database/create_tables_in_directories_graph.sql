@@ -1,10 +1,12 @@
 /* Suppression des tables de liens */
 DROP TABLE IF EXISTS directories_graph.liens;
 DROP TABLE IF EXISTS directories_graph.liens_externes;
+DROP TABLE IF EXISTS directories_graph.liens_chargement;
+DROP TABLE IF EXISTS directories_graph.geocoding;
+DROP TABLE IF EXISTS directories_graph.directories_content;
+DROP TABLE IF EXISTS directories_graph.dataset;
 
 /*Création de la table directories_content*/
-DROP TABLE IF EXISTS directories_graph.directories_content;
-
 CREATE TABLE directories_graph.directories_content AS (
 	--Pour chaque entrée, compte le nombre de '<PER>' dans la chaîne XML retournée par la pipeline NER
 	WITH per_count AS (
@@ -27,7 +29,9 @@ CREATE TABLE directories_graph.directories_content AS (
 	WHERE (
 		-- Sélection des entrées issues des listes par noms
         (src.liste_type ILIKE '%ListNoms%') AND
-		-- Liste des mots-clés
+	/* ************************************************************* */
+        /* Modifier la liste des mots-clés selon les données à extraire  */
+        /* ************************************************************* */
 		(act.act ILIKE '%atlas%' AND act.act ILIKE '%cart%')OR
 		(act.act ILIKE '%cart%' AND act.act ILIKE '%géo%')OR
 		(act.act ILIKE '%cart%' AND act.act ILIKE '%geo%')OR
@@ -36,12 +40,8 @@ CREATE TABLE directories_graph.directories_content AS (
 		(act.act ILIKE '%cart%' AND act.act ILIKE '%topograph%')
 		)
 	ORDER BY src.liste_annee ASC);
-	
-
 
 /*Création de la table geocoding*/
-DROP TABLE IF EXISTS directories_graph.geocoding;
-
 CREATE TABLE directories_graph.geocoding AS (
 	--Pour chaque entrée, compte le nombre de '<PER>' dans la chaîne XML retournée par la pipeline NER
 	WITH per_count AS (
@@ -64,7 +64,9 @@ CREATE TABLE directories_graph.geocoding AS (
         (src.liste_type ILIKE '%ListNoms%') AND
 		-- Sélection des géocodages non nuls
 		(gcd.street not like '') AND
-		-- Liste des mots-clés
+	/* ************************************************************* */
+        /* Modifier la liste des mots-clés selon les données à extraire  */
+        /* ************************************************************* */
 		((act.act ILIKE '%atlas%' AND act.act ILIKE '%cart%')OR
 		(act.act ILIKE '%cart%' AND act.act ILIKE '%géo%')OR
 		(act.act ILIKE '%cart%' AND act.act ILIKE '%geo%')OR
@@ -75,35 +77,25 @@ CREATE TABLE directories_graph.geocoding AS (
 	ORDER BY e.uuid ASC);
 
 	
-/* ********************************************************* */
-/*    Ajout d'une clé primaire à la table principale                               */
-/* ******************************************************** */
+
+-- Ajout d'une clé primaire à la table principale 
 ALTER TABLE directories_graph.directories_content ADD COLUMN entry_id uuid ;
 UPDATE directories_graph.directories_content SET entry_id = gen_random_uuid ();
 ALTER tABLE directories_graph.directories_content ADD PRIMARY KEY (entry_id);
-/* ********************************************************* */
-/*    Ajout d'une colonne pour stocker le graphe nommé des données                               */
-/* ******************************************************** */
+--  Ajout d'une colonne pour stocker le graphe nommé des données 
 ALTER TABLE directories_graph.directories_content ADD COLUMN graph_name character varying (50);	
-UPDATE directories_graph.directories_content SET graph_name ='cartes_et_plans';
-ALTER TABLE directories_graph.geocoding ADD COLUMN graph_name character varying (50);	
-UPDATE directories_graph.geocoding SET graph_name ='cartes_et_plans';
-
-/* ********************************************************* */
-/*    On complète la table des graphes nommés                */
-/* ******************************************************** */
-DROP TABLE IF EXISTS directories_graph.dataset;
+ALTER TABLE directories_graph.geocoding ADD COLUMN graph_name character varying (50);
+-- Ajout de la table de gestion des jeux de données / graphes nommés
 CREATE TABLE directories_graph.dataset(title character varying(100), issued date, graph_name character varying(100));
 ALTER TABLE directories_graph.dataset ADD COLUMN dataset_id uuid PRIMARY KEY;
+/* ****************************************************************************************************************************** */
+/* Modifier les propriétés du graphe nommmé selon les données extraites: identifiant, titre du jeu de données, date d'extraction  */
+/* ****************************************************************************************************************************** */
+UPDATE directories_graph.directories_content SET graph_name ='cartes_et_plans';
+UPDATE directories_graph.geocoding SET graph_name ='cartes_et_plans';
 INSERT INTO directories_graph.dataset VALUES ('Graveurs et marchands de cartes et plans', '2023-10-29', 'cartes_et_plans', gen_random_uuid ());
 
-
-/* ********************************************************* */
-/*    Ajout des tables de liens                */
-/* ******************************************************** */
-
-DROP TABLE IF EXISTS directories_graph.liens;
-
+-- Ajout des tables de liens
 CREATE TABLE IF NOT EXISTS directories_graph.liens
 (
     entry_id1 uuid,
@@ -120,8 +112,6 @@ CREATE TABLE IF NOT EXISTS directories_graph.liens
         NOT VALID
 );
 
-DROP TABLE IF EXISTS directories_graph.liens_externes;
-
 CREATE TABLE IF NOT EXISTS directories_graph.liens_externes
 (
     entry_id uuid,
@@ -133,9 +123,7 @@ CREATE TABLE IF NOT EXISTS directories_graph.liens_externes
         NOT VALID
 );
 
-/* ********************************************************* */
-/*    Ajout des index               */
-/* ******************************************************** */
+-- Ajout des index  
 create index on directories_graph.directories_content(entry_id);
 create index on directories_graph.directories_content(uuid);
 create index on directories_graph.directories_content(person);
