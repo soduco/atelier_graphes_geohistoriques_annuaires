@@ -4,7 +4,7 @@
 
 2) Créez une base PostgreSQL vide (clic droit / create database). Ouvrez votre base, et l'éditeur de requêtes (Tools / Query tool). Tapez la commande suivante dans l'éditeur de requêtes et exécutez-la en cliquant sur le bouton entouré en vert:
 
-![Create extension postgis](Execute.png "Create extension postgis")
+![Create extension postgis](./img/Execute.png "Create extension postgis")
 
 Cette extension permet à votre base de données de stocker des données géographiques, dotées de géométries sur lesquelles on peut faire des analyses spatiales quantitatives.
 
