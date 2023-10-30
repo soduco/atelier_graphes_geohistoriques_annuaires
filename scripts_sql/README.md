@@ -4,7 +4,7 @@ Ce dossier regroupe les scripts SQL utiles pour extraire les données de la base
 
 Si vous n'avez pas de compte utilisateur pour accéder au serveur SODUCO, utilisez les scripts du dossier *local_database* pour extraire les données qui vous intéressent et les importer dans une base de données locale, sur votre machine.
 
-Les scripts sont prêts à être exécutés. Ouvrez les à l'aide de l'éditeur de requête de pgAdmin4 et modifiez seulement les parties indiquées sous les commentaires encadrés par des étoiles comme dans l'exemple ci-dessous. Ici il faut modifier les mots-clés '%photo%', '%daguer' ou '%opti%' pour les remplacer par les activités que l'on cherche à retrouver dans les annuaires.
+Les scripts sont prêts à être exécutés. Ouvrez les à l'aide de l'éditeur de requêtes de pgAdmin4 et modifiez seulement les parties indiquées sous les commentaires encadrés par des étoiles comme dans l'exemple ci-dessous. Ici il faut modifier les mots-clés '%photo%', '%daguer' ou '%opti%' pour les remplacer par les activités que l'on cherche à retrouver dans les annuaires.
 
 ```sql
 SELECT ...
