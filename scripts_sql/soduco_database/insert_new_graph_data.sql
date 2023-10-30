@@ -21,14 +21,16 @@ INSERT INTO directories_graph.directories_content (uuid, person, activity,loc, c
 	WHERE (
 		-- Sélection des entrées issues des listes par noms
         (src.liste_type ILIKE '%ListNoms%') AND
-		-- Liste des mots-clés
-		(act.act ILIKE '%nouveauté%' 
+	/* ************************************************************* */
+        /* Modifier la liste des mots-clés selon les données à extraire  */
+        /* ************************************************************* */
+      (act.act ILIKE '%nouveauté%' 
       OR act.act ILIKE '%nouveaute%' 
       OR act.act ILIKE '%nouvaute%' 
-	  OR (act.act ILIKE '%march%' AND act.act ILIKE '%nouv%')
-	  OR (act.act ILIKE '%magasin%' AND act.act ILIKE '%nouv%') 
-      OR act.act ILIKE '%nouv.%' ))
-	ORDER BY src.liste_annee ASC);
+      OR (act.act ILIKE '%march%' AND act.act ILIKE '%nouv%')
+      OR (act.act ILIKE '%magasin%' AND act.act ILIKE '%nouv%') 
+      OR act.act ILIKE '%nouv.%' )
+) ORDER BY src.liste_annee ASC);
 	
 INSERT INTO directories_graph.geocoding 
 (
@@ -53,15 +55,21 @@ INSERT INTO directories_graph.geocoding
         (src.liste_type ILIKE '%ListNoms%') AND
 		-- Sélection des géocodages non nuls
 		(gcd.street not like '') AND
-		-- Liste des mots-clés
-		(act.act ILIKE '%nouveauté%' 
+	/* ************************************************************* */
+        /* Modifier la liste des mots-clés selon les données à extraire  */
+        /* ************************************************************* */
+      (act.act ILIKE '%nouveauté%' 
       OR act.act ILIKE '%nouveaute%' 
       OR act.act ILIKE '%nouvaute%' 
-	  OR (act.act ILIKE '%march%' AND act.act ILIKE '%nouv%')
-	  OR (act.act ILIKE '%magasin%' AND act.act ILIKE '%nouv%') 
-      OR act.act ILIKE '%nouv.%' ))
-	ORDER BY e.uuid ASC);
-	
+      OR (act.act ILIKE '%march%' AND act.act ILIKE '%nouv%')
+      OR (act.act ILIKE '%magasin%' AND act.act ILIKE '%nouv%') 
+      OR act.act ILIKE '%nouv.%' )
+) ORDER BY e.uuid ASC);
+
+-- Mise à jour des informations sur le nouveau graphe nommé (cad le nouveau jeu de données) ajouté à la base
+/* ****************************************************************************************************************************** */
+/* Modifier les propriétés du graphe nommmé selon les données extraites: identifiant, titre du jeu de données, date d'extraction  */
+/* ****************************************************************************************************************************** */
 UPDATE directories_graph.directories_content SET graph_name ='nouveautes_test' WHERE graph_name ISNULL;
 UPDATE directories_graph.geocoding SET graph_name ='nouveautes_test' WHERE graph_name ISNULL;
 INSERT INTO directories_graph.dataset VALUES ('Magasins de nouveautés', '2023-10-29', 'nouveautes_test', gen_random_uuid ());
