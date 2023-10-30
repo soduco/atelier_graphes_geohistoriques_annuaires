@@ -24,7 +24,7 @@ WHERE (
 ```
 Dans le fichier Test_keywords.sql on teste seulement trois mots-clés: photo, daguer et opti, précédés ou suivis de n'importe quelle chaîne de caractères. Des exemples plus élaborés sont proposés dans les fichiers *Create_local_tables.sql* et *Insert_into_local_tables.sql*. 
 
-5) Créez votre base locale et importez-y les données correspondant aux mots-clés que vous avez préalablement identifiés comme valides. Pour cela, ouvrez le fichier *Create_local_tables.sql* dans l'éditeur de requêtes, modifiez les parties indiquées sous les commentaires encadrés par des étoiles, et exécutez le. Parmi les modification effectuer, il faut:
+5) Créez votre base locale et importez-y les données correspondant aux mots-clés que vous avez préalablement identifiés comme valides. Pour cela, ouvrez le fichier *Create_local_tables.sql* dans l'éditeur de requêtes, modifiez les parties indiquées sous les commentaires encadrés par des étoiles, et exécutez le. Parmi les modifications à effectuer, il faut:
    * changer les mots-clés à deux endroits (mettre les mêmes à chaque fois!)
    * compléter les métadonnées du jeu de données:
      * son identifiant, "cartes_et_plans" dans le fichier exemple, à remplacer par un nom court correspondant à votre jeu de données;
