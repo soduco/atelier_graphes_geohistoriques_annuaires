@@ -73,3 +73,5 @@ GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
 ```
 NB: Ces données peuvent être chargées sour QGIS pour produire une analyse spatiale ou une visualisation cartographique. Pour cela, aller dans "Couches/ Ajouter une couche / Ajouter une couche de texte délimité" et sélectionner le fichier CSV que vous avez exporté. L'attribut coordonnées contient la géométrie. Elle est de type Point, dans le système de coordonnées WGS84 (EPSG:4326).
 
+![Les magasins de nouveauté du quartier Richelieu, visualisés sour QGIS.](Richelieu.png "Les magasins de nouveauté du quartier Richelieu, visualisés sour QGIS. Fonds: BDORTHO IGN")
+
