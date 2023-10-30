@@ -17,11 +17,13 @@ PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX gsp: <http://www.opengis.net/ont/geosparql#>
 PREFIX pav: <http://purl.org/pav/>
+PREFIX rda: <http://rdaregistry.info/Elements/a/>
 select distinct ?s ?label ?adresse_annuaire ?nom_annuaire ?date ?adresse_geocodeur ?coordonnees
 where { 
 GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
  {?s a ont:Entry.
   ?s rdfs:label ?label.
+  ?s rda:P50104 ?activity.
   ?s locn:address ?add.
   ?add prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>.
   ?add locn:fullAddress ?adresse_annuaire.
@@ -51,11 +53,13 @@ PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX gsp: <http://www.opengis.net/ont/geosparql#>
 PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
 PREFIX pav: <http://purl.org/pav/>
+PREFIX rda: <http://rdaregistry.info/Elements/a/>
 select distinct ?s ?label ?adresse_annuaire ?nom_annuaire ?date ?adresse_geocodeur ?coordonnees
 where { 
 GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
  {?s a ont:Entry.
   ?s rdfs:label ?label.
+  ?s rda:P50104 ?activity.
   ?s locn:address ?add.
   ?add prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>.
   ?add locn:fullAddress ?adresse_annuaire.
