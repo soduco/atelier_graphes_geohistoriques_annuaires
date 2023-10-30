@@ -35,6 +35,8 @@ GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
 }order by ?label 
 ```
 
+NB: Ces données peuvent être chargées sour QGIS pour produire une analyse spatiale ou une visualisation cartographique. Pour cela, aller dans "Couches/ Ajouter une couche / Ajouter une couche de texte délimité" et sélectionner le fichier CSV que vous avez exporté. L'attribut coordonnées contient la géométrie. Elle est de type Point, dans le système de coordonnées WGS84 (EPSG:4326).
+
 ## Export des entrées en CSV, pour les données géocodées dans une zone particulière (ex. ici, le quartier Richelieu)
 
 Dans le menu SPARQL, exécuter la requête ci-dessous et demander à télécharger les résultats en CSV:
