@@ -16,8 +16,8 @@
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://DEL1709P004:7200/repositories/imprimeurs_cartes2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_geographiques"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/graveurs_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_et_plans"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -29,8 +29,8 @@
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://DEL1709P004:7200/repositories/imprimeurs_cartes2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_geographiques"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/graveurs_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_et_plans"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
