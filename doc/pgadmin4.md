@@ -15,13 +15,14 @@ Cette étape permet de se connecter à distance à la base de données SODUCO da
     * Dans l'onglet Avancé :
         - Limité aux bases de données :  soduco
 
-<img src="./img/pgadmin/image2.png">
+<img src="./img/pgadmin/image2.png" width="350px" style="display:block;margin-left:auto;
+margin-right: auto;">
 
-<img src="./img/pgadmin/image3.png" style="width:350;display:block;margin-left:auto;
+<img src="./img/pgadmin/image3.png" width="200px" style="display:block;margin-left:auto;
 margin-right: auto;">
-<img src="./img/pgadmin/image4.png" style="width:350;display:block;margin-left:auto;
+<img src="./img/pgadmin/image4.png" width="200px" style="display:block;margin-left:auto;
 margin-right: auto;">
-<img src="./img/pgadmin/image5.png" style="width:350;display:block;margin-left:auto;
+<img src="./img/pgadmin/image5.png" width="200px" style="display:block;margin-left:auto;
 margin-right: auto;">
 
 ## Réseau IGN (avec le proxy)
