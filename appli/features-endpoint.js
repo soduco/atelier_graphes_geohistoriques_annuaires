@@ -114,26 +114,6 @@ function createGeoJson(JSobject){
   }
 };
 
-function downloadGeoJSON() {
-  //Création d'une chaîne de caractère contenant la date et l'heure du téléchargement
-  var now     = new Date();
-  var annee   = now.getFullYear();
-  var mois    = now.getMonth() + 1;
-  var jour    = now.getDate();
-  var heure   = now.getHours();
-  var minute  = now.getMinutes();
-  var seconde = now.getSeconds();
-  var date = annee + '-' + mois + '-' + jour + '_' + heure + ':' + minute + ':' + seconde
-  //Création d'une chaîne de caractère correspondant au nom du fichier
-  var filename = graphname_ + '_' + date + '.geojson'
-  //Préparation du téléchargement
-  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(jsonData));
-  var dlAnchorElem = document.createElement('a');
-  dlAnchorElem.setAttribute("href", dataStr);
-  dlAnchorElem.setAttribute("download", filename);
-  dlAnchorElem.click();
-}
-
 /*************************************************
  ************** MAIN FUNCTIONS *******************
  *************************************************/
@@ -239,9 +219,13 @@ function requestData() {
   //La requête est transmise au serveur sous la forme d'une URL			
   queryURL = endpointURL + "?query="+encodeURIComponent(finalquery)+"&?application/json";
 
-  // Ajout d'un bouton qui permet à l'utilisateur de télécharger les données
-  var downloaddiv = document.getElementById('downloaddata')
-  downloaddiv.innerHTML = '<input id="downloaddatabtn" type="button" value="Télécharger les données" style="background-color:grey" onclick="downloadGeoJSON();"/>'
+  function downloadGeoJSON() {
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(jsonData));
+    var dlAnchorElem = document.createElement('a');
+    dlAnchorElem.setAttribute("href", dataStr);
+    dlAnchorElem.setAttribute("download", graphname_+".geojson");
+    dlAnchorElem.click();
+  };
 
 /**************************************
  **************** MAIN ****************
@@ -258,6 +242,13 @@ $.ajax({
 }).done((promise) => {
   // Création d'un geojson à partir du json retourné par le triplestore
   jsonData = createGeoJson(promise)
+
+  var downloadbtn = document.getElementById("downloadbutton")
+  downloadbtn.classList.remove("w3-disabled");
+  downloadbtn.disabled = false;
+  
+  var s = document.getElementById("selectgraphs");
+  var graphname_ = s.options[s.selectedIndex].value;
   
   // Création d'un objet L.geoJSON dans leaflet
   extract = '';

@@ -11,7 +11,7 @@
 
 ### Installation (avant l'atelier)
 
-➡️ [Notice d'installation des logiciels requis](https://docs.google.com/document/d/1toDmTdc2XMvecJQJZhU5ERwvb2qoIhzIRl5rI5HCcZk/edit) : 
+➡️ [Notice d'installation des logiciels requis](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/Installations_Atelier_SODUCO.pdf) : 
 - JDK 8
 - Postgres SQL 16 avec PostGIS et pgAdmin
 - GraphDB
