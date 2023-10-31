@@ -132,6 +132,6 @@ GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
   ?add prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>.
   ?add locn:fullAddress ?adresse_annuaire.
   ?s prov:wasDerivedFrom/rdfs:label ?nom_annuaire.
-  MINUS {?s owl:sameAs ?o}
+  MINUS {?s owl:sameAs ?o}}
 }
-}```
+```
