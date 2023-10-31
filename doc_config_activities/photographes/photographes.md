@@ -8,9 +8,19 @@
 Une première liste de mots-clés a été constituée en cherchant manuellement les photographes répertoriés par Durand et al. et en relevant les mots présents de manière récurrente dans la description de leur activité. Cette liste élargie contenait trop de bruit.
 
 Les mots-clés conservés pour l'extraction finale sont
-- photo
-- daguer
+- photo pour <i>photographe</i>, <i>photographie</i>, <i>photographique</i>
+- daguer pour <i>daguerréotype</i>, <i>photographie</i>, <i>photographique</i>
 - opti
+
+## Filtrage
+```sql
+SELECT ...
+WHERE (
+		act.act ILIKE '%photo%' OR
+		act.act ILIKE '%daguer%' OR
+		act.act ILIKE '%opti%'
+		)
+```
 
 ## Liage (1ère extraction)
 

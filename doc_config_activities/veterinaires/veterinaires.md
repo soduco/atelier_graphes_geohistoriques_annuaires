@@ -30,19 +30,20 @@ Plusieurs dénominations sucessives/parallèles associées à l'évolution de la
 
 ## Filtrage des entrées
 
-```
-    -- Contient
-    (act.ner_xml ILIKE '%vétérinaire%' OR
-    act.ner_xml ILIKE '%veterinaire%' OR
-    act.ner_xml ILIKE '%vetérinaire%' OR
-    act.ner_xml ILIKE '%véterinaire%' OR
-    act.ner_xml ILIKE '%veteri%' OR
-    act.ner_xml ILIKE '%vetéri%' OR
-    act.ner_xml ILIKE '%véteri%' OR
-    act.ner_xml ILIKE '%vétéri%' OR
-    (act.ner_xml ILIKE '%marech%' AND act.ner_xml ILIKE '%expert%')) AND 
+```sql
+SELECT ...
+WHERE (-- Contient
+    act.act ILIKE '%vétérinaire%' OR
+    act.act ILIKE '%veterinaire%' OR
+    act.act ILIKE '%vetérinaire%' OR
+    act.act ILIKE '%véterinaire%' OR
+    act.act ILIKE '%veteri%' OR
+    act.act ILIKE '%vetéri%' OR
+    act.act ILIKE '%véteri%' OR
+    act.act ILIKE '%vétéri%' OR
+    (act.act ILIKE '%marech%' AND act.act ILIKE '%expert%')) AND 
     -- Ne contient pas
-    (act.ner_xml NOT ILIKE '%paveteri%')
+    (act.act NOT ILIKE '%paveteri%')
 ```
 
 ## Liage
