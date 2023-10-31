@@ -219,14 +219,6 @@ function requestData() {
   //La requête est transmise au serveur sous la forme d'une URL			
   queryURL = endpointURL + "?query="+encodeURIComponent(finalquery)+"&?application/json";
 
-  function downloadGeoJSON() {
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(jsonData));
-    var dlAnchorElem = document.createElement('a');
-    dlAnchorElem.setAttribute("href", dataStr);
-    dlAnchorElem.setAttribute("download", graphname_+".geojson");
-    dlAnchorElem.click();
-  };
-
 /**************************************
  **************** MAIN ****************
  **************************************/
@@ -246,9 +238,6 @@ $.ajax({
   var downloadbtn = document.getElementById("downloadbutton")
   downloadbtn.classList.remove("w3-disabled");
   downloadbtn.disabled = false;
-  
-  var s = document.getElementById("selectgraphs");
-  var graphname_ = s.options[s.selectedIndex].value;
   
   // Création d'un objet L.geoJSON dans leaflet
   extract = '';
@@ -327,3 +316,16 @@ $.ajax({
     });
 });
 }; 
+
+function downloadGeoJSON() {  
+  var s = document.getElementById("selectgraphs");
+  var graphname_ = s.options[s.selectedIndex].value;
+  var filename = graphname_ + '_' + inputNumberMin.value + '_' + inputNumberMax.value + '.geojson'
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(jsonData));
+  const downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href",     dataStr);
+  downloadAnchorNode.setAttribute("download", filename);
+  document.body.appendChild(downloadAnchorNode); // required for firefox
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
+}
