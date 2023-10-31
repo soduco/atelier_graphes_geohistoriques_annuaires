@@ -59,18 +59,16 @@
     <!--Leaflet clusters-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.4/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.4/MarkerCluster.Default.css" />
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
     <!--Control Panel-->
     <link rel="stylesheet" href="./libs/leaflet-panel-layers/src/leaflet-panel-layers.css">
     <script src="./libs/leaflet-panel-layers/src/leaflet-panel-layers.js"></script>
     <!--Timeline JS-->
-    <!--<link title="timeline-styles" rel="stylesheet" href="http://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
-    <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>-->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link title="timeline-styles" rel="stylesheet" href="./libs/timelineJS/timeline.css">
-    <script src="./libs/timelineJS/timeline.js"></script>
-
+    <script src="./libs/timelineJS/timeline.js"></script> 
+    <!--Plotly JS-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Mapbox/supercluster -->
+    <script src="https://unpkg.com/@mapbox/supercluster@7.1.2/dist/supercluster.min.js"></script>
     <!--Style-->
     <link rel="stylesheet" href="libs/w3.css">
     <link rel="stylesheet" href="style.css">
@@ -134,7 +132,7 @@
           </div>
     
           <div id="search">
-            <center><input type="button" onclick="requestData()" value="Lancer la recherche" class="button"></center>
+            <center><input id="researchbutton" type="button" onclick="requestData()" value="Lancer la recherche" class="button"></center>
             <div id="message"></div>
           </div>
         <!--END : Advanced research tabber-->
@@ -158,9 +156,12 @@
   <script src="stats.js"></script>
   <script src="draw.js"></script>
   <script src="anim.js"></script>
-  <script src="tile.js"></script>
+  <script src="tiles.js"></script>
   <script src="named_graphs.js"></script>
-  <script src="functions.js"></script>
+  <script src="timeline.js"></script>
+  <script src="timeline.js"></script>
+  <script src="features-external.js"></script>
+  <script src="feature-style.js"></script>
   <script src="features-endpoint.js"></script>
   <script src="features-ref.js"></script>
   <script src="map.js"></script>
