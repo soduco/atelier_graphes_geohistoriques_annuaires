@@ -235,6 +235,7 @@ $.ajax({
   // Création d'un geojson à partir du json retourné par le triplestore
   jsonData = createGeoJson(promise)
 
+  // Active le bouton de téléchargement des données
   var downloadbtn = document.getElementById("downloadbutton")
   downloadbtn.classList.remove("w3-disabled");
   downloadbtn.disabled = false;
@@ -317,7 +318,11 @@ $.ajax({
 });
 }; 
 
-function downloadGeoJSON() {  
+function downloadGeoJSON() { 
+  /*
+  * Fonction éxécutée à l'aide du boutton télécharger les données.
+  * Permet de télécharger les entrées géocodées retournées lors de la recherche de données.
+  */
   var s = document.getElementById("selectgraphs");
   var graphname_ = s.options[s.selectedIndex].value;
   var filename = graphname_ + '_' + inputNumberMin.value + '_' + inputNumberMax.value + '.geojson'
