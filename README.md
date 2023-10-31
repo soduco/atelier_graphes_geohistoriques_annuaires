@@ -76,7 +76,7 @@ Valider le formulaire pour créer le dépôt.
 
 ### 3. Lier les entrées d'annuaires qui représentent un même commerce de gravure ou de vente de cartes et plans
 
-Le liage des entrées d'annuaires représentant un même commerce est fait avec le logiciel libre Silk-single-machine. Il permet d'évaluer le degré de similarité entre ressources en comparant leurs valeurs de propriétés avec des fonctions de similarité adaptées (mesures de similarité de chaînes de caractères, comparaison de valeurs numériques, etc.) et en agrégeant les résultats obtenus pour chauqe paire de propriétés comparées pour produire un score de similarité global. Le choix des propriétés à comparer et des fonctions et agrégateurs à utiliser est défini dans un fichier XML (dit *LinkSpec*). Il permet de lancer Silk en ligne de commande.
+Le liage des entrées d'annuaires représentant un même commerce est fait avec le logiciel libre Silk-single-machine. Il permet d'évaluer le degré de similarité entre ressources en comparant leurs valeurs de propriétés avec des fonctions de similarité adaptées (mesures de similarité de chaînes de caractères, comparaison de valeurs numériques, etc.) et en agrégeant les résultats obtenus pour chaque paire de propriétés afin de produire un score de similarité global. Le choix des propriétés à comparer et des fonctions de transformation, de similarité et d'agrégation à utiliser, ainsi que leur paramétrage sont définis dans un fichier XML (dit *LinkSpec*). Il permet de lancer Silk en ligne de commande.
 
 1) Copier l'adresse du point d'accès SPARQL de votre dépôt GraphDB local : aller dans "Configurer / Dépôts" et cliquer sur l'icône dédiée (voir ci-dessous)
    ![URI SPARQL endpoint GraphDB](./img/URL_Depot.png "URI SPARQL endpoint GraphDB")
@@ -137,7 +137,7 @@ java -DconfigFile=liage_annuaires_index_extraction.xml -jar silk.jar
 java -DconfigFile=liage_annuaires_label_activity.xml -jar silk.jar
 java -DconfigFile=liage_annuaires_label_address.xml -jar silk.jar
 ```
-:warning: Selon la quantité de données et le paramétrage choisi dans la LinkSpec, ces opérations peuvent prendre plus ou moins de temps, allant de quelques secondes à plusieurs heures.
+:warning: Selon la quantité de données et le paramétrage choisi dans la *LinkSpec*, ces opérations peuvent prendre plus ou moins de temps, allant de quelques secondes à plusieurs heures.
 
 4) Récupérer les fichiers de liens produits sur C:\Users\votre_nom\.silk\output (sous Windows)
    
