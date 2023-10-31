@@ -142,6 +142,28 @@ java -DconfigFile=liage_annuaires_label_address.xml -jar silk.jar
 4) Récupérer les fichiers de liens produits sur C:\Users\votre_nom\.silk\output (sous Windows)
    
 ### 4. Inférer plus de liens et exporter les liens obtenus
+
+1) Charger les fichiers de liens obtenus dans votre dépôt GraphDB cartes_et_plans_local en suivant la même procédure qu'à l'étape 2.7. Il faut seulement changer le nom du graphe nommé dans lequel vous mettez les données:
+   * Base IRI : http://rdf.geohistoricaldata.org/id/directories/entry/
+   * Cocher l'option "Graphe nommé"
+   * Graphes cibles: http://rdf.geohistoricaldata.org/id/directories/links
+2) Aller dans SPARQL et exécuter la requête suivante pour récupérer la liste complète des liens créés (penser à changer le nom du graphe nommé pour y mettre le vôtre si vous travaillez sur un autre jeu de données):
+```sparql
+   PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+   select distinct ?entry_id1 ?entry_id2 ?named_graph
+   where {?s owl:sameAs ?p.
+	FILTER (?s != ?p).
+    BIND(STRAFTER(STR(?s), 'http://rdf.geohistoricaldata.org/id/directories/entry/') AS ?entry_id1).
+    BIND(STRAFTER(STR(?p), 'http://rdf.geohistoricaldata.org/id/directories/entry/') AS ?entry_id2).
+    BIND('cartes_et_plans' AS ?named_graph).}
+ ```
+
+:warning: A cette étape, vérifier la quantité de liens inférés par le système de raisonnement de GraphDB! En effet, GraphDB est équipé d'un moteur d'inférences qui déduit de nouveaux faits à partir des faits (c-à-d des triplets de données) et des connaissances (c-à-d des ontologies) que l'on lui fournit. Ici on lui a fourni des triplets avec des liens owl:sameAs et on a précisé en créant le dépôt qu'il pouvait utiliser la propriété de transitivité de ces liens pour en inférer de nouveaux (en décochant l'option "Disable owl:sameAs"). Donc si dans nos données et nos liens, nous avons fourni au système A owl:sameAs B et B owl:sameAs C, il en déduit A owl:sameAs C. C'est très pratique pour compléter des liens que l'on peut avoir manqués avec Silk à causes de problèmes d'OCR par exemple. En revanche, cela peut aussi propager des liens erronés en cas d'erreurs dans les liens créés! Les liens erronés calculés par Silk à cause des erreurs d'OCR qui génèrent des chaînes de caractères très courtes et très fréquentes (ex. "R. " au lieu de "R. du Bac" ou "R. de la Paix") peuvent alors conduire à une explosion du nombre de liens erronés inférés... 
+
+ ![Liens calculés et liens inferrés](./img/Visu_nb_liens.png "Liens calculés et liens inferrés")
+
+ 3) Quand le nombre total de liens est légèeremnt supérieur au nombre de liens calculés, vous pouvez télécharger le résultats de la requête de l'étape 2 en CSV. Sinon, désactiver le raisonnement avant d'exécuter la requête pour récupérer seulement les liens calculés. 
+
 ### 5. Importer les liens dans la base, créer et requêter le graphe
 ### 6. Visualiser le graphe
  
