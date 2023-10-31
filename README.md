@@ -162,7 +162,7 @@ java -DconfigFile=liage_annuaires_label_address.xml -jar silk.jar
 
  ![Liens calculés et liens inferrés](./doc/Visu_nb_liens.png "Cliquer sur l'icône entourée en vert pour activer ou désactiver les inférences: le nombre de liens total s'affiche dans la partie entourée en bleu.")
 
- 3) Quand le nombre total de liens est légèeremnt supérieur au nombre de liens calculés, vous pouvez télécharger le résultats de la requête de l'étape 2 en CSV. Sinon, désactiver le raisonnement avant d'exécuter la requête pour récupérer seulement les liens calculés. 
+ 3) Quand le nombre total de liens est légèrement supérieur au nombre de liens calculés par Silk (par exemple 20 000 liens au total pour 15 000 liens calculés), vous pouvez télécharger le résultats de la requête de l'étape 2 en CSV. Sinon, désactiver le raisonnement avant d'exécuter la requête pour récupérer seulement les liens calculés. 
 
 ### 5. Importer les liens dans la base, créer et requêter le graphe
 ### 6. Visualiser le graphe
