@@ -49,7 +49,7 @@ function createlinkDataSoduco(uri_){
 
   //Options d'ititialisation de la frise chronologique
   var options = {
-    scale_factor:1,
+    scale_factor:0.5,
     language:'fr',
     start_at_slide:1,
     hash_bookmark: false,
@@ -64,8 +64,52 @@ function createlinkDataSoduco(uri_){
     dataType:"json",
     data:''
   }).done((promise) => {
+
+    var s = document.getElementById("selectgraphs");
+    var graphname_ = s.options[s.selectedIndex].value;
+
     //Pour chaque objet du JSON retourné par le triplestore
     $.each(promise.results.bindings, function(i,bindings){
+
+      var request = prefixes +
+      'SELECT ?uri ?index ?person ?activity ?address ?directoryName ?directoryDate ?address_geocoding ?geom_wkt ( <' + bindings.uri.value + '> AS ?rooturi) ' +
+      'WHERE {GRAPH <' + graphname_ + '> {{' +
+        '?uri a adb:Entry. ' +
+        '?uri adb:numEntry ?index. ' +
+        '?uri rdfs:label ?person. ' +
+        '?uri prov:wasDerivedFrom ?directory. '+
+          '?directory rdfs:label ?directoryName. '+
+          '?directory pav:createdOn ?directoryDate. '+
+        'OPTIONAL{?uri locn:address ?add1. '+
+          '?add1 locn:fullAddress ?address_geocoding. '+
+          '?add1 prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0002>. '+
+          '?add1 gsp:hasGeometry ?geom. '+
+          '?geom gsp:asWKT ?geom_wkt.} '+
+        '?uri locn:address ?add2. '+
+          '?add2 locn:fullAddress ?address. '+
+          '?add2 prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>. '+
+        '?uri rda:P50104 ?activity. '+
+        'FILTER(?uri = <' + bindings.uri.value + '>). '+
+      ' } UNION { ' +
+        '<' + bindings.uri.value + '> owl:sameAs ?uri. ' +
+        '?uri adb:numEntry ?index. ' +
+        '?uri rdfs:label ?person. ' +
+        '?uri prov:wasDerivedFrom ?directory. '+
+          '?directory rdfs:label ?directoryName. '+
+          '?directory pav:createdOn ?directoryDate. '+
+        'OPTIONAL{?uri locn:address ?add1. '+
+          '?add1 locn:fullAddress ?address_geocoding. '+
+          '?add1 prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0002>. '+
+          '?add1 gsp:hasGeometry ?geom. '+
+          '?geom gsp:asWKT ?geom_wkt.} '+
+        '?uri locn:address ?add2. '+
+          '?add2 locn:fullAddress ?address. '+
+          '?add2 prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>. '+
+        '?uri rda:P50104 ?activity. '+
+      '}}}' +
+      'ORDER BY ?directoryDate'
+      console.log(request)
+      var queryURL = endpointURL + encodeURIComponent("#query="+request) + "&contentTypeConstruct=text%2Fturtle&contentTypeSelect=application%2Fsparql-results%2Bjson&endpoint=https%3A%2F%2Fdir.geohistoricaldata.org%2Fsparql&requestMethod=POST&tabTitle=Query+5&headers=%7B%7D&outputFormat=table";
 
       //Init feature
       var feature = {
@@ -83,11 +127,13 @@ function createlinkDataSoduco(uri_){
           },
         "text": {
           "headline": bindings.person.value,
-          "text": '<p>' + bindings.activities.value + '</br>' + bindings.address.value + '<br/>Source : ' + bindings.directoryName.value + ' - ' + bindings.index.value + "<br/>Nombre d'entités liées : " + promise.results.bindings.length.toString() + '</p>'
+          "text": '<p>' + bindings.activities.value + '</br>' + bindings.address.value + '<br/>Source : ' + bindings.directoryName.value + '<br/>Identifiant de l\'entrée : ' + bindings.index.value + '<br/>Nombre de ressources liées : ' + promise.results.bindings.length.toString() 
+                    //+ ' - (<a href="'+ queryURL +'">Voir en détails</a>)'
+                  +'</p>'
         },
         "group":bindings.address.value,
         "background":{"color":"#1c244b"},
-        "unique_id":bindings.activities.uri
+        "unique_id":bindings.uri.value
       }
       //Ajout de l'objet au JSON résultat
       timelinejson.events.push(feature);
@@ -95,14 +141,20 @@ function createlinkDataSoduco(uri_){
         
   }).done((promise) => {
     // Création de la frise chronologique dans le DOM
+    var height = 400;
     if (timelinejson.events.length > 1){
-      divtimeline.setAttribute('style', 'height:800px;');
+      if (timelinejson.events.length <=5){
+        divtimeline.setAttribute('style', 'height:'+height.toString()+'px;');
+      } else {
+        height = 400 + (timelinejson.events.length-5)*10
+        divtimeline.setAttribute('style', 'height:'+height.toString()+'px;');
+      }
       window.timeline = new TL.Timeline('timeline-embed', timelinejson, options);
-      message.innerHTML = '';
       window.scrollTo(0, document.body.scrollHeight);
-    } else {
+      divmessage.innerHTML = ""
+    } else if (timelinejson.events.length <= 1) {
       divtimeline.setAttribute('style', 'height:0px;');
-      message.innerHTML = '<p class="noentry">Aucune entrée liée.</p>';
+      divmessage.innerHTML = "<center><p>Aucunes ressources liées à la ressource sélectionnée.</p></center>"
     }
   });
 };

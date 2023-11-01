@@ -44,7 +44,7 @@ function iconByName(name) {
   * Input : URI de la ressource 
   * Output : Button HTML inséré dans la popup du point
   */
-  var htmlString = `<button class="button" style="font-size: 12px; margin-right:auto; margin-left:auto;" onclick="createlinkDataSoduco('${valuri.toString()}')">Frise chronologique</button>`;
+  var htmlString = `<button id="timelinebutton" class="button" style="font-size: 12px; margin-right:auto; margin-left:auto;" onclick="createlinkDataSoduco('${valuri.toString()}')">Frise chronologique</button>`;
   return htmlString;
 }
 
@@ -60,8 +60,10 @@ function iconByName(name) {
   };
   texte += '<b>Année de publication</b> : ' + feature.properties.directoryDate + '<br>'+
   '<b>Annuaire</b> : ' + feature.properties.directoryName + '</br>'+
-  '<b>Identifiant de l\'entrée </b> : ' + feature.properties.index + '</p>'
+  '<b>Identifiant de l\'entrée </b> : ' + feature.properties.index + '</p><center>'
   texte += generateButton(valuri)
+  texte += '</center>'
+  texte += '<div id="popupmessage"></div>'
   layer.bindPopup(texte);
 }
 

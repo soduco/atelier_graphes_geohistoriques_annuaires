@@ -5,19 +5,26 @@
     <meta title="Visualisation des données extraites des annuaires du commerce parisien">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--JQuery-->
     <script src="./libs/jquery-3.6.1.min.js"></script>
     <script src="./libs/jquery.geo.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/wkx@0.5.0/dist/wkx.min.js"></script>
     <!--Slider-->
     <script src="./libs/wnumb-1.2.0/wNumb.min.js"></script>
     <link rel="stylesheet" href="./libs/noUiSlider/nouislider.min.css" />
    <script src="./libs/noUiSlider/nouislider.min.js"></script>
     <!--Leaflet-->
+    <script>L_PREFER_CANVAS=true;</script>
     <link rel="stylesheet" href="./libs/leaflet/leaflet.css" />
     <script src="./libs/leaflet/leaflet.js"></script>
     <!--Leaflet Full Screen-->
     <link rel="stylesheet" href="./libs/leaflet.fullscreen-master/Control.FullScreen.css"/>
     <script src="./libs/leaflet.fullscreen-master/Control.FullScreen.js"></script>
+    <!--Leaflet clusters-->
+    <script src="./libs/leaflet.markercluster/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="./libs/leaflet.markercluster/MarkerCluster.Default.css" />
+    <!-- Leaflet Control Panel-->
+    <link rel="stylesheet" href="./libs/leaflet-panel-layers/src/leaflet-panel-layers.css">
+    <script src="./libs/leaflet-panel-layers/src/leaflet-panel-layers.js"></script>
     <!--Leaflet.draw-->
     <script src="./libs/leaflet_draw/src/Leaflet.draw.js"></script>
     <script src="./libs/leaflet_draw/src/Leaflet.Draw.Event.js"></script>
@@ -43,7 +50,6 @@
     <script src="./libs/leaflet_draw/src/draw/handler/Draw.Polygon.js"></script>
     <script src="./libs/leaflet_draw/src/draw/handler/Draw.Rectangle.js"></script>
 
-
     <script src="./libs/leaflet_draw/src/edit/EditToolbar.js"></script>
     <script src="./libs/leaflet_draw/src/edit/handler/EditToolbar.Edit.js"></script>
     <script src="./libs/leaflet_draw/src/edit/handler/EditToolbar.Delete.js"></script>
@@ -56,19 +62,13 @@
     <script src="./libs/leaflet_draw/src/edit/handler/Edit.Marker.js"></script>
     <script src="./libs/leaflet_draw/src/edit/handler/Edit.CircleMarker.js"></script>
     <script src="./libs/leaflet_draw/src/edit/handler/Edit.Circle.js"></script>
-    <!--Leaflet clusters-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.4/leaflet.markercluster.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.4/MarkerCluster.Default.css" />
-    <!--Control Panel-->
-    <link rel="stylesheet" href="./libs/leaflet-panel-layers/src/leaflet-panel-layers.css">
-    <script src="./libs/leaflet-panel-layers/src/leaflet-panel-layers.js"></script>
+
     <!--Timeline JS-->
     <link title="timeline-styles" rel="stylesheet" href="./libs/timelineJS/timeline.css">
     <script src="./libs/timelineJS/timeline.js"></script> 
     <!--Plotly JS-->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <!-- Mapbox/supercluster -->
-    <script src="https://unpkg.com/@mapbox/supercluster@7.1.2/dist/supercluster.min.js"></script>
+    <script src="./libs/plotly-latest.min.js"></script>
+
     <!--Style-->
     <link rel="stylesheet" href="libs/w3.css">
     <link rel="stylesheet" href="style.css">
