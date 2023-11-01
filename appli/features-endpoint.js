@@ -48,7 +48,7 @@ noUiSlider.create(slidervar, {
     behaviour: 'drag',
     range: {
         min: 1790,         //Année minimale proposée à l'utilisateur
-        max: 1910          //Année maximale proposée à l'utilisateur
+        max: 1915          //Année maximale proposée à l'utilisateur
     },
     format: wNumb({
         decimals: 0
@@ -70,10 +70,6 @@ inputNumberMax.setAttribute("value", 1880);
 let per = document.getElementById("per").value; //Valeur du champ "Raison sociale"
 let act = document.getElementById("act").value; //Valeur du champ "Activité"
 let spat = document.getElementById("spat").value; //Valeur du champ "Adresse"
-
-// Initialise les variables correspondant aux objets DOM
-//let html = document.getElementById("content");
-//var divtimeline = document.getElementById('timeline-embed') // Frise chronologique
 
 /*************************************************
  ******************* FUNCTIONS *******************
@@ -286,13 +282,6 @@ $.ajax({
   // Permet de ne pas requêter le serveur si on veut faire varier l'affichage selon les dates dans la période sélectionnée précédement
   document.getElementById('loadedperiod').innerHTML = '<p style="text-align: center; height: fit-content;">❓ Le filtre temporel permet de faire varier l\'affichage des points préalablement chargés sur la carte sans lancer une nouvelle recherche.</br>Données chargées pour la période <b>' + inputNumberMin.value + '</b>-<b>' + inputNumberMax.value + '</b>.</p>'
   message.innerHTML = ''
-
-  inputNumberMin.addEventListener('change', function(){
-      slidervar.noUiSlider.set([this.value, null]);
-  });
-  inputNumberMax.addEventListener('change', function(){
-      slidervar.noUiSlider.set([null, this.value]);
-  });
   
   slidervar.noUiSlider.on('update', function( values, handle ) {
       if (handle==0){
@@ -318,9 +307,20 @@ $.ajax({
 });
 }; 
 
+/////////////////// EVENTS
+
+inputNumberMin.addEventListener('change', function(){
+  slidervar.noUiSlider.set([this.value, null]);
+});
+inputNumberMax.addEventListener('change', function(){
+  slidervar.noUiSlider.set([null, this.value]);
+});
+
+/////////////////// ADDITIONAL TOOLS
+
 function downloadGeoJSON() { 
   /*
-  * Fonction éxécutée à l'aide du boutton télécharger les données.
+  * Fonction exécutée à l'aide du bouton "Télécharger les données".
   * Permet de télécharger les entrées géocodées retournées lors de la recherche de données.
   */
   var s = document.getElementById("selectgraphs");
@@ -334,3 +334,4 @@ function downloadGeoJSON() {
   downloadAnchorNode.click();
   downloadAnchorNode.remove();
 }
+
