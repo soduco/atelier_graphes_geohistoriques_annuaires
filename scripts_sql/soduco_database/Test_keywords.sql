@@ -39,6 +39,9 @@ LEFT JOIN LATERAL (
 ) AS titles
 ON True
 WHERE (
+	/* ************************************************************* */
+        /* Modifier la liste des mots-clés selon les données à extraire  */
+        /* ************************************************************* */
 	act ILIKE '%nouveauté%' 
 	OR act ILIKE '%nouveaute%' 
 	OR act ILIKE '%nouvaute%' 
