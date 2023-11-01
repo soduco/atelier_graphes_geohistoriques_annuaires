@@ -1,3 +1,6 @@
+/* Déclaration des schéma*/
+SET SEARCH_PATH=directories_v2, public;
+
 /* Suppression des tables de liens */
 DROP TABLE IF EXISTS directories_graph.liens;
 DROP TABLE IF EXISTS directories_graph.liens_externes;
@@ -8,76 +11,102 @@ DROP TABLE IF EXISTS directories_graph.dataset;
 
 /*Création de la table directories_content*/
 CREATE TABLE directories_graph.directories_content AS (
-	--Pour chaque entrée, compte le nombre de '<PER>' dans la chaîne XML retournée par la pipeline NER
-	WITH per_count AS (
-			SELECT e.uuid, (length(e.ner_xml) - length(replace(e.ner_xml, '<PER>', '' ))) / length('<PER>') AS count_
-			FROM directories_v2.entries AS e
-			ORDER BY count_ DESC
-		), short_list AS ( --Ne conserve que les entrées avec 0 ou 1 PER (au delà, on aura un produit cartésien de tous les attributs)
-			SELECT pc.uuid
-			FROM per_count AS pc
-			WHERE count_ <=1)
-	SELECT DISTINCT e.uuid, TRANSLATE(p.per,',.:;\-_\(\)\[\]?!$&*/','') AS person, TRANSLATE(act.act,',.:;\-_\(\)\[\]?!$&*/','') AS activity, s.loc AS loc, s.cardinal AS cardinal,
-	t.titre AS title, src.code_ouvrage AS directory, src.liste_annee AS published, TRANSLATE(lower((COALESCE(s.loc,'') || ' '::text) || COALESCE(s.cardinal,'')),',.:;_\(\)\[\]?!$&*/','') AS fulladd, s.uuid AS id_address
-	FROM short_list AS l
-	INNER JOIN directories_v2.entries AS e ON l.uuid = e.uuid
-	INNER JOIN directories_v2.persons AS p ON e.uuid = p.entry_uuid
-	INNER JOIN directories_v2.activities AS act ON e.uuid = act.entry_uuid
-	INNER JOIN directories_v2.addresses AS s ON e.uuid = s.entry_uuid
-	INNER JOIN directories_v2.titles AS t ON e.uuid = t.entry_uuid
-	INNER JOIN directories_v2.sources AS src ON e.source_uuid = src.uuid
+	SELECT  entries.uuid, TRANSLATE(per,',.:;\-_\(\)\[\]?!$&*/','') AS person, TRANSLATE(act,',.:;\-_\(\)\[\]?!$&*/','') AS activity, loc, cardinal, titre AS title, sources.code_ouvrage AS directory, sources.liste_annee AS published, trim(concat(cardinal, ' ', loc)) AS fulladd, addresses.uuid as id_address 
+	FROM activities 
+	JOIN entries
+		ON activities.entry_uuid = entries.uuid
+		AND activities.source = entries.source
+	JOIN sources
+		ON entries.source_uuid = sources.uuid
+	JOIN addresses
+		ON addresses.entry_uuid = activities.entry_uuid
+		AND addresses.source = activities.source
+	LEFT JOIN LATERAL (
+		SELECT string_agg(per, ',') AS per
+		FROM persons
+		WHERE persons.entry_uuid = activities.entry_uuid
+			AND persons.source = activities.source
+			AND per IS NOT NULL
+		GROUP BY entry_uuid
+	) AS persons
+	ON True
+	LEFT JOIN LATERAL (
+		SELECT string_agg(titre, ',') AS titre
+		FROM titles
+		WHERE titles.entry_uuid = activities.entry_uuid
+			AND titles.source = activities.source
+			AND titre IS NOT NULL
+		GROUP BY entry_uuid
+	) AS titles
+	ON True
 	WHERE (
-		-- Sélection des entrées issues des listes par noms
-        (src.liste_type ILIKE '%ListNoms%') AND
 	/* ************************************************************* */
         /* Modifier la liste des mots-clés selon les données à extraire  */
         /* ************************************************************* */
-		(act.act ILIKE '%atlas%' AND act.act ILIKE '%cart%')OR
-		(act.act ILIKE '%cart%' AND act.act ILIKE '%géo%')OR
-		(act.act ILIKE '%cart%' AND act.act ILIKE '%geo%')OR
-		(act.act ILIKE '%cart%' AND act.act ILIKE '%marin%')OR
-		(act.act ILIKE '%plan%' AND act.act ILIKE '%topograph%')OR
-		(act.act ILIKE '%cart%' AND act.act ILIKE '%topograph%')
+		act ILIKE '%nouveauté%' 
+		OR act ILIKE '%nouveaute%' 
+		OR act ILIKE '%nouvaute%' 
+		OR act ILIKE '%nouv.%'
+		OR (
+			act ILIKE '%march%' 
+			AND act ILIKE '%nouv%'
 		)
-	ORDER BY src.liste_annee ASC);
+		OR (act ILIKE '%magasin%'
+			AND act ILIKE '%nouv%'
+   		)
+	)
+	AND sources.liste_type = 'ListNoms');
 
 /*Création de la table geocoding*/
 CREATE TABLE directories_graph.geocoding AS (
-	--Pour chaque entrée, compte le nombre de '<PER>' dans la chaîne XML retournée par la pipeline NER
-	WITH per_count AS (
-			SELECT e.uuid, (length(e.ner_xml) - length(replace(e.ner_xml, '<PER>', '' ))) / length('<PER>') AS count_
-			FROM directories_v2.entries AS e
-			ORDER BY count_ DESC
-		), short_list AS ( --Ne conserve que les entrées avec 0 ou 1 PER (au delà, on aura un produit cartésien de tous les attributs)
-			SELECT pc.uuid
-			FROM per_count AS pc
-			WHERE count_ <=1)
-	SELECT DISTINCT e.uuid as entry_id, s.uuid as address_id, gcd.housenumber, gcd.street, gcd.locality , gcd.source, ST_Transform(gcd.geometry,4326) AS precise_geom
-	FROM short_list AS l
-	INNER JOIN directories_v2.entries AS e ON l.uuid = e.uuid
-	INNER JOIN directories_v2.addresses AS s ON s.entry_uuid = e.uuid
-    INNER JOIN directories_v2.geocoded_address_gazetteer AS gcd ON gcd.uuid = s.geocoded_gazetteer_uuid
-    INNER JOIN directories_v2.sources AS src ON e.source_uuid = src.uuid
-	INNER JOIN directories_v2.activities AS act ON e.uuid = act.entry_uuid
+	SELECT  entries.uuid as entry_id, addresses.uuid as address_id, geocoded_address_gazetteer.housenumber, geocoded_address_gazetteer.street, geocoded_address_gazetteer.locality, geocoded_address_gazetteer.source, ST_Transform(geocoded_address_gazetteer.geometry,4326) AS precise_geom
+	FROM activities 
+	JOIN entries
+		ON activities.entry_uuid = entries.uuid
+		AND activities.source = entries.source
+	JOIN sources
+		ON entries.source_uuid = sources.uuid
+	JOIN addresses
+		ON addresses.entry_uuid = activities.entry_uuid
+		AND addresses.source = activities.source
+	JOIN geocoded_address_gazetteer
+		ON addresses.geocoded_gazetteer_uuid = geocoded_address_gazetteer.uuid
+	LEFT JOIN LATERAL (
+		SELECT string_agg(per, ',') AS per
+		FROM persons
+		WHERE persons.entry_uuid = activities.entry_uuid
+			AND persons.source = activities.source
+			AND per IS NOT NULL
+		GROUP BY entry_uuid
+	) AS persons
+	ON True
+	LEFT JOIN LATERAL (
+		SELECT string_agg(titre, ',') AS titre
+		FROM titles
+		WHERE titles.entry_uuid = activities.entry_uuid
+			AND titles.source = activities.source
+			AND titre IS NOT NULL
+		GROUP BY entry_uuid
+	) AS titles
+	ON True
 	WHERE (
-		-- Sélection des entrées issues des listes par noms
-        (src.liste_type ILIKE '%ListNoms%') AND
-		-- Sélection des géocodages non nuls
-		(gcd.street not like '') AND
 	/* ************************************************************* */
         /* Modifier la liste des mots-clés selon les données à extraire  */
         /* ************************************************************* */
-		((act.act ILIKE '%atlas%' AND act.act ILIKE '%cart%')OR
-		(act.act ILIKE '%cart%' AND act.act ILIKE '%géo%')OR
-		(act.act ILIKE '%cart%' AND act.act ILIKE '%geo%')OR
-		(act.act ILIKE '%cart%' AND act.act ILIKE '%marin%')OR
-		(act.act ILIKE '%plan%' AND act.act ILIKE '%topograph%')OR
-		(act.act ILIKE '%cart%' AND act.act ILIKE '%topograph%')
-	))
-	ORDER BY e.uuid ASC);
-
+		act ILIKE '%nouveauté%' 
+		OR act ILIKE '%nouveaute%' 
+		OR act ILIKE '%nouvaute%' 
+		OR act ILIKE '%nouv.%'
+		OR (
+			act ILIKE '%march%' 
+			AND act ILIKE '%nouv%'
+		)
+		OR (act ILIKE '%magasin%'
+			AND act ILIKE '%nouv%'
+   		)
+	)
+	AND sources.liste_type = 'ListNoms');
 	
-
 -- Ajout d'une clé primaire à la table principale 
 ALTER TABLE directories_graph.directories_content ADD COLUMN entry_id uuid ;
 UPDATE directories_graph.directories_content SET entry_id = gen_random_uuid ();
