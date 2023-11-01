@@ -50,7 +50,7 @@
     ], [ a rr:PredicateObjectMap;
       rr:objectMap [ a rr:TermMap, rr:ObjectMap;
           rr:column "uuid";
-          rr:datatype xsd:integer;
+          rr:datatype xsd:string;
           rr:termType rr:Literal
         ];
       rr:predicate adb:numEntry
