@@ -1,4 +1,4 @@
-/* Déclaration des schéma*/
+/* Déclaration des schémas*/
 SET SEARCH_PATH=directories_v2, public;
 
 INSERT INTO directories_graph.directories_content (uuid, person, activity,loc, cardinal,title,directory,published, fulladd, id_address, entry_id)
