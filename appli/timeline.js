@@ -4,7 +4,7 @@
 
 var divtimeline = document.getElementById('timeline-embed')
 var divmessage = document.getElementById('message')
-
+var divstats = document.getElementById("statistiques")
 var inputNumberMin = document.getElementById('input-number-min');
 var inputNumberMax = document.getElementById('input-number-max');
 
@@ -117,7 +117,7 @@ function createlinkDataSoduco(uri_){
               "year":bindings.directoryDate.value,
               "month":"1",
               "day":"1",
-              "display_date":bindings.directoryDate.value
+              "display_date":"Année"
           },
         "end_date": {
               "year":bindings.directoryDate.value,
@@ -152,6 +152,7 @@ function createlinkDataSoduco(uri_){
       window.timeline = new TL.Timeline('timeline-embed', timelinejson, options);
       window.scrollTo(0, document.body.scrollHeight);
       divmessage.innerHTML = ""
+      divstats.innerHTML = ""
     } else if (timelinejson.events.length <= 1) {
       divtimeline.setAttribute('style', 'height:0px;');
       divmessage.innerHTML = "<center><p>Aucunes ressources liées à la ressource sélectionnée.</p></center>"
