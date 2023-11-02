@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS directories_graph.dataset;
 
 /*Création de la table directories_content*/
 CREATE TABLE directories_graph.directories_content AS (
-	SELECT  entries.uuid, TRANSLATE(per,',.:;\-_\(\)\[\]?!$&*/','') AS person, TRANSLATE(act,',.:;\-_\(\)\[\]?!$&*/','') AS activity, loc, cardinal, titre AS title, sources.code_ouvrage AS directory, sources.liste_annee AS published, trim(concat(cardinal, ' ', loc)) AS fulladd, addresses.uuid as id_address 
+	SELECT  entries.uuid, TRANSLATE(per,'.:;\-_\(\)\[\]?!$&*/','') AS person, TRANSLATE(act,'.:;\-_\(\)\[\]?!$&*/','') AS activity, loc, cardinal, titre AS title, sources.code_ouvrage AS directory, sources.liste_annee AS published, trim(concat(cardinal, ' ', loc)) AS fulladd, addresses.uuid as id_address 
 	FROM activities 
 	JOIN entries
 		ON activities.entry_uuid = entries.uuid
