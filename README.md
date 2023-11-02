@@ -166,5 +166,64 @@ java -DconfigFile=liage_annuaires_label_address.xml -jar silk.jar
  3) Quand le nombre total de liens est légèrement supérieur au nombre de liens calculés par Silk (par exemple 20 000 liens au total pour 15 000 liens calculés), vous pouvez télécharger le résultats de la requête de l'étape 2 en CSV. Sinon, désactiver le raisonnement avant d'exécuter la requête pour récupérer seulement les liens calculés. 
 
 ### 5. Importer les liens dans la base, créer et requêter le graphe final
+
+#### Import des liens dans la base locale
+
+1) Ouvrir le fichier CSV qui contient les liens et supprimer la première et la dernière ligne.
+2) Mettre à jour et exécuter la requête SQL ci-dessous:
+
+```sql
+-- DROP TABLE IF EXISTS directories_graph.liens_chargement;
+CREATE TABLE IF NOT EXISTS directories_graph.liens_chargement
+(
+    entry_id1 uuid,
+    entry_id2 uuid,
+	named_graph character varying);
+
+/* **************************************************************** */
+/* Modifier ici le nom du fichier des liens et celui du graph nommé */
+/* **************************************************************** */
+COPY directories_graph.liens_chargement FROM 'C:\silk\liens_graveurs.csv' (DELIMITER ',');
+INSERT INTO directories_graph.liens(entry_id1,entry_id2) SELECT entry_id1,entry_id2 FROM directories_graph.liens_chargement WHERE named_graph like 'cartes_et_plans';
+DELETE FROM directories_graph.liens_chargement WHERE named_graph like 'cartes_et_plans';
+```
+
+#### Import des liens dans la base soduco distante
+
+1) Si elle n'existe pas déjà, ajouter une table intermédiaire pour la chargement des liens:
+   
+```sql
+-- DROP TABLE IF EXISTS directories_graph.liens_chargement;
+CREATE TABLE IF NOT EXISTS directories_graph.liens_chargement
+(
+    entry_id1 uuid,
+    entry_id2 uuid,
+	named_graph character varying);
+```
+
+2) Aller dans le dossier bin de PostgreSQL et lancer une invite de commandes. Entrer et exécuter la commande suivante:
+   
+```cmd
+psql -h geohistoricaldata.org -d soduco -U user
+```
+3) Entrer le mot de passe de votre compte utilisateur
+4) Adapter, entrer et exécuter la commande suivante:
+```cmd
+\copy directories_graph.liens_chargement from 'C:/.../liens_graveurs_cartes.csv' with CSV ENCODING 'UTF8'
+```
+
+5) Transférer les liens vers la table de liens:
+   
+```sql
+INSERT INTO directories_graph.liens(entry_id1,entry_id2) SELECT entry_id1,entry_id2 FROM directories_graph.liens_chargement WHERE named_graph like 'cartes_et_plans';
+DELETE FROM directories_graph.liens_chargement WHERE named_graph like 'cartes_et_plans';
+```
+
+#### Création du graphe final
+
+1) Sous GraphDB, créer un nouveau dépôt "SPARQL virtuel Ontop" en utilisant le fichier de mapping *directory.ttl*. (Si vous voulez activer aussi le raisonnement, l'ontologie directory.rdf est disponible dans le même dépôt).
+2) Dans l'onglet SPARQL, vous pouvez explorer le graphe géohistorique. Pour vous aider à démarrer, vous trouverez des requêtes types ici: *./atelier_graphes_geohistoriques_annuaires
+/requetes_sparql/explorer_un_graphe.md*
+
 ### 6. Visualiser le graphe final
  
