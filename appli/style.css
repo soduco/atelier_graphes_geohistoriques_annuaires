@@ -14,6 +14,17 @@
     "map map controls";
 }
 
+footer{
+  width:100%;
+  height: 40px;
+  background-color: #1c244b;
+  color:"white";
+  text-align: center;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-size: smaller;
+}
+
 h2{
   font-size: 24px;
 }
