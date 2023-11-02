@@ -1,28 +1,57 @@
--- Sélection des entrées existantes dans la base des annuaires selon les activités qui sont déclarées, représentées ici par des mots-clés
+SET SEARCH_PATH=directories_local, public;
 
-WITH per_count AS (
-			SELECT e.uuid, (length(e.ner_xml) - length(replace(e.ner_xml, '<PER>', '' ))) / length('<PER>') AS count_
-			FROM directories_local.entries AS e
-			ORDER BY count_ DESC
-		), short_list AS ( --Ne conserve que les entrées avec 0 ou 1 PER (au delà, on aura un produit cartésien de tous les attributs)
-			SELECT pc.uuid
-			FROM per_count AS pc
-			WHERE count_ <=1)
-	SELECT DISTINCT e.uuid, p.per AS person, act.act AS activity, s.loc AS loc, s.cardinal AS cardinal,
-	t.titre AS title, src.code_ouvrage, src.liste_annee, lower((COALESCE(s.loc,'') || ' '::text) || COALESCE(s.cardinal,'')) AS fulladd
-	FROM short_list AS l
-	INNER JOIN directories_local.entries AS e ON l.uuid = e.uuid
-	INNER JOIN directories_local.persons AS p ON e.uuid = p.entry_uuid
-	INNER JOIN directories_local.activities AS act ON e.uuid = act.entry_uuid
-	INNER JOIN directories_local.addresses AS s ON e.uuid = s.entry_uuid
-	INNER JOIN directories_local.titles AS t ON e.uuid = t.entry_uuid
-	INNER JOIN directories_local.sources AS src ON e.source_uuid = src.uuid
-	WHERE (
-		/* ************************************************************* */
-    /* Modifier la liste des mots-clés selon les données à extraire  */
-    /* ************************************************************* */
-		act.act ILIKE '%photo%' OR
-		act.act ILIKE '%daguer%' OR
-		act.act ILIKE '%opti%'
-		)
-	ORDER BY src.liste_annee ASC;
+SELECT  entries.uuid, 
+		entries.ner_xml, 
+		per, 
+		titre, 
+		act, 
+		loc, 
+		cardinal,  
+		trim(concat(cardinal, ' ', loc)) AS fulladd, 
+		sources.code_ouvrage, 
+		sources.liste_annee, 
+		sources.liste_type
+FROM activities 
+JOIN entries
+ON activities.entry_uuid = entries.uuid
+AND activities.source = entries.source
+JOIN sources
+ON entries.source_uuid = sources.uuid
+JOIN addresses
+ON addresses.entry_uuid = activities.entry_uuid
+AND addresses.source = activities.source
+LEFT JOIN LATERAL (
+	SELECT string_agg(per, ',') AS per
+	FROM persons
+	WHERE persons.entry_uuid = activities.entry_uuid
+	AND persons.source = activities.source
+	AND per IS NOT NULL
+	GROUP BY entry_uuid
+) AS persons
+ON True
+LEFT JOIN LATERAL (
+	SELECT string_agg(titre, ',') AS titre
+	FROM titles
+	WHERE titles.entry_uuid = activities.entry_uuid
+	AND titles.source = activities.source
+	AND titre IS NOT NULL
+	GROUP BY entry_uuid
+) AS titles
+ON True
+WHERE (
+	/* ************************************************************* */
+        /* Modifier la liste des mots-clés selon les données à extraire  */
+        /* ************************************************************* */
+	act ILIKE '%nouveauté%' 
+	OR act ILIKE '%nouveaute%' 
+	OR act ILIKE '%nouvaute%' 
+	OR act ILIKE '%nouv.%'
+	OR (
+		act ILIKE '%march%' 
+		AND act ILIKE '%nouv%'
+	)
+	OR (act ILIKE '%magasin%'
+		AND act ILIKE '%nouv%'
+   )
+)
+AND sources.liste_type = 'ListNoms'
