@@ -227,3 +227,11 @@ DELETE FROM directories_graph.liens_chargement WHERE named_graph like 'cartes_et
 
 ### 6. Visualiser le graphe final
  
+#### Visualisation des données de la base locale
+
+#### Visualisation des données de la base soduco distante
+
+* Le graphe géohistorique publié sur la base soduco est directement requêtable sur le point d'accès SPARQL suivant (des requêtes types sont disponibles ici: *./atelier_graphes_geohistoriques_annuaires) : https://dir.geohistoricaldata.org/
+
+* Il est aussi visualisable via l'interface cartographique suivante: https://soduco.geohistoricaldata.org/atelier_graphes_geohistoriques_annuaires/
+
