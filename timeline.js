@@ -27,7 +27,7 @@ function createlinkDataSoduco(uri_){
   var query2 = prefixes +
   'SELECT distinct ?uri ?index ?person (GROUP_CONCAT(DISTINCT ?activity ; SEPARATOR=" |||et||| ") as ?activities) ?address ?directoryName ?directoryDate '+
   "WHERE { "+
-    "GRAPH <" +  graphname_ + "> {" +
+    "GRAPH <" +  graphname_ + "> {{" +
     "<http://rdf.geohistoricaldata.org/id/directories/entry/" + uri_ + "> owl:sameAs ?uri."+
     "?uri a adb:Entry."+
     "?uri adb:numEntry ?index."+
@@ -38,12 +38,25 @@ function createlinkDataSoduco(uri_){
     "?uri locn:address ?add2."+
     "?add2 locn:fullAddress ?address."+
     "?add2 prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>."+
-    "OPTIONAL{?uri <http://rdaregistry.info/Elements/a/P50104> ?activity.}"+
+    "?uri <http://rdaregistry.info/Elements/a/P50104> ?activity."+
+    "} UNION {"+
+    "?uri a adb:Entry."+
+    "?uri adb:numEntry ?index."+
+    "?uri rdfs:label ?person."+
+    "?uri prov:wasDerivedFrom ?directory."+
+    "?directory rdfs:label ?directoryName."+
+    "?directory pav:createdOn ?directoryDate."+
+    "?uri locn:address ?add2."+
+    "?add2 locn:fullAddress ?address."+
+    "?add2 prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>."+
+    "?uri <http://rdaregistry.info/Elements/a/P50104> ?activity."+
+    "FILTER(?uri = <http://rdf.geohistoricaldata.org/id/directories/entry/" + uri_ + ">)"+
+    "}"+
     "} }" +
   "GROUP BY ?uri ?index ?person ?address ?directoryName ?directoryDate "+
   "ORDER BY ASC(?index) ASC(?directoryDate)"
   var queryURL2 = endpointURL + "?query="+encodeURIComponent(query2)+"&?outputFormat=rawResponse";
-
+  console.log(query2)
   // Initialisation du JSON résultat
   var timelinejson = {"title": {"text":{"headline":'Données liées'}}, "events": []}
 
@@ -70,46 +83,6 @@ function createlinkDataSoduco(uri_){
 
     //Pour chaque objet du JSON retourné par le triplestore
     $.each(promise.results.bindings, function(i,bindings){
-
-      var request = prefixes +
-      'SELECT ?uri ?index ?person ?activity ?address ?directoryName ?directoryDate ?address_geocoding ?geom_wkt ( <' + bindings.uri.value + '> AS ?rooturi) ' +
-      'WHERE {GRAPH <' + graphname_ + '> {{' +
-        '?uri a adb:Entry. ' +
-        '?uri adb:numEntry ?index. ' +
-        '?uri rdfs:label ?person. ' +
-        '?uri prov:wasDerivedFrom ?directory. '+
-          '?directory rdfs:label ?directoryName. '+
-          '?directory pav:createdOn ?directoryDate. '+
-        'OPTIONAL{?uri locn:address ?add1. '+
-          '?add1 locn:fullAddress ?address_geocoding. '+
-          '?add1 prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0002>. '+
-          '?add1 gsp:hasGeometry ?geom. '+
-          '?geom gsp:asWKT ?geom_wkt.} '+
-        '?uri locn:address ?add2. '+
-          '?add2 locn:fullAddress ?address. '+
-          '?add2 prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>. '+
-        '?uri rda:P50104 ?activity. '+
-        'FILTER(?uri = <' + bindings.uri.value + '>). '+
-      ' } UNION { ' +
-        '<' + bindings.uri.value + '> owl:sameAs ?uri. ' +
-        '?uri adb:numEntry ?index. ' +
-        '?uri rdfs:label ?person. ' +
-        '?uri prov:wasDerivedFrom ?directory. '+
-          '?directory rdfs:label ?directoryName. '+
-          '?directory pav:createdOn ?directoryDate. '+
-        'OPTIONAL{?uri locn:address ?add1. '+
-          '?add1 locn:fullAddress ?address_geocoding. '+
-          '?add1 prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0002>. '+
-          '?add1 gsp:hasGeometry ?geom. '+
-          '?geom gsp:asWKT ?geom_wkt.} '+
-        '?uri locn:address ?add2. '+
-          '?add2 locn:fullAddress ?address. '+
-          '?add2 prov:wasGeneratedBy <http://rdf.geohistoricaldata.org/id/directories/activity/0001>. '+
-        '?uri rda:P50104 ?activity. '+
-      '}}}' +
-      'ORDER BY ?directoryDate'
-      console.log(request)
-      var queryURL = endpointURL + encodeURIComponent("#query="+request) + "&contentTypeConstruct=text%2Fturtle&contentTypeSelect=application%2Fsparql-results%2Bjson&endpoint=https%3A%2F%2Fdir.geohistoricaldata.org%2Fsparql&requestMethod=POST&tabTitle=Query+5&headers=%7B%7D&outputFormat=table";
 
       //Init feature
       var feature = {
