@@ -146,7 +146,7 @@ function createlinkDataSoduco(uri_){
       if (timelinejson.events.length <=5){
         divtimeline.setAttribute('style', 'height:'+height.toString()+'px;');
       } else {
-        height = 400 + (timelinejson.events.length-5)*10
+        height = 400 + (timelinejson.events.length-5)*12
         divtimeline.setAttribute('style', 'height:'+height.toString()+'px;');
       }
       window.timeline = new TL.Timeline('timeline-embed', timelinejson, options);
