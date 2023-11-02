@@ -5,7 +5,7 @@
 - [Article](https://hal.science/hal-04121643/)
 - [Présentation](https://docs.google.com/presentation/d/1rwIu4ilWswUI7ltXQRd4-AUwcRffb8CQJ54chePoRQc/edit?usp=sharing)
 - [Dépôt de code de la chaîne de traitement proposée à IC 2023](https://github.com/soduco/ic_2023_photographes_parisiens/tree/main/doc)
-- [Interface de visualisation](https://soduco.github.io/ic_2023_photographes_parisiens/)
+- [Interface de visualisation (ancienne version)](https://soduco.github.io/ic_2023_photographes_parisiens/)
 
 ## Outils et logiciels requis
 
@@ -23,6 +23,7 @@
 - [PgAdmin v7](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/pgadmin4.md) : connexion à la base de donnée soduco (réseau IGN / réseau invité)
 - [Graph DB](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/Tutoriel_GraphDB.pdf) : utiliser le triplestore
 - [Silk Single Machine](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/silk_single_machine.md) : utiliser le fichier .jar
+- [Application de visualisation](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/Aide_utilisateur_appli_annuaires_SODUCO.pdf) : consulter les données
 
 ## Méthodologie de création de graphes de connaissances géohistoriques à partir des annuaires du commerce parisien du XIXème siècle
 
