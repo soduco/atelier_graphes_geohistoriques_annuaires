@@ -190,7 +190,7 @@ DELETE FROM directories_graph.liens_chargement WHERE named_graph like 'cartes_et
 
 #### Import des liens dans la base soduco distante
 
-1) Si elle n'existe pas déjà, ajouter une table intermédiaire pour la chargement des liens:
+1) Si elle n'existe pas déjà, ajouter une table intermédiaire pour le chargement des liens:
    
 ```sql
 -- DROP TABLE IF EXISTS directories_graph.liens_chargement;
