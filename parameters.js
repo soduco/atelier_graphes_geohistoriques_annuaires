@@ -1,11 +1,11 @@
 /***********************************************************************
  * Adresse du répertoire GraphDB où se trouve le graph spatio-temporel *
  * *********************************************************************/
-// URL du triplestore du projet SODUCO
-//var endpointURL = "https://dir.geohistoricaldata.org/sparql/"
+// URL du triplestore du projet ANR SODUCO
+var endpointURL = "https://dir.geohistoricaldata.org/sparql/"
 
 // A remplacer par l'URL de votre triplestore si vous travaillez en local. Par exemple :
-var endpointURL = "http://HPE2101P101:7200/repositories/mon-triplestore-local"
+//var endpointURL = "http://HPE2101P101:7200/repositories/mon-triplestore-local"
 
 /***********************************************************************
  * Prefixes des vocabulaires utilisés dans le graphe de connaissances  *
