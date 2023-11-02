@@ -3,7 +3,7 @@
  ****************************************/
 
 // Bases de la requête SPARQL construite par l'utilisateur par le biais du formulaire HTML
-var select = 'SELECT distinct ?uri ?index ?person (GROUP_CONCAT(DISTINCT ?activity ; SEPARATOR=" et ") as ?activities) (GROUP_CONCAT(DISTINCT ?address ; SEPARATOR=" et ") as ?addresses) (GROUP_CONCAT(DISTINCT ?address_geocoding ; SEPARATOR=" et ") as ?addresses_geocoding) ?geom_wkt ?directoryName ?directoryDate '
+var select = 'SELECT ?uri ?index ?person ?activity ?address ?address_geocoding ?geom_wkt ?directoryName ?directoryDate '
 
 var where =
 "?uri a adb:Entry."+
@@ -43,7 +43,7 @@ var slidervar = document.getElementById('slider');
 
 noUiSlider.create(slidervar, {
     connect: true,
-    start: [ 1860, 1880 ], //Période proposée à l'utilisateur par défaut
+    start: [ 1860, 1870 ], //Période proposée à l'utilisateur par défaut
     step:1,                //Pas de déplacement : 1 an
     behaviour: 'drag',
     range: {
@@ -64,7 +64,7 @@ noUiSlider.create(slidervar, {
 //CONNECT SLIDER WITH DATA
 //Set default value on input number
 inputNumberMin.setAttribute("value", 1860);
-inputNumberMax.setAttribute("value", 1880);
+inputNumberMax.setAttribute("value", 1870);
 
 // Inititialise les variables correspondant aux valeurs des champs du formulaire
 let per = document.getElementById("per").value; //Valeur du champ "Raison sociale"
@@ -127,13 +127,6 @@ function requestData() {
   var extractgroup; //L.geojson markercluster
   var bb_filter; //Emprise spatiale sélectionnée par l'utilisateur
   
-  // Ajout un gif de chargement tant que l'éxécution de la fonction n'est pas terminée
-  divtimeline.setAttribute('style', 'height:0px;');
-  message.innerHTML = '<p class="noentry">Chargement <img src="./img/loading_cut.gif"></p>';
-
-  //Réinitialise la div des statistiques
-  document.getElementById('statistiques').innerHTML = ''
-
   // Initialisation de la couche de points de type cluster qui sera affichée sur la carte
   extractgroup = L.markerClusterGroup({
     spiderfyOnMaxZoom: false,
@@ -145,8 +138,15 @@ function requestData() {
     iconCreateFunction: function(cluster) {
       return L.divIcon({ html: '', className:'clusters', iconSize: L.point(12.5,12.5)}) //L.featureGroup();
       },
-    spiderLegPolylineOptions:{ weight: 2, color: '#222', opacity: 0.9 }
+    spiderLegPolylineOptions:{ weight: 2, color: '#222', opacity: 0.9 },
   });
+  
+  // Ajout un gif de chargement tant que l'éxécution de la fonction n'est pas terminée
+  divtimeline.setAttribute('style', 'height:0px;');
+  message.innerHTML = '<p class="noentry">Chargement <img src="./img/loading_cut.gif"></p>';
+
+  //Réinitialise la div des statistiques
+  document.getElementById('statistiques').innerHTML = ''
 
   //Récupère les valeurs du formulaire (Raison sociale, Activité, Adresse)
   per = document.getElementById("per").value.toLowerCase();
@@ -209,7 +209,7 @@ function requestData() {
   //Création de la requête SPARQL complète à envoyer au triplestore
   var completewhere = "WHERE { GRAPH <" + graphname_ + "> {"
   finalquery = prefixes + select + completewhere + where + compquery + periodfilter + bb_filter + '} }' +
-  'GROUP BY ?uri ?index ?person ?geom_wkt ?directoryName ?directoryDate ' +
+  'GROUP BY ?uri ?index ?person ?activity ?address ?address_geocoding ?geom_wkt ?directoryName ?directoryDate ' +
   'ORDER BY ASC(?directoryDate) ASC(?index)'
   console.log(finalquery)
   //La requête est transmise au serveur sous la forme d'une URL			
@@ -242,7 +242,7 @@ $.ajax({
     onEachFeature: onEachFeature,
     pointToLayer:pointToLayerExtract,
     filter: function(feature, layer) {
-        return (feature.properties.directoryDate <= 1860) && (feature.properties.directoryDate >= 1880);
+        return (feature.properties.directoryDate <= 1860) && (feature.properties.directoryDate >= 1870);
         }
   });
 

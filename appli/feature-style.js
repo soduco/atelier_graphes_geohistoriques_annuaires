@@ -1,15 +1,25 @@
 /***********************************
  ******** STYLE DES POINTS *********
 ************************************/
-
+var myRenderer = L.canvas({ padding: 0.5 });
 //////////// Sur la couche des extractions soduco ///////////
 
 function pointToLayerExtract(feature,latlng) {
     /* Création d'un marker pour chaque point du geojson */
-    return L.marker(latlng, 
+    /*return L.marker(latlng, 
       {icon: L.divIcon({ html: '', 
                         className:'clusters', 
                         iconSize: new L.point(12.5,12.5)})
+  });*/
+  return L.circleMarker(latlng, {
+    //renderer:myRenderer,
+    fillColor: "#0351f9",
+    radius: 5.25,
+    stroke: true,
+    color: "white",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 1,
   });
 }
 
@@ -53,10 +63,10 @@ function iconByName(name) {
   */
   var valuri = feature.properties.uri.replace('http://rdf.geohistoricaldata.org/id/directories/entry/', '')
   texte = '<h4>'+ feature.properties.person +'</h4>'+
-  '<p><b>Adresse (annuaire)</b> : ' + feature.properties.addresses + '<br>'+ 
-  '<b>Adresse (géocodeur)</b> : ' + feature.properties.addresses_geocoding + '<br>';
-  if (feature.properties.activities){
-      texte += '<b>Activité</b> : ' + feature.properties.activities + '<br>';
+  '<p><b>Adresse (annuaire)</b> : ' + feature.properties.address + '<br>'+ 
+  '<b>Adresse (géocodeur)</b> : ' + feature.properties.address_geocoding + '<br>';
+  if (feature.properties.activity){
+      texte += '<b>Activité</b> : ' + feature.properties.activity + '<br>';
   };
   texte += '<b>Année de publication</b> : ' + feature.properties.directoryDate + '<br>'+
   '<b>Annuaire</b> : ' + feature.properties.directoryName + '</br>'+
