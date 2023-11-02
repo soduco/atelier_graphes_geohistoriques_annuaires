@@ -88,8 +88,8 @@ function onEachFeature(feature, layer) {
       layer.on('click', function(e) {
         //Search external resources
         $('#bnfdata').empty();
-        //searchLinkedDataWithBNF(feature.properties.uri)
-        //message.innerHTML = '<p class="noentry">Requête en cours d\'exécution : entrées liées à ' + feature.properties.person + ' (ID ' + feature.properties.index + ') <img src="./img/loading_cut.gif">.</p>';  
+        searchLinkedDataWithBNF(feature.properties.uri)
+        message.innerHTML = '<p class="noentry">Requête en cours d\'exécution : entrées liées à ' + feature.properties.person + ' (ID ' + feature.properties.index + ') <img src="./img/loading_cut.gif">.</p>';  
       });
         
     } else if (feature.properties.secteur) {

@@ -191,6 +191,7 @@ function statsCountByYear(graphname_){
 
         Plotly.newPlot('barplot', data, layout);
     }); // AJAX END
+    
 };
 
 
@@ -215,11 +216,12 @@ function getStats(){
       '<div id="totalstatsSameAs"></div>'+
   '</div>'+
   '<div id="barplot"></div>'
-
+  
   //Exécution des fonctions statistiques
   totalNumEntries(graphname_)
   totalNumRessources(graphname_)
   numTriples(graphname_)
   numSameAS(graphname_)
   statsCountByYear(graphname_)
+  window.scrollTo(0, document.body.scrollHeight);
 }
