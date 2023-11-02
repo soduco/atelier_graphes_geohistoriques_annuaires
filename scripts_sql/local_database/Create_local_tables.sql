@@ -1,5 +1,5 @@
 /* Déclaration des schéma*/
-SET SEARCH_PATH=directories_local, public;
+SET SEARCH_PATH=directories_v2, public;
 
 /* Suppression des tables de liens */
 DROP TABLE IF EXISTS directories_graph.liens;
