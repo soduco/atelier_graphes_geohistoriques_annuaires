@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS directories_graph.liens_chargement
 (
     entry_id1 uuid,
     entry_id2 uuid,
-	named_graph character varying);
+	 graph_name character varying);
 
 /* **************************************************************** */
 /* Modifier ici le nom du fichier des liens et celui du graph nommé */
