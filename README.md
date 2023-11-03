@@ -220,8 +220,8 @@ psql -h geohistoricaldata.org -d soduco -U user
 5) Transférer les liens vers la table de liens:
    
 ```sql
-INSERT INTO directories_graph.liens(entry_id1,entry_id2) SELECT entry_id1,entry_id2 FROM directories_graph.liens_chargement WHERE named_graph like 'cartes_et_plans';
-DELETE FROM directories_graph.liens_chargement WHERE named_graph like 'cartes_et_plans';
+INSERT INTO directories_graph.liens(entry_id1,entry_id2) SELECT entry_id1,entry_id2 FROM directories_graph.liens_chargement AS t WHERE t.graph_name like 'cartes_et_plans';
+DELETE FROM directories_graph.liens_chargement AS t WHERE t.graph_name like 'cartes_et_plans';
 ```
 
 #### Création du graphe final
@@ -233,6 +233,20 @@ DELETE FROM directories_graph.liens_chargement WHERE named_graph like 'cartes_et
 ### 6. Visualiser le graphe final
  
 #### Visualisation des données de la base locale
+
+* Si ce n'est pas encore fait : 
+* Téléchargez le dossier *appli* de ce dépôt Git-Hub
+* Copiez l'adresse du point d'accès du dépôt "SPARQL virtuel Ontop" que vous avez créés à l'étape précédente. 
+![URI SPARQL endpoint GraphDB](./doc/img/URL_Depot.png "URI SPARQL endpoint GraphDB")
+![Copier URI SPARQL endpoint GraphDB](./doc/img/URL_Depot_copy.png "Copier URI SPARQL endpoint GraphDB")
+* Ouvrez le fichier *parameters.js*  : 
+   * Commentez l'adresse du endpoint en ligne du projet SODUCO
+   * Coller l'adresse du point d'accès "SPARQL virtuel Ontop" que vous venez de créer en local comme valeur de la variable **endpointURL**.
+![URI SPARQL endpoint dans l'appli](./doc/img/Adresse_sparql_endpoint_appli_local.png "URI SPARQL endpoint dans l'appli")
+* Cliquez sur le fichier *index.html* : vous arrivez sur la page d'accueil de l'application. Elle vous permet de consulter :
+   - les ressources géocodés de votre jeu de données ;
+   - les sous-ensembles d'entrées liées sous la forme d'une frise chronologique (PS: pour voir les fonds de cartes, vous devez être connectés à Internet).
+
 
 #### Visualisation des données de la base soduco distante
 
