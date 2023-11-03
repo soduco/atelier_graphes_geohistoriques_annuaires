@@ -250,7 +250,7 @@ DELETE FROM directories_graph.liens_chargement AS t WHERE t.graph_name like 'car
 
 #### Visualisation des données de la base soduco distante
 
-* Le graphe géohistorique publié sur la base soduco est directement requêtable sur le point d'accès SPARQL suivant (des requêtes types sont disponibles ici: *./atelier_graphes_geohistoriques_annuaires) : https://dir.geohistoricaldata.org/
+* Le graphe géohistorique publié sur la base soduco est directement requêtable sur le point d'accès SPARQL suivant (des requêtes types sont disponibles ici: *./requetes_sparql*) : https://dir.geohistoricaldata.org/
 
 * Il est aussi visualisable via l'interface cartographique suivante: https://soduco.geohistoricaldata.org/atelier_graphes_geohistoriques_annuaires/
 
