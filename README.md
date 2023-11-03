@@ -242,7 +242,7 @@ DELETE FROM directories_graph.liens_chargement AS t WHERE t.graph_name like 'car
 * Ouvrez le fichier *parameters.js*  : 
    * Commentez l'adresse du endpoint en ligne du projet SODUCO
    * Coller l'adresse du point d'accès "SPARQL virtuel Ontop" que vous venez de créer en local comme valeur de la variable **endpointURL**.
-![URI SPARQL endpoint dans l'appli](./doc/img/Adresse_sparql_endpoint_appli_local.png "URI SPARQL endpoint dans l'appli")
+![URI SPARQL endpoint dans l'appli](./doc/img/Adresse_sparql_endpoint_appli_local.PNG "URI SPARQL endpoint dans l'appli")
 * Cliquez sur le fichier *index.html* : vous arrivez sur la page d'accueil de l'application. Elle vous permet de consulter :
    - les ressources géocodés de votre jeu de données ;
    - les sous-ensembles d'entrées liées sous la forme d'une frise chronologique (PS: pour voir les fonds de cartes, vous devez être connectés à Internet).
