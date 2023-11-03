@@ -32,24 +32,28 @@ Plusieurs dénominations sucessives/parallèles associées à l'évolution de la
 
 ```sql
 SELECT ...
-WHERE (-- Contient
-    act.act ILIKE '%vétérinaire%' OR
-    act.act ILIKE '%veterinaire%' OR
-    act.act ILIKE '%vetérinaire%' OR
-    act.act ILIKE '%véterinaire%' OR
-    act.act ILIKE '%veteri%' OR
-    act.act ILIKE '%vetéri%' OR
-    act.act ILIKE '%véteri%' OR
-    act.act ILIKE '%vétéri%' OR
-    (act.act ILIKE '%marech%' AND act.act ILIKE '%expert%')) AND 
+WHERE (
+    (-- Contient
+    act ILIKE '%vétérinaire%' OR
+    act ILIKE '%veterinaire%' OR
+    act ILIKE '%vetérinaire%' OR
+    act ILIKE '%véterinaire%' OR
+    act ILIKE '%veteri%' OR
+    act ILIKE '%vetéri%' OR
+    act ILIKE '%véteri%' OR
+    act ILIKE '%vétéri%' OR
+    (act ILIKE '%marech%' AND act ILIKE '%expert%') OR
+    (act ILIKE '%maréch%' AND act ILIKE '%expert%')
+    ) AND 
     -- Ne contient pas
-    (act.act NOT ILIKE '%paveteri%')
+    (act NOT ILIKE '%paveteri%')
+)
 ```
 
 ## Liage
 ### Paramétrage dans Silk Workbench
 - Label / Activity : 
-    - Transformation : RegexReplace(àáéèěîïíóúůščřžý,aaeeeiiiouuscrzy), alphaReduce, LowerCase
+    - Transformation : alphaReduce, LowerCase, RegexReplace(àáéèěîïíóúůščřžý,aaeeeiiiouuscrzy)
     - Distance de Levenshtein label(0.8), activity(0.8) => quasiment que du 100%
 
 ### Silk single-machine

@@ -72,7 +72,7 @@ Cette étape peut être réalisée en suivant les procédures présentées dans 
 5)  Créer un nouveau dépôt en choisissant de créer un dépôt "GraphDB". Compléter le formulaire avec les informations suivantes:
    * ID du dépôt : cartes_et_plans_local
    * Décocher l'option "Disable owl:sameAs"
-Valider le formulaire pour créer le dépôt.
+   * Valider le formulaire pour créer le dépôt.
 6)  Sélectionner le dépôt que vous venez de créer pour pouvoir travailler dessus.
 7) Charger les données que vous venez d'exporter (Importer / Télécharger des fichiers RDF). Une fois votre fichier en liste d'attente, le sélectionner et cliquer sur "Importer". Compléter le formulaire avec les valeurs suivantes:  
    * Base IRI : http://rdf.geohistoricaldata.org/id/directories/entry/
@@ -84,7 +84,8 @@ Valider le formulaire pour créer le dépôt.
 Le liage des entrées d'annuaires représentant un même commerce est fait avec le logiciel libre Silk-single-machine. Il permet d'évaluer le degré de similarité entre ressources en comparant leurs valeurs de propriétés avec des fonctions de similarité adaptées (mesures de similarité de chaînes de caractères, comparaison de valeurs numériques, etc.) et en agrégeant les résultats obtenus pour chaque paire de propriétés afin de produire un score de similarité global. Le choix des propriétés à comparer et des fonctions de transformation, de similarité et d'agrégation à utiliser, ainsi que leur paramétrage sont définis dans un fichier XML (dit *LinkSpec*). Il permet de lancer Silk en ligne de commande.
 
 1) Copier l'adresse du point d'accès SPARQL de votre dépôt GraphDB local : aller dans "Configurer / Dépôts" et cliquer sur l'icône dédiée (voir ci-dessous)
-   ![URI SPARQL endpoint GraphDB](./img/URL_Depot.png "URI SPARQL endpoint GraphDB")
+   ![URI SPARQL endpoint GraphDB](./doc/img/URL_Depot.png "URI SPARQL endpoint GraphDB")
+   ![Copier URI SPARQL endpoint GraphDB](./doc/img/URL_Depot_copy.png "Copier URI SPARQL endpoint GraphDB")
 2) Adapter les fichiers de configuration de Silk en collant l'adresse du dépôt GraphDB de vos données et en modifiant si besoin l'URI du graphe nommé: paramètres endpointURI et graph.
 ```xml
   <Silk>
@@ -165,7 +166,7 @@ java -DconfigFile=liage_annuaires_label_address.xml -jar silk.jar
 
 :warning: A cette étape, vérifier la quantité de liens inférés par le système de raisonnement de GraphDB! En effet, GraphDB est équipé d'un moteur d'inférences qui déduit de nouveaux faits à partir des faits (c-à-d des triplets de données) et des connaissances (c-à-d des ontologies) que l'on lui fournit. Ici on lui a fourni des triplets avec des liens owl:sameAs et on a précisé en créant le dépôt qu'il pouvait utiliser la propriété de transitivité de ces liens pour en inférer de nouveaux (en décochant l'option "Disable owl:sameAs"). Donc si dans nos données et nos liens, nous avons fourni au système A owl:sameAs B et B owl:sameAs C, il en déduit A owl:sameAs C. C'est très pratique pour compléter des liens que l'on peut avoir manqués avec Silk à causes de problèmes d'OCR par exemple. En revanche, cela peut aussi propager des liens erronés en cas d'erreurs dans les liens créés! Les liens erronés calculés par Silk à cause des erreurs d'OCR qui génèrent des chaînes de caractères très courtes et très fréquentes (ex. "R. " au lieu de "R. du Bac" ou "R. de la Paix") peuvent alors conduire à une explosion du nombre de liens erronés inférés... 
 
- ![Liens calculés et liens inferrés](./doc/Visu_nb_liens.png "Cliquer sur l'icône entourée en vert pour activer ou désactiver les inférences: le nombre de liens total s'affiche dans la partie entourée en bleu.")
+ ![Liens calculés et liens inferrés](./doc/img/Visu_nb_liens.png "Cliquer sur l'icône entourée en vert pour activer ou désactiver les inférences: le nombre de liens total s'affiche dans la partie entourée en bleu.")
 
  3) Quand le nombre total de liens est légèrement supérieur au nombre de liens calculés par Silk (par exemple 20 000 liens au total pour 15 000 liens calculés), vous pouvez télécharger le résultats de la requête de l'étape 2 en CSV. Sinon, désactiver le raisonnement avant d'exécuter la requête pour récupérer seulement les liens calculés. 
 
@@ -188,8 +189,8 @@ CREATE TABLE IF NOT EXISTS directories_graph.liens_chargement
 /* Modifier ici le nom du fichier des liens et celui du graph nommé */
 /* **************************************************************** */
 COPY directories_graph.liens_chargement FROM 'C:\silk\liens_graveurs.csv' (DELIMITER ',');
-INSERT INTO directories_graph.liens(entry_id1,entry_id2) SELECT entry_id1,entry_id2 FROM directories_graph.liens_chargement WHERE named_graph like 'cartes_et_plans';
-DELETE FROM directories_graph.liens_chargement WHERE named_graph like 'cartes_et_plans';
+INSERT INTO directories_graph.liens(entry_id1,entry_id2) SELECT entry_id1,entry_id2 FROM directories_graph.liens_chargement AS t WHERE t.graph_name like 'cartes_et_plans';
+DELETE FROM directories_graph.liens_chargement AS t WHERE t.graph_name like 'cartes_et_plans';
 ```
 
 #### Import des liens dans la base soduco distante
