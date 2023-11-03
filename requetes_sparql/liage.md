@@ -36,17 +36,6 @@ where {?s owl:sameAs ?p.
 ## Compter le nombre d'uri distinctes dans un répertoire
 ```sparql
 PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#>
-PREFIX rda: <http://rdaregistry.info/Elements/a/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX fn: <http://www.w3.org/2005/xpath-functions#> 
-PREFIX prov: <http://www.w3.org/ns/prov#> 
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
-PREFIX pav: <http://purl.org/pav/> 
-PREFIX locn: <http://www.w3.org/ns/locn#> 
-PREFIX gsp: <http://www.opengis.net/ont/geosparql#> 
-PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 select (count (?uri) as ?c)
 where {
