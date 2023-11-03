@@ -36,7 +36,7 @@ authors:
       orcid: 'https://orcid.org/0000-0001-5737-5266'
       affiliation: 'LRE, EPITA'
       email: edwin.carlinet@epita.fr
-repository-code: 'https://github.com/soduco/ic_2023_photographes_parisiens'
+repository-code: 'https://github.com/soduco/atelier_graphes_geohistoriques_annuaires'
 license: CC-BY-NC-4.0
 preferred-citation:
   type: "conference-paper"
@@ -76,7 +76,7 @@ preferred-citation:
       place: "Strasbourg, France"
       date-start: 2023-07-03
       date-end: 2023-07-05
-  url: 'https://soduco.github.io/ic_2023_photographes_parisiens/'
+  url: 'https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/'
   abstract: >-
     Les annuaires professionnels anciens, édités à un rythme
     soutenu dans de nombreuses villes européennes tout au long
