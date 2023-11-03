@@ -106,5 +106,5 @@
 	  rr:graphMap [ rr:constant rr:defaultGraph ]
     ];
   rr:logicalTable [ a rr:R2RMLView;
-      rr:sqlQuery "select entry_id, uuid, directory, published, person, activity, fulladd, loc, cardinal, graph_name from directories_graph.directories_content where (length(loc) >3 or loc ilike 'bac') and lower(loc) not similar to '(boul|ave|av|fg|faub|quai|imp|f|r|1|a|b|q|i)\.\s(des|du|de l''|de la|de l|de|d)' and lower(loc) not similar to'(avenue|boulevard|faubourg|impasse|quai|faub|boul|těléph|téléph|teleph|těleph|telěph|télěph|téleph|tělěph)';"
+      rr:sqlQuery "select entry_id, uuid, directory, published, person, activity, fulladd, loc, cardinal, graph_name from directories_graph.directories_content where (length(loc) >3 or loc ilike 'bac') and lower(loc) not similar to '(boul|ave|av|fg|faub|quai|imp|f|r|1|a|b|q|i)\.\s(des|du|de l''|de la|de l|de|d)' and lower(loc) not similar to'(avenue|boulevard|faubourg|impasse|quai|faub|boul|těléph|téléph|teleph|těleph|telěph|télěph|téleph|tělěph|télé|tele|téle|telé|tel|tél|tělé|télě|těle|telě|téléph|teleph|téleph|teléph)';"
     ] .
