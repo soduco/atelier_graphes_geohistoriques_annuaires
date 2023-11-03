@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS directories_graph.liens_chargement
 (
     entry_id1 uuid,
     entry_id2 uuid,
-	named_graph character varying);
+	 graph_name character varying);
 ```
 
 2) Aller dans le dossier bin de PostgreSQL et lancer une invite de commandes. Entrer et exécuter la commande suivante:
