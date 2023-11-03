@@ -2,12 +2,16 @@
  *********** FUNCTIONS ****************
 **************************************/
 
-async function searchLinkedDataWithBNF(id) {
+async function searchLinkedDataWithBNF(id,graphname_) {
     /**
    * Fonction qui recherche pour une ressource du graphe les ressources issues de D=data BNF qui sont liées
    * Input : ID de la ressource (numEntry)
    * Output : void. La fonction insère un élément HTML dans la page avec les informations issues de data BNF relative à l'entrée sélectionnée.
    */
+    accepted_graphs = ['photographes']
+    if (accepted_graphs.includes('photographes')) {
+
+    
 
     // Recherche l'élément HTML où seront écrits les résultats
     var html = document.getElementById('bnfdata')
@@ -73,4 +77,5 @@ async function searchLinkedDataWithBNF(id) {
         console.log('Pas de ressources externes associées.')
       }
     });
+  }
 };

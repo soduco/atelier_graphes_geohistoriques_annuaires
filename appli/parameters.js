@@ -1,5 +1,5 @@
 /***********************************************************************
- * Adresse du répertoire GraphDB où se trouve le graph spatio-temporel *
+ * Adresse du répertoire GraphDB où se trouve le graphe géo-historique *
  * *********************************************************************/
 // URL du triplestore du projet ANR SODUCO
 var endpointURL = "https://dir.geohistoricaldata.org/sparql/"
