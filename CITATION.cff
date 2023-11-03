@@ -1,0 +1,110 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  Création d’un graphe de connaissances géohistorique à
+  partir d’annuaires du commerce parisien du 19ème siècle:
+  application aux métiers de la photographie
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+    - given-names: Solenn
+      family-names: Tual
+      email: solenn.tual@ign.fr
+      affiliation: 'LASTIG, IGN-ENSG, Univ. Gustave Eiffel'
+      orcid: 'https://orcid.org/0000-0001-8549-7949'
+    - given-names: Nathalie
+      family-names: Abadie
+      email: nathalie-f.abadie@ign.fr
+      affiliation: 'LASTIG, IGN-ENSG, Univ. Gustave Eiffel'
+      orcid: 'https://orcid.org/0000-0001-8741-2398'
+    - given-names: Bertrand
+      family-names: Duménieu
+      orcid: 'https://orcid.org/0000-0002-2517-2058'
+      affiliation: 'CRH, EHESS'
+      email: bertrand.dumenieu@ehess.fr
+    - given-names: Joseph
+      family-names: Chazalon
+      email: joseph.chazalon@epita.fr
+      affiliation: 'LRE, EPITA'
+      orcid: 'https://orcid.org/0000-0002-3757-074X'
+    - given-names: Edwin
+      family-names: Carlinet
+      orcid: 'https://orcid.org/0000-0001-5737-5266'
+      affiliation: 'LRE, EPITA'
+      email: edwin.carlinet@epita.fr
+repository-code: 'https://github.com/soduco/ic_2023_photographes_parisiens'
+license: CC-BY-NC-4.0
+preferred-citation:
+  type: "conference-paper"
+  authors:
+    - given-names: Solenn
+      family-names: Tual
+      email: solenn.tual@ign.fr
+      affiliation: 'LASTIG, IGN-ENSG, Univ. Gustave Eiffel'
+      orcid: 'https://orcid.org/0000-0001-8549-7949'
+    - given-names: Nathalie
+      family-names: Abadie
+      email: nathalie-f.abadie@ign.fr
+      affiliation: 'LASTIG, IGN-ENSG, Univ. Gustave Eiffel'
+      orcid: 'https://orcid.org/0000-0001-8741-2398'
+    - given-names: Bertrand
+      family-names: Duménieu
+      orcid: 'https://orcid.org/0000-0002-2517-2058'
+      affiliation: 'CRH, EHESS'
+      email: bertrand.dumenieu@ehess.fr
+    - given-names: Joseph
+      family-names: Chazalon
+      email: joseph.chazalon@epita.fr
+      affiliation: 'LRE, EPITA'
+      orcid: 'https://orcid.org/0000-0002-3757-074X'
+    - given-names: Edwin
+      family-names: Carlinet
+      orcid: 'https://orcid.org/0000-0001-5737-5266'
+      affiliation: 'LRE, EPITA'
+      email: edwin.carlinet@epita.fr
+  title: "Création d’un graphe de connaissances géohistorique à
+  partir d’annuaires du commerce parisien du 19ème siècle:
+  application aux métiers de la photographie"
+  year: 2023
+  collection-title: "Actes des 34es journées francophones d'Ingénierie des connaissances"
+  conference:
+    - name: "IC 2023, 34es journées francophones d'Ingénierie des connaissances"
+      place: "Strasbourg, France"
+      date-start: 2023-07-03
+      date-end: 2023-07-05
+  url: 'https://soduco.github.io/ic_2023_photographes_parisiens/'
+  abstract: >-
+    Les annuaires professionnels anciens, édités à un rythme
+    soutenu dans de nombreuses villes européennes tout au long
+    des XIXe et XXe siècles, forment un corpus de sources
+    unique par son volume et la possibilité qu’ils donnent de
+    suivre les transformations urbaines à travers le prisme
+    des activités professionnelles des habitants, de l’échelle
+    individuelle jusqu’à celle de la ville entière. L’analyse
+    spatio-temporelle d’un type de commerces au travers des
+    entrées d’annuaires demande cependant un travail
+    considérable de recensement, de transcription et de
+    recoupement manuels. Pour pallier cette difficulté, cet
+    article propose une approche automatique pour construire
+    et visualiser un graphe de connaissances géohistorique des
+    commerces figurant dans des annuaires anciens. L’approche
+    est testée sur des annuaires du commerce parisien du XIXe
+    siècle allant de 1799 à 1908, sur le cas des métiers de la
+    photographie
+  identifiers:
+    - type: url
+      value: 'https://hal.science/hal-04121643'
+      description: HAL
+  keywords:
+    - knowledge-graph
+    - semantic web
+    - digital humanities
+    - named entity recognition and linking
+    - OCR noise
+    - spatio-temporal visualization
+    - Geohistorical knowledge graph
+  
