@@ -31,6 +31,10 @@ L'objectif de ce tutoriel est de créer des graphes de connaissances géohistori
 
 Nous allons travailler sur les entrées représentant les graveurs et les marchands de cartes et plans. Vous pouvez librement adapter la méthodologie présentée ici à d'autres types d'activités figurant dans les annuaires: ébénistes, architectes, photographes, dentelières, etc. 
 
+NB: Pour citer ce travail, merci d'utiliser la référence suivante:
+
+Solenn Tual, Nathalie Abadie, Bertrand Duménieu, Joseph Chazalon and Edwin Carlinet. Création d’un graphe de connaissances géohistorique à partir d’annuaires du commerce parisien du 19ème siècle: application aux métiers de la photographie. *IC 2023, 34èmes journées francophones d’Ingénierie des connaissances*, Strasbourg, France, 3-7 July 2023. [hal-04121643](https://hal.science/hal-04121643/)
+
 ### 1. Extraire les entrées d'annuaires sur les graveurs et les marchands de cartes et plans
 
 Cette étape peut être réalisée en suivant les procédures présentées dans le dossier *scripts_sql*. 
