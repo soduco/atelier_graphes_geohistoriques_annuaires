@@ -53,7 +53,7 @@ Cette étape peut être réalisée en suivant les procédures présentées dans 
    * Mot de passe: le mot de passe de votre base de données PostgreSQL locale (postgres?)
    * Fichier OBDA ou R2RML: chargez le fichier *scripts_r2rml / directory_mapping_liage.ttl*
  Cliquez sur Test de connexion pour vous assurer que cela fonctionne. Validez ensuite votre formulaire pour créer le dépôt. Il doit apparaître dans la liste des dépôts existants (Configurer / Dépôts). 
-2)  Sélectionner le dépôt que vous venez de créer pour pouvoir travailler dessus.
+2)  Sélectionner (connecter) le dépôt que vous venez de créer pour pouvoir travailler dessus.
 3)  Aller dans SPARQL pour tester le bon accès aux données en exécutant la requête suivante:
     ```sparql
     SELECT * WHERE { 
@@ -73,7 +73,7 @@ Cette étape peut être réalisée en suivant les procédures présentées dans 
    * ID du dépôt : cartes_et_plans_local
    * Décocher l'option "Disable owl:sameAs"
    * Valider le formulaire pour créer le dépôt.
-6)  Sélectionner le dépôt que vous venez de créer pour pouvoir travailler dessus.
+6)  Sélectionner (connecter) le dépôt que vous venez de créer pour pouvoir travailler dessus.
 7) Charger les données que vous venez d'exporter (Importer / Télécharger des fichiers RDF). Une fois votre fichier en liste d'attente, le sélectionner et cliquer sur "Importer". Compléter le formulaire avec les valeurs suivantes:  
    * Base IRI : http://rdf.geohistoricaldata.org/id/directories/entry/
    * Cocher l'option "Graphe nommé"
