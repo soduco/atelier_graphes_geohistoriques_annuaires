@@ -27,12 +27,6 @@ Création DB locale en 35'46'' pour 13 708 entrées.
 ### Paramétrage du liage avec Silk Workbench
 :warning: BUG de Silk Workbench... N'ai pas pu l'utiliser. Paramétrage de liage de silk single-machine fondé sur l'évaluation de la 1ere extraction.
 
-[//]: # - Label / Activity : 
-[//]: #     - Transformation : lowerCase
-[//]: # 	- Label : 
-[//]: # 	- Aggrégation : 
-[//]: # 	- Seuil de confiance : 
-
 ### Liage avec Silk single-machine
 - NumEntry : (paramétrage par défaut)
 	- 17 735 liens
