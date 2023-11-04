@@ -1,44 +1,39 @@
 #### Les nourrisseurs dans les listes alphabetiques, toutes dates
-Config de Julie.
 
-##### init query: creation du graphe
-Specification de recherche, avec transformation dans le graphe de certains patterns (regex):
-```SQL
-WITH per_count AS (
-			SELECT e.index, (length(e.ner_xml) - length(replace(e.ner_xml, '<PER>', '' ))) / length('<PER>') AS count_
-			FROM directories.elements AS e
-			ORDER BY count_ DESC
-		), short_list AS ( --Ne conserve que les entrées avec 0 ou 1 PER (au delà, on aura un produit cartésien de tous les attributs)
-			SELECT pc.index
-			FROM per_count AS pc
-			WHERE count_ <=1)
-	SELECT DISTINCT e.index, TRANSLATE(p.ner_xml,'éëèêàçôö,.:;\-_\(\)\[\]?!$&','eeeeacoo') AS person, TRANSLATE(act.ner_xml,'éëèêàçôö,.:;\-_\(\)\[\]?!$&','eeeeacoo') AS activity, s.loc AS loc, s.cardinal AS cardinal,
-	-- change TRANSLATE in unaccent()
-	t.ner_xml AS title, e.directory, e.published, TRANSLATE(lower((COALESCE(s.loc,'') || ' '::text) || COALESCE(s.cardinal,'')),'éëèêàçôö,.:;\-_\(\)\[\]?!$&','eeeeacoo') AS fulladd, s.index AS id_address
-	FROM short_list AS l
-	INNER JOIN directories.elements AS e ON l.index = e.index
-	INNER JOIN directories.persons AS p ON e.index = p.entry_id
-	INNER JOIN directories.activities AS act ON e.index = act.entry_id
-	INNER JOIN directories.addresses AS s ON e.index = s.entry_id
-	INNER JOIN directories.titles AS t ON e.index = t.entry_id
-	INNER JOIN directories.sources AS w ON e.directory = w.code_fichier
-	WHERE (
-		-- Liste des mots-clés: à adapter!
-		(e.view BETWEEN w.npage_pdf_d AND w.npage_pdf_f) AND
-        (w.liste_type ILIKE '%ListNoms%') AND
-		((act.ner_xml ILIKE '%nourrisseur%') OR
-		(act.ner_xml ILIKE '%noürrisseur%') OR
-		(act.ner_xml ILIKE '%nourris%'))
-		)
-	ORDER BY e.index, e.published ASC);
+## Liage (1ere extraction)
+Détail:
+* [documentation](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc_config_activities/nourrisseurs/nourriseurs_extraction1.md)
+
+## Liage (2eme extraction)
+### Filtrage des mots-clefs
+```sql
+SELECT ...
+WHERE (
+    (act.ner_xml ILIKE '%nourrisseur%') OR
+	(act.ner_xml ILIKE '%noürrisseur%') OR
+	(act.ner_xml ILIKE '%nourris%')
+)
 ```
 
-##### configuration silk-workbench
-Sans personnes/adresses car l'objectif est de travailler uniquement sur les nourriseurs et non les transformations d'activites des personnes ayant ete a un moment donne ebenistes.
+Création DB locale en 35'46'' pour 13 708 entrées.
 
-###### personnes et activites
-![](https://raw.githubusercontent.com/soduco/atelier_graphes_geohistoriques_annuaires/main/doc_config_activities/img/nourriseurs_activity_name.png)
+## Liage (2ème extraction)
 
-###### activites et adresses
-Meme config que pour les ebenistes:
-![](https://raw.githubusercontent.com/soduco/atelier_graphes_geohistoriques_annuaires/main/doc_config_activities/img/ebenistes_activity_adress.png)
+### Quelques chiffres
+<b>Listes par nom </b>
+- 13 708 entrées
+- XX ressources
+
+### Paramétrage du liage avec Silk Workbench
+- Label / Activity : 
+    - Transformation : alphaReduce, LowerCase, normalizechars
+	- Label : Tokenwise distance (0.15) ; Activity : Tokenwise distance 0.4 (+ inequality des numEntry (identifiant d'extraction) pour accélerer le processus)
+	- Aggrégation :
+	- Seuil de confiance :
+
+### Liage avec Silk single-machine
+
+
+## Questions intéressantes 
+- Mouvements dans la ville (~ déménagements) vers la périphérie urbaine au fil du temps ?
+- Transmission ???
