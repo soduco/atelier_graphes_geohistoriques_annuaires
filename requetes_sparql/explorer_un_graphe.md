@@ -7,7 +7,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
 select distinct ?label 
 where {
-GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes>
   {?s a ont:Entry.
   ?s rdfs:label ?label.}
 } order by ?label
@@ -23,7 +23,7 @@ PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX rda: <http://rdaregistry.info/Elements/a/>
 select distinct ?label ?fullAdd 
 where { 
-GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes>
 { ?s a ont:Entry.
   ?s rdfs:label ?label.
   ?s rda:P50104 ?activity.
@@ -43,7 +43,7 @@ PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX rda: <http://rdaregistry.info/Elements/a/>
 select distinct ?label ?fullAdd ?annuaire
 where { 
-GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+GRAPH<http://rdf.geohistoricaldata.org/id/directories/nouveautes>
  {?s a ont:Entry.
   ?s rdfs:label ?label.
   ?s rda:P50104 ?activity.
@@ -64,7 +64,7 @@ PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX pav: <http://purl.org/pav/>
 select distinct ?e ?label ?fullAdd
 where { 
-    graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+    graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes>
     {
      ?e a ont:Entry.
     ?e rdfs:label ?label.
@@ -86,7 +86,7 @@ PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX pav: <http://purl.org/pav/>
 select (count(?e) as ?nombre)
 where { 
- graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+ graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes>
     {
     ?e a ont:Entry.
     ?e prov:wasDerivedFrom ?directory.
@@ -108,7 +108,7 @@ PREFIX gsp: <http://www.opengis.net/ont/geosparql#>
 PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
 select distinct ?label ?directory ?fullAdd
 where { 
-     graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+     graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes>
     {
     ?e a ont:Entry.
     ?e rdfs:label ?label.
@@ -135,7 +135,7 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 select distinct ?label ?voie ?voieo 
 where { 
-     graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+     graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes>
 {
     ?e a ont:Entry.
     ?e rdfs:label ?label.
@@ -165,7 +165,7 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 select distinct ?e ?label ?labelo ?o
 where { 
-     graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes_test>
+     graph <http://rdf.geohistoricaldata.org/id/directories/nouveautes>
 {
 	?e a ont:Entry.
 	?e rdfs:label ?label.
