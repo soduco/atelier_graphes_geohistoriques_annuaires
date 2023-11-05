@@ -86,7 +86,7 @@ Le liage des entrées d'annuaires représentant un même commerce est fait avec 
 1) Copier l'adresse du point d'accès SPARQL de votre dépôt GraphDB local : aller dans "Configurer / Dépôts" et cliquer sur l'icône dédiée (voir ci-dessous)
    ![URI SPARQL endpoint GraphDB](./doc/img/URL_Depot.png "URI SPARQL endpoint GraphDB")
    ![Copier URI SPARQL endpoint GraphDB](./doc/img/URL_Depot_copy.png "Copier URI SPARQL endpoint GraphDB")
-2) Adapter les fichiers de configuration de Silk en collant l'adresse du dépôt GraphDB de vos données et en modifiant si besoin l'URI du graphe nommé: paramètres endpointURI et graph. :warning: si vous êtes sous Mac, vous devez également spécifier le chemin de sortie du fichier (voir [documentation pour Mac](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/silk_MacOS_java_home_workbench.md)).
+2) Adapter les fichiers de configuration de Silk en collant l'adresse du dépôt GraphDB de vos données et en modifiant si besoin l'URI du graphe nommé: paramètres endpointURI et graph. :warning: si vous êtes sous Mac, vous devez également spécifier le chemin de sortie du fichier (voir documentation pour [Mac](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/silk_MacOS_java_home_workbench.md)).
 ```xml
   <Silk>
 <!--Prefixes-->
@@ -240,7 +240,7 @@ DELETE FROM directories_graph.liens_chargement AS t WHERE t.graph_name like 'car
 ![URI SPARQL endpoint GraphDB](./doc/img/URL_Depot.png "URI SPARQL endpoint GraphDB")
 ![Copier URI SPARQL endpoint GraphDB](./doc/img/URL_Depot_copy.png "Copier URI SPARQL endpoint GraphDB")
 * Ouvrez le fichier *parameters.js*  : 
-   * Commentez l'adresse du endpoint en ligne du projet SODUCO
+   * Commentez l'adresse du endpoint en ligne du projet SODUCO (avec //)
    * Coller l'adresse du point d'accès "SPARQL virtuel Ontop" que vous venez de créer en local comme valeur de la variable **endpointURL**.
 ![URI SPARQL endpoint dans l'appli](./doc/img/Adresse_sparql_endpoint_appli_local.PNG "URI SPARQL endpoint dans l'appli")
 * Cliquez sur le fichier *index.html* : vous arrivez sur la page d'accueil de l'application. Elle vous permet de consulter :
