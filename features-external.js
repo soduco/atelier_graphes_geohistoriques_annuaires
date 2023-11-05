@@ -8,19 +8,16 @@ async function searchLinkedDataWithBNF(id,graphname_) {
    * Input : ID de la ressource (numEntry)
    * Output : void. La fonction insère un élément HTML dans la page avec les informations issues de data BNF relative à l'entrée sélectionnée.
    */
-    accepted_graphs = ['photographes']
-    if (accepted_graphs.includes('photographes')) {
-
-    
 
     // Recherche l'élément HTML où seront écrits les résultats
     var html = document.getElementById('bnfdata')
   
     // Requête SPARQL à éxécuter dans le triplestore soduco/local pour récupérer les liens sameAs vers des ressources de la BNF s'il y en a
     var query3 = prefixes+
-        "SELECT DISTINCT * where { <http://rdf.geohistoricaldata.org/id/directories/entry/" + id + "> owl:sameAs ?uri." +
+        "SELECT DISTINCT * where { <" + id + "> owl:sameAs ?uri." +
         " FILTER (regex(str(?uri),'bnf'))" +
         "}";
+    console.log(query3)
     var queryURL3 = endpointURL + "?query="+encodeURIComponent(query3)+"&?application/json"
   
     //2. Requête AJAX vers data BNF à partir des URI de la BNF liées aux ressources SODUCO
@@ -45,9 +42,9 @@ async function searchLinkedDataWithBNF(id,graphname_) {
           "WHERE {"+
           " <" + simple_uri + "> skos:prefLabel ?name. "+
           " <" + simple_uri + "> skos:altLabel ?altname. "+
-          " OPTIONAL{<" + bindings.uri.value + ">  <http://rdaregistry.info/Elements/a/#P50113> ?act.} "+
-          " OPTIONAL{<" + bindings.uri.value + "> 	bnf-onto:firstYear ?fy.} "+
-          " OPTIONAL{<" + bindings.uri.value + "> bnf-onto:lastYear ?ly}. "+
+          " OPTIONAL{<" + bindings.uri.value + "#about>  <http://rdaregistry.info/Elements/a/#P50113> ?act.} "+
+          " OPTIONAL{<" + bindings.uri.value + "#about> 	bnf-onto:firstYear ?fy.} "+
+          " OPTIONAL{<" + bindings.uri.value + "#about> bnf-onto:lastYear ?ly}. "+
           "}"
           var queryURL4 = "https://data.bnf.fr/sparql?query="+encodeURIComponent(query4)+"&format=application/json"
           
@@ -77,5 +74,4 @@ async function searchLinkedDataWithBNF(id,graphname_) {
         console.log('Pas de ressources externes associées.')
       }
     });
-  }
 };
