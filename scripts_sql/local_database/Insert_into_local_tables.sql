@@ -81,7 +81,7 @@ GROUP BY uuid, activity, fulladd, loc, cardinal, address_id, geocoded_gazetteer_
 INSERT INTO directories_graph.geocoding 
 SELECT	
 	directories_content.uuid as entry_id, 
-	id_address, 
+	id_address ad address_id, 
 	geocoded_address_gazetteer.housenumber, 
 	geocoded_address_gazetteer.street, 
 	geocoded_address_gazetteer.locality, 
