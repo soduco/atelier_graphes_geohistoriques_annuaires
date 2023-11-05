@@ -86,7 +86,7 @@ Le liage des entrées d'annuaires représentant un même commerce est fait avec 
 1) Copier l'adresse du point d'accès SPARQL de votre dépôt GraphDB local : aller dans "Configurer / Dépôts" et cliquer sur l'icône dédiée (voir ci-dessous)
    ![URI SPARQL endpoint GraphDB](./doc/img/URL_Depot.png "URI SPARQL endpoint GraphDB")
    ![Copier URI SPARQL endpoint GraphDB](./doc/img/URL_Depot_copy.png "Copier URI SPARQL endpoint GraphDB")
-2) Adapter les fichiers de configuration de Silk en collant l'adresse du dépôt GraphDB de vos données et en modifiant si besoin l'URI du graphe nommé: paramètres endpointURI et graph.
+2) Adapter les fichiers de configuration de Silk en collant l'adresse du dépôt GraphDB de vos données et en modifiant si besoin l'URI du graphe nommé: paramètres endpointURI et graph. :warning: si vous êtes sous Mac, vous devez également spécifier le chemin de sortie du fichier (voir [documentation pour Mac](https://github.com/soduco/atelier_graphes_geohistoriques_annuaires/blob/main/doc/silk_MacOS_java_home_workbench.md)).
 ```xml
   <Silk>
 <!--Prefixes-->
@@ -135,7 +135,7 @@ Le liage des entrées d'annuaires représentant un même commerce est fait avec 
 ....
  </Silk>
 ```
-3) Placer les 4 fichiers de *LinkSpec* fournis dans *scripts_silk* dans le dossier silk sur votre machine, avec silk.jar, ouvrir une invite de commandes dans ce dossier et lancer le liage en exécutant successivement les 4 commandes suivantes:
+3) Placer les 4 fichiers de *LinkSpec* fournis dans *scripts_silk* dans le dossier silk-single-machine sur votre machine, avec silk.jar, ouvrir une invite de commandes dans ce dossier et lancer le liage en exécutant successivement les 4 commandes suivantes:
    
 ```cmd
 java -DconfigFile=liage_annuaires_address_activity.xml -jar silk.jar
