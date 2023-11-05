@@ -273,7 +273,7 @@ $.ajax({
                     "<td>"+a.layer._markers[feat].feature.properties['directoryDate']+"</td></tr>"
       }
     popUpText +='</table>';
-    var popup = L.popup().setLatLng([a.layer._cLatLng.lat, a.layer._cLatLng.lng]).setContent(popUpText).openOn(map); 
+    var popup = L.popup().setLatLng([a.layer._cLatLng.lat, a.layer._cLatLng.lng]).setContent(popUpText).openOn(map).openPopup(); 
   }
   })
 
@@ -334,4 +334,3 @@ function downloadGeoJSON() {
   downloadAnchorNode.click();
   downloadAnchorNode.remove();
 }
-

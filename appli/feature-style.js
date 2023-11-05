@@ -1,16 +1,10 @@
 /***********************************
  ******** STYLE DES POINTS *********
 ************************************/
-var myRenderer = L.canvas({ padding: 0.5 });
 //////////// Sur la couche des extractions soduco ///////////
 
 function pointToLayerExtract(feature,latlng) {
     /* Création d'un marker pour chaque point du geojson */
-    /*return L.marker(latlng, 
-      {icon: L.divIcon({ html: '', 
-                        className:'clusters', 
-                        iconSize: new L.point(12.5,12.5)})
-  });*/
   return L.circleMarker(latlng, {
     //renderer:myRenderer,
     fillColor: "#0351f9",
@@ -89,7 +83,7 @@ function onEachFeature(feature, layer) {
         //Search external resources
         $('#bnfdata').empty();
         searchLinkedDataWithBNF(feature.properties.uri)
-        message.innerHTML = '<p class="noentry">Requête en cours d\'exécution : entrées liées à ' + feature.properties.person + ' (ID ' + feature.properties.index + ') <img src="./img/loading_cut.gif">.</p>';  
+        //message.innerHTML = '<p class="noentry">Requête en cours d\'exécution : entrées liées à ' + feature.properties.person + ' (ID ' + feature.properties.index + ') <img src="./img/loading_cut.gif">.</p>';  
       });
         
     } else if (feature.properties.secteur) {

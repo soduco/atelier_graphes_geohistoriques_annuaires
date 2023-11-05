@@ -126,9 +126,10 @@ function createlinkDataSoduco(uri_){
       window.scrollTo(0, document.body.scrollHeight);
       divmessage.innerHTML = ""
       divstats.innerHTML = ""
-    } else if (timelinejson.events.length <= 1) {
-      divtimeline.setAttribute('style', 'height:0px;');
-      divmessage.innerHTML = "<center><p>Aucunes ressources liées à la ressource sélectionnée.</p></center>"
-    }
-  });
-};
+    }}).done((promise) => {
+      if (timelinejson.events.length == 1) {
+        console.log(timelinejson.events.length)
+        divtimeline.setAttribute('style', 'height:0px;');
+        divmessage.innerHTML = "<center><p>Aucunes ressources liées à la ressource sélectionnée.</p></center>"
+    }})
+  }
