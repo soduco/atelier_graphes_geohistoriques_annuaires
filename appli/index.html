@@ -100,6 +100,8 @@
         
         <!--#START : Advanced research panel-->
         <div id="av">
+
+          <!--START : FORMULAIRE-->
           <div class="searchtool">
             <fieldset>
               <legend>Propriétés</legend>
@@ -110,6 +112,11 @@
                 <input type="text" name="act" id="act" placeholder="Ex : photo" title="Tout ou partie d'un mot-clé"><br>
                 <label for="spat">Adresse</label><br>
                 <input type="text" name="spat" id="spat" placeholder="Ex : rivoli" title="Tout ou partie d'une adresse"><br>
+                <p id="helpform" style="text-align: justify; height: fit-content;"><small>❓ Les champs du formulaire acceptent les expressions régulières. Deux regex utiles : <br>
+                  <ul>
+                    <li>La propriété contient <i>mot1</i> <b>ET</b> <i>mot2</i>: <span style="color:purple;">(?=.*mot1)(?=.*mot2)</span></li>
+                    <li>La propriété contient <i>mot1</i> <b>OU</b> <i>mot2</i>: <span style="color:purple;"><i>mot1|mot2</i></span></li>
+                  </ul><a href="https://regex101.com/">Tester une regex complexe.</a></small></p>
               </form>
             </fieldset>
           </div>
@@ -128,7 +135,7 @@
           <div id="spatialfilter">
             <fieldset>
               <legend>Localisation</legend>
-              <p style="text-align: justify; height: fit-content;"><small>Dessinez l'emprise de votre zone de recherche avec l'outil de dessin disponible sur la carte.</small></p>
+              <p style="text-align: justify; height: fit-content;"><small>❓ Dessinez l'emprise de votre zone de recherche avec l'outil de dessin disponible sur la carte.</small></p>
             </fieldset>
           </div>
     
