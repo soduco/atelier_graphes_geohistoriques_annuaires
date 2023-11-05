@@ -88,7 +88,7 @@ GROUP BY uuid, activity, fulladd, loc, cardinal, id_address, geocoded_gazetteer_
 CREATE TABLE directories_graph.geocoding AS
 SELECT	
 	directories_content.uuid as entry_id, 
-	id_address, 
+	id_address as address_id, 
 	geocoded_address_gazetteer.housenumber, 
 	geocoded_address_gazetteer.street, 
 	geocoded_address_gazetteer.locality, 
@@ -160,7 +160,7 @@ create index on directories_graph.dataset(dataset_id);
 create index on directories_graph.dataset(graph_name);
 
 create index on directories_graph.geocoding(entry_id);
-create index on directories_graph.geocoding(id_address);
+create index on directories_graph.geocoding(address_id);
 create index on directories_graph.geocoding(graph_name);
 create index on directories_graph.geocoding(housenumber);
 create index on directories_graph.geocoding(street);
