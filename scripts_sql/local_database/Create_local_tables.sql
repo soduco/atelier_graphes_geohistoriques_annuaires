@@ -58,14 +58,14 @@ SELECT  DISTINCT ON(act, fulladd, loc, cardinal, address_id, geocoded_gazetteer_
 		uuid,
         STRING_AGG(DISTINCT per, ',') AS person,
         STRING_AGG(DISTINCT titre, ',') AS title,
-        act,
+        act AS activity,
         fulladd,
         loc,
         cardinal,
 		address_id,
 		geocoded_gazetteer_uuid,
-	    code_ouvrage,
-        liste_annee
+	    code_ouvrage  AS directory,
+        liste_annee AS published
 FROM
 (
     SELECT  uuid,
@@ -78,11 +78,10 @@ FROM
 			address_id,
 			geocoded_gazetteer_uuid,
             code_ouvrage,
-            liste_annee,
-            liste_type
+            liste_annee
     FROM aggregated
 ) AS sub
-GROUP BY uuid, act, fulladd, loc, cardinal, address_id, geocoded_gazetteer_uuid, code_ouvrage, liste_annee
+GROUP BY uuid, activity, fulladd, loc, cardinal, address_id, geocoded_gazetteer_uuid, directory, published
 );
 
 /*Création de la table geocoding*/
