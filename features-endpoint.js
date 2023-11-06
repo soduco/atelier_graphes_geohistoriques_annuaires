@@ -104,6 +104,7 @@ function createGeoJson(JSobject){
   // Si le geojson est vide, afficher une boite de dialogue avec un message
   if (geojson['features'].length == 0) {
     alert('Pas de données correspondant à cette recherche.')
+    message.innerHTML = '';
   } else {
     //Sinon retourner le geojson
     return geojson
@@ -281,6 +282,7 @@ $.ajax({
   // si le slider temporel est mis à jour
   // Permet de ne pas requêter le serveur si on veut faire varier l'affichage selon les dates dans la période sélectionnée précédement
   document.getElementById('loadedperiod').innerHTML = '<p style="text-align: center; height: fit-content;"><small>❓ Le filtre temporel permet de faire varier l\'affichage des points préalablement chargés sur la carte sans lancer une nouvelle recherche.</br>Données chargées pour la période <b>' + inputNumberMin.value + '</b>-<b>' + inputNumberMax.value + '</b>.</small></p>'
+  document.getElementById('resumeresultat').innerHTML = '<fieldset><legend>Résumé</legend><small><ul><li>Période chargée: ' + inputNumberMin.value + '-' + inputNumberMax.value + '</li><li>Nombre de points: ' + jsonData.features.length + ' </li></ul></small></fieldset>'
   message.innerHTML = ''
   
   slidervar.noUiSlider.on('update', function( values, handle ) {
