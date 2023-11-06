@@ -51,30 +51,109 @@ WHERE (
 ```
 
 ## Liage
-### Paramétrage dans Silk Workbench
-- Label / Activity : 
-    - Transformation : alphaReduce, LowerCase, RegexReplace(àáéèěîïíóúůščřžý,aaeeeiiiouuscrzy)
-    - Distance de Levenshtein label(0.8), activity(0.8) => quasiment que du 100%
 
-### Silk single-machine
+### Paramétrage Silk single-machine
+#### Transformations sur les chaînes de caractères : 
+    - lowerCase : minuscules
+    - alphaReduce : supprime les caractères spéciaux
+    - normalizeChars : remplace les caractères accentués par des caractères non accentués
+
+#### Critères de comparaison
+<table>
+  <tr>
+    <th>Clé</th>
+    <th>Propriété 1</th>
+    <th>Distance</th>
+    <th>Propriété 2</th>
+    <th>Distance</th>
+    <th>Seuil de confiance global</th>
+  </tr>
+  <tr>
+    <td><b>Label / Activity<b></td>
+    <td>Label</td>
+    <td>levenshtein(0.2)</td>
+    <td>Activity</td>
+    <td>tokenwiseDistance(0.4)</td>
+    <td>10%</td>
+  </tr>
+  <tr>
+    <td><b>Label / Address<b></td>
+    <td>Label</td>
+    <td>levenshtein(0.2)</td>
+    <td>Address</td>
+    <td>streetname: levenshtein(0.3)<br>card: levenshtein(0.0)</td>
+    <td>0%</td>
+  </tr>
+  <tr>
+    <td><b>Address / Activity</b></td>
+    <td>Address</td>
+    <td>streetname: levenshtein(0.3)<br>card: levenshtein(0.0)</td>
+    <td>Activity</td>
+    <td>tokenwiseDistance(0.3)</td>
+    <td>0%</td>
+  </tr>
+</table>
+
+#### Aggrégation
+Pour chaque paire de propriété, le score conservé pour filtrer les liens est le plus faible score de similirité obtenu.
+
+### Résultats avec Silk
 - NumEntry : 
-    - Même numéro d'extraction
     - Temps de calcul : quelques secondes
-    - 100% : 11501 liens.
-- Label / Activity (test avec l'ancienne extraction, sans les maréchaux experts): 
-    - Transformation : RegexReplace(àáéèěîïíóúůščřžý,aaeeeiiiouuscrzy), alphaReduce, LowerCase
-    - Distance de Levenshtein label(0.4), activity(0.8)   (tests très lents avec pc portable 8G0 RAM à label=0.6 et label=0.8)
-    - Temps de calcul : ~ 15 minutes (5 to 6 Ga de RAM alloués)
-    - Ratio liens calculés/ liens gardés : 
-    - 0%-50% : 436 869 liens ; 50%-75% : 55 993 liens; 75%-99% : 22407 liens ; 100% : 42906 liens.
+    - Nombre de liens : **31 244 liens**
+- Label / Activity : 
+    - Temps de calcul : ~6 minutes
+    - Nombre de liens : **178 332 liens** (4 458 794)
+- Label / Address
+    - Temps de calcul : ~1 minute
+    - Nombre de liens : **37 667 liens** (682 976 filtrés)
+- Address / Activity
+    - Temps de calcul : ~1 minute
+    - Nombre de liens : **31 695 liens** (1 312 650 filtrés)
 
-## Questions intéressantes
-- Maréchal-expert devenu vétérinaire ? (changements de titres de manière plus générale)
-- Déménagements ?
-- Transmission dans une même famille (comme les médecins/notaires) ?
+Nombre total de liens associant des ressources différentes (sans inférence) : **155 905**
 
-## TODO
-- Avec la nouvelle extraction
-    - [ ] Prévoir l'ajout des maréchaux-experts
-    - [ ] Vérifier les seuils 
-    - [ ] Liage
+## Questions
+### Quelle est la liste des vétérinaires également professeurs ?
+
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rda: <http://rdaregistry.info/Elements/a/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX pav: <http://purl.org/pav/>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+
+SELECT DISTINCT ?e ?label ?act ?fullAdd
+WHERE { 
+    ?e a adb:Entry.
+    ?e rdfs:label ?label.
+    ?e rda:P50104 ?act.
+    ?e prov:wasDerivedFrom ?directory.
+    FILTER(regex(lcase(?act), 'école|ecole|alfort|prof')).#Contient un des mots de cette liste.
+}
+```
+Dans l'application : écrire <span style="color:blue">école|ecole|alfort|prof</span> dans le champs *Activité*
+
+### Quelle est liste des vétérinaires exerçant également la profession de maréchal ferrant ?
+
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX adb: <http://rdf.geohistoricaldata.org/def/directory#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rda: <http://rdaregistry.info/Elements/a/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX pav: <http://purl.org/pav/>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+
+SELECT DISTINCT ?e ?label ?act ?fullAdd
+WHERE { 
+    ?e a adb:Entry.
+    ?e rdfs:label ?label.
+    ?e rda:P50104 ?act.
+    ?e prov:wasDerivedFrom ?directory.
+    FILTER(regex(lcase(?act), '((?=.*vet)|(?=.*vét))(?=.* et )(?=.*mar)'))..
+}
+```
+Dans l'application : écrire <span style="color:blue">((?=.*vet)|(?=.*vét))(?=.* et )(?=.*mar)</span> dans le champs *Activité*

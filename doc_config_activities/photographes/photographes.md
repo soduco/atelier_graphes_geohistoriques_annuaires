@@ -8,9 +8,9 @@
 Une première liste de mots-clés a été constituée en cherchant manuellement les photographes répertoriés par Durand et al. et en relevant les mots présents de manière récurrente dans la description de leur activité. Cette liste élargie contenait trop de bruit.
 
 Les mots-clés conservés pour l'extraction finale sont
-- photo pour <i>photographe</i>, <i>photographie</i>, <i>photographique</i>
-- daguer pour <i>daguerréotype</i>, <i>photographie</i>, <i>photographique</i>
-- opti
+- <b>photo</b> pour <i>photographe</i>, <i>photographie</i>, <i>photographique</i>
+- <b>daguer</b> pour <i>daguerréotype</i>, <i>photographie</i>, <i>photographique</i>
+- <b>opti</b> pour <i>opticien</i>, <i>optique</i>
 
 ## Filtrage
 ```sql
@@ -40,7 +40,7 @@ Détail :
 - 45 853 entrées
 - 60 295 ressources
 
-### Paramétrage du liage avec Silk Workbench
+### Test de liage avec Silk Workbench
 - Label / Activity : 
     - Transformation : alphaReduce, LowerCase, normalizechars
 	- Label : Tokenwise distance (0.15) ; Activity : Tokenwise distance 0.4 (+ inequality des numEntry (identifiant d'extraction) pour accélerer le processus)
@@ -48,21 +48,69 @@ Détail :
 	- Seuil de confiance : 10.0% (+ d'ambiguités en dessous)
 
 ### Liage avec Silk single-machine
-- NumEntry : 
-	- 159402 links
-	- QUelques secondes
-- Label / Activity (paramétrage ci-dessus): 
-	- 14h50 => 16h06 : 1h15
-	- 20 775 995 links yielding 993 519 links
-	- 0-9.99% : 39 968 liens | 10%-100% : 952 655 liens
-- Label / Address (fichier par défaut)
-	- 17h50 => 17h55 : 5 min
-	- Filtered 5071335 links yielding 222374 links
-- Address / Activity
-	- 16h58 => 17H23 : 25 min
-	- 11207085 links yielding 298466 links
 
-Total : 1 010 332 liens (?u1 != ?u2) sans inférence
+
+### Paramétrage Silk single-machine
+#### Transformations sur les chaînes de caractères : 
+    - lowerCase : minuscules
+    - alphaReduce : supprime les caractères spéciaux
+    - normalizeChars : remplace les caractères accentués par des caractères non accentués
+
+#### Critères de comparaison
+<table>
+  <tr>
+    <th>Clé</th>
+    <th>Propriété 1</th>
+    <th>Distance</th>
+    <th>Propriété 2</th>
+    <th>Distance</th>
+    <th>Seuil de confiance global</th>
+  </tr>
+  <tr>
+    <td><b>Label / Activity<b></td>
+    <td>Label</td>
+    <td>levenshtein(0.15)</td>
+    <td>Activity</td>
+    <td>tokenwiseDistance(0.4)</td>
+    <td>10%</td>
+  </tr>
+  <tr>
+    <td><b>Label / Address<b></td>
+    <td>Label</td>
+    <td>levenshtein(0.2)</td>
+    <td>Address</td>
+    <td>streetname: levenshtein(0.3)<br>card: levenshtein(0.0)</td>
+    <td>0%</td>
+  </tr>
+  <tr>
+    <td><b>Address / Activity</b></td>
+    <td>Address</td>
+    <td>streetname: levenshtein(0.3)<br>card: levenshtein(0.0)</td>
+    <td>Activity</td>
+    <td>tokenwiseDistance(0.3)</td>
+    <td>0%</td>
+  </tr>
+</table>
+
+#### Aggrégation
+Pour chaque paire de propriété, le score conservé pour filtrer les liens est le plus faible score de similirité obtenu.
+
+### Résultats avec Silk
+- NumEntry : 
+    - Temps de calcul : quelques secondes
+    - Nombre de liens : **159 402 liens**
+- Label / Activity : 
+    - Temps de calcul : ~1h15 minutes
+    - Nombre de liens : **993 519 liens** (20 775 995)
+	- 0-9.99% : 39 968 liens | 10%-100% : 952 655 liens
+- Label / Address
+    - Temps de calcul : ~5 minute
+    - Nombre de liens : **222 374 liens** (507 1335 filtrés)
+- Address / Activity
+    - Temps de calcul : ~25 minute
+    - Nombre de liens : **298 466 liens** (11 207 085 filtrés)
+
+Nombre total de liens associant des ressources différentes (sans inférence) : **1 010 332 liens**
 
 ## Liage avec données de la BNF
 Endpoint BNF : https://data.bnf.fr/sparql/
@@ -88,8 +136,15 @@ WHERE {
   Filter (?fy > 1740 && ?fy < 1890)
 } 
 ```
+Ajouté au graphe : uniquement les liens validés dans Silk Workbench (~ 130)
 
 ## Questions intéressantes 
 - Déménagements
 - Transmissions d'ateliers / reprises par d'autres photographes
 - Partage d'ateliers
+
+## Exemples intéressants
+- Nadar
+- Marville
+- Chevallier/Chevalier
+- Léon Gaumont / Comptoir de la photographie

@@ -1,0 +1,131 @@
+<Silk>
+<!--Prefixes-->
+    <Prefixes>
+      <Prefix id="rdf" namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+	  <Prefix id="owl" namespace="http://www.w3.org/2002/07/owl#"/>
+	  <Prefix id="adb" namespace="http://rdf.geohistoricaldata.org/def/directory#"/>
+	  <Prefix id="rdfs" namespace="http://www.w3.org/2000/01/rdf-schema#"/>
+	  <Prefix id="locn" namespace="http://www.w3.org/ns/locn#"/>
+	  <Prefix id="xsd" namespace="http://www.w3.org/2001/XMLSchema#"/>
+	  <Prefix id="dcterms" namespace="http://purl.org/dc/terms/"/>
+	  <Prefix id="rda" namespace="http://rdaregistry.info/Elements/a/"/>
+    </Prefixes>
+	<!--Datasets-->
+<DataSources>
+	  <DataSource id="dataset1" type="sparqlEndpoint"><!--Nom du premier dataset à apparier-->
+		  <Param name="pageSize" value="1000"></Param>
+		  <Param name="pauseTime" value="0"></Param>
+		  <Param name="retryCount" value="3"></Param>
+		  <Param name="endpointURI" value="http://localhost:7200/repositories/photographes_v2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/photographes"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="retryPause" value="1000"></Param>
+		  <Param name="queryParameters" value=""/>
+		  <Param name="login" value=""/>
+		  <Param name="entityList" value=""/>
+		  <Param name="parallel" value="true"/>
+		  <Param name="password" value=""/>
+	  </DataSource>
+	  <DataSource id="dataset2" type="sparqlEndpoint"><!--Nom du second dataset à apparier-->
+		  <Param name="pageSize" value="1000"></Param>
+		  <Param name="pauseTime" value="0"></Param>
+		  <Param name="retryCount" value="3"></Param>
+		  <Param name="endpointURI" value="http://localhost:7200/repositories/photographes_v2"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/photographes"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="retryPause" value="1000"></Param>
+		  <Param name="queryParameters" value=""/>
+		  <Param name="login" value=""/>
+		  <Param name="entityList" value=""/>
+		  <Param name="parallel" value="true"/>
+		  <Param name="password" value=""/>
+	  </DataSource>
+	</DataSources>
+<!--Links-->
+<Interlinks>
+	<Interlink id="by-keys">
+		<LinkType>owl:sameAs</LinkType>
+			<SourceDataset dataSource="dataset1" var="a">
+				<RestrictTo>{ ?a rdf:type adb:Entry } .</RestrictTo>
+			</SourceDataset>
+			<TargetDataset dataSource="dataset2" var="b">
+				<RestrictTo>{ ?b rdf:type adb:Entry } .</RestrictTo>
+			</TargetDataset>
+<LinkageRule>
+<!--Key 2 : label and activity-->
+<!--
+Conserve tous les cas où le score minimal de la combinaison de propriété Label-Activité est supérieur à 0
+-->
+<Aggregate id="min_label_activity" required="true" weight="1" type="min">
+<!--
+Pour deux entrées : calcule la distance d'édition Tokenwise entre les valeurs de la propriété Activité
+-->
+<Compare id="tokenwiseDistance_activity_1" required="true" weight="1" metric="tokenwiseDistance" threshold="0.4">
+<!--Distance maximale = 0.6-->
+<!--
+Transformation des valeurs : passage en minuscules
+-->
+<TransformInput id="transfo_activity_source_1_alphaReduce" function="alphaReduce">
+	<TransformInput id="transfo_activity_source_1_lower" function="lowerCase">
+		<TransformInput id="transfo_activity_source_1_normalizeChars" function="normalizeChars">
+			<Input id="source_activity_1" path="?a/rda:P50104"/>
+		</TransformInput>
+	</TransformInput>
+</TransformInput>
+<!--
+Transformation des valeurs : passage en minuscules
+-->
+<TransformInput id="transfo_activity_source_2_alphaReduce" function="alphaReduce">
+	<TransformInput id="transfo_activity_source_2_lower" function="lowerCase">
+		<TransformInput id="transfo_activity_source_2_normalizeChars" function="normalizeChars">
+			<Input id="target_activity_1" path="?b/rda:P50104"/>
+		</TransformInput>
+	</TransformInput>
+</TransformInput>
+</Compare>
+<!--
+Pour deux entrées : calcule la distance d'édition Tokenwise entre les valeurs de la propriété Label
+-->
+<Compare id="levenshteinDistance_label_2" required="true" weight="1" metric="levenshtein" threshold="0.15">
+<!--Distance maximale = 0.7-->
+<!--
+Transformation des valeurs : passage en minuscules
+-->
+<TransformInput id="transfo_label_source_2_alphaReduce" function="alphaReduce">
+	<TransformInput id="transfo_label_source_2_lower" function="lowerCase">
+		<TransformInput id="transfo_label_source_2_normalizeChars" function="normalizeChars">
+			<Input id="source_label_2" path="?a/rdfs:label"/>
+		</TransformInput>
+	</TransformInput>
+</TransformInput>
+<!--
+Transformation des valeurs : passage en minuscules
+-->
+<TransformInput id="transfo_label_target_2_alphaReduce" function="alphaReduce">
+	<TransformInput id="transfo_label_target_2_lower" function="lowerCase">
+		<TransformInput id="transfo_label_target_2_normalizeChars" function="normalizeChars">
+			<Input id="target_label_2" path="?b/rdfs:label"/>
+		</TransformInput>
+	</TransformInput>
+</TransformInput>
+</Compare>
+</Aggregate>
+</LinkageRule>
+<Filter limit="50"/>
+<Outputs>
+<Output type="file" minConfidence="0.10">
+<!--
+Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8
+-->
+<Param name="file" value="photographes_labelactivity_accepted_links_sup_10.nt"/>
+<Param name="format" value="ntriples"/>
+</Output>
+<Output type="file" maxConfidence="0.099">
+<!--
+Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8
+-->
+<Param name="file" value="photographes_labelactivity_verify_links.nt"/>
+<Param name="format" value="ntriples"/>
+</Output>
+</Outputs>
+</Interlink>
+</Interlinks>
+</Silk>
