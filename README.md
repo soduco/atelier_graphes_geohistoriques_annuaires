@@ -235,15 +235,19 @@ DELETE FROM directories_graph.liens_chargement AS t WHERE t.graph_name like 'car
 #### Visualisation des données de la base locale
 
 * Si ce n'est pas encore fait : 
-* Téléchargez le dossier *appli* de ce dépôt Git-Hub
-* Copiez l'adresse du point d'accès du dépôt "SPARQL virtuel Ontop" que vous avez créés à l'étape précédente. 
+* Télécharger le dossier *appli* de ce dépôt Git-Hub
+* Copier l'adresse du point d'accès du dépôt "SPARQL virtuel Ontop" que vous avez créés à l'étape précédente. 
 ![URI SPARQL endpoint GraphDB](./doc/img/URL_Depot.png "URI SPARQL endpoint GraphDB")
 ![Copier URI SPARQL endpoint GraphDB](./doc/img/URL_Depot_copy.png "Copier URI SPARQL endpoint GraphDB")
-* Ouvrez le fichier *parameters.js*  : 
-   * Commentez l'adresse du endpoint en ligne du projet SODUCO (avec //)
+* Ouvrir le fichier *parameters.js*  : 
+   * Commenter l'adresse du endpoint en ligne du projet SODUCO (avec //)
    * Coller l'adresse du point d'accès "SPARQL virtuel Ontop" que vous venez de créer en local comme valeur de la variable **endpointURL**.
 ![URI SPARQL endpoint dans l'appli](./doc/img/Adresse_sparql_endpoint_appli_local.PNG "URI SPARQL endpoint dans l'appli")
-* Cliquez sur le fichier *index.html* : vous arrivez sur la page d'accueil de l'application. Elle vous permet de consulter :
+* Dans la fenêtre GraphDB Desktop, cliquer sur "Settings" et ajouter les deux paramètres suivants:
+	* -Dgraphdb.workbench.cors.enable = true
+	* -Dgraphdb.workbench.cors.origin = *
+* Cliquer sur "Save and Restart"
+* Cliquer sur le fichier *index.html* : vous arrivez sur la page d'accueil de l'application. Elle vous permet de consulter :
    - les ressources géocodés de votre jeu de données ;
    - les sous-ensembles d'entrées liées sous la forme d'une frise chronologique (PS: pour voir les fonds de cartes, vous devez être connectés à Internet).
 

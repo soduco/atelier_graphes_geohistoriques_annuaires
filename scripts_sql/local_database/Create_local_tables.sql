@@ -33,7 +33,7 @@ aggregated AS (
             trim(concat(cardinal, ' ', loc)) AS fulladd,
             loc,
             cardinal,
-			addresses.uuid AS address_id,
+			addresses.uuid AS id_address,
 			addresses.geocoded_gazetteer_uuid,
             sources.code_ouvrage,
             sources.liste_annee,
@@ -54,7 +54,7 @@ aggregated AS (
     ON addresses.entry_uuid = filtered_activities.entry_uuid
     AND addresses.source = filtered_activities.source
 )
-SELECT  DISTINCT ON(act, fulladd, loc, cardinal, address_id, geocoded_gazetteer_uuid, code_ouvrage, liste_annee)
+SELECT  DISTINCT ON(act, fulladd, loc, cardinal, id_address, geocoded_gazetteer_uuid, code_ouvrage, liste_annee)
 		uuid,
         STRING_AGG(DISTINCT per, ',') AS person,
         STRING_AGG(DISTINCT titre, ',') AS title,
@@ -62,7 +62,7 @@ SELECT  DISTINCT ON(act, fulladd, loc, cardinal, address_id, geocoded_gazetteer_
         fulladd,
         loc,
         cardinal,
-		address_id,
+		id_address,
 		geocoded_gazetteer_uuid,
 	    code_ouvrage  AS directory,
         liste_annee AS published
@@ -75,20 +75,20 @@ FROM
             fulladd,
             loc,
             cardinal,
-			address_id,
+			id_address,
 			geocoded_gazetteer_uuid,
             code_ouvrage,
             liste_annee
     FROM aggregated
 ) AS sub
-GROUP BY uuid, activity, fulladd, loc, cardinal, address_id, geocoded_gazetteer_uuid, directory, published
+GROUP BY uuid, activity, fulladd, loc, cardinal, id_address, geocoded_gazetteer_uuid, directory, published
 );
 
 /*Création de la table geocoding*/
 CREATE TABLE directories_graph.geocoding AS
 SELECT	
 	directories_content.uuid as entry_id, 
-	address_id, 
+	id_address as address_id, 
 	geocoded_address_gazetteer.housenumber, 
 	geocoded_address_gazetteer.street, 
 	geocoded_address_gazetteer.locality, 
