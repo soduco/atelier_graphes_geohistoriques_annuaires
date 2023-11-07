@@ -23,3 +23,46 @@ var GeoportailFrance_plan = L.tileLayer('https://wxs.ign.fr/{apikey}/geoportail/
     format: 'image/png',
     style: 'normal'
 });
+
+/////////////// VECTOR LAYER
+
+var url_voies = "./data/voie.geojson"
+//Source : Open data Paris
+
+function onEachLine(feature, layer) {
+    if (feature.properties) {
+        layer.bindPopup(feature.properties.l_longmin);
+    }
+}
+
+var voies = L.geoJSON(null,{
+    onEachFeature: onEachLine,
+    style:{
+            "color": "ff7800",
+            "weight": 0.5,
+            "opacity": 1
+    }
+});
+
+$.getJSON(url_voies, function(data) {
+    voies.addData(data);
+});
+
+
+var url_arr = "./data/arrondissement.geojson"
+//Source : Open data Paris
+
+var arr = L.geoJSON(null,{
+    //onEachFeature: onEachLine,
+    style: {
+        color: 'lightblue',
+        fillColor: '#f03',
+        fillOpacity: 0.5
+    }
+});
+
+$.getJSON(url_arr, function(data) {
+    arr.addData(data);
+});
+
+var openDataParis = L.layerGroup([voies])

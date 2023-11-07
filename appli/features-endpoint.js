@@ -71,6 +71,8 @@ let per = document.getElementById("per").value; //Valeur du champ "Raison social
 let act = document.getElementById("act").value; //Valeur du champ "Activité"
 let spat = document.getElementById("spat").value; //Valeur du champ "Adresse"
 
+let resdiv = document.getElementById("resumeresultat")
+let loadperioddiv = document.getElementById("loadedperiod")
 /*************************************************
  ******************* FUNCTIONS *******************
  *************************************************/
@@ -105,6 +107,8 @@ function createGeoJson(JSobject){
   if (geojson['features'].length == 0) {
     alert('Pas de données correspondant à cette recherche.')
     message.innerHTML = '';
+    //resdiv.innerHTML = '';
+    //loadperioddiv.innerHTML = '<p style="text-align: center; height: fit-content;"><small>❓ Le filtre temporel permet de faire varier l\'affichage des points préalablement chargés sur la carte sans lancer une nouvelle recherche.</small></p>'
   } else {
     //Sinon retourner le geojson
     return geojson
