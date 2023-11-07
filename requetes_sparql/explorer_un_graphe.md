@@ -2,6 +2,8 @@
 
 Vous pouvez aisément adapter ces requêtes pour explorer d'autres graphes parmi ceux publiés sur le point d'accès SPARQL des annuaires du commerce parisien du XIXème siècle: il suffit de changer l'URI du graphe nommé à interroger.
 
+Le point d'accès SPARQL est accessible ici: https://dir.geohistoricaldata.org/
+
 ## On cherche les noms et les URIs des graphes de données disponibles
 ```sparql
 PREFIX dcterms: <http://purl.org/dc/terms/>
