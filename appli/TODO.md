@@ -1,0 +1,5 @@
+-[ ] Liste des mots clés d'intérêt pour faire un graphe de leur apparition dans les stats
+-[ ] Plus de liens avec le endpoint de la BNF
+-[ ] Lien Endpoint avec les Archives Nationales
+-[ ] Mettre un paragraphe dans le readme pour les issues
+-Avocats de conseil

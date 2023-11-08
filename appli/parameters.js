@@ -5,7 +5,7 @@
 var endpointURL = "https://dir.geohistoricaldata.org/sparql/"
 
 // A remplacer par l'URL de votre triplestore si vous travaillez en local. Par exemple :
-//var endpointURL = "http://HPE2101P101:7200/repositories/cartes_et_plans_local"
+//var endpointURL = "http://HPE2101P101:7200/repositories/local_soduco"
 
 /***********************************************************************
  * Prefixes des vocabulaires utilisés dans le graphe de connaissances  *

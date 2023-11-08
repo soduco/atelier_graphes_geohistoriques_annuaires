@@ -4,8 +4,8 @@
 
 - [Article](https://hal.science/hal-04121643/)
 - [Présentation](https://docs.google.com/presentation/d/1rwIu4ilWswUI7ltXQRd4-AUwcRffb8CQJ54chePoRQc/edit?usp=sharing)
-- [Dépôt de code de la chaîne de traitement proposée à IC 2023](https://github.com/soduco/ic_2023_photographes_parisiens/tree/main/doc)
-- [Interface de visualisation (ancienne version)](https://soduco.github.io/ic_2023_photographes_parisiens/)
+- [Dépôt de code de la chaîne de traitement proposée à IC 2023](https://github.com/soduco/ic_2023_photographes_parisiens)
+- [Interface de visualisation (ancienne version, juillet 2023)](https://soduco.github.io/ic_2023_photographes_parisiens/)
 
 ## Outils et logiciels requis
 
@@ -257,4 +257,3 @@ DELETE FROM directories_graph.liens_chargement AS t WHERE t.graph_name like 'car
 * Le graphe géohistorique publié sur la base soduco est directement requêtable sur le point d'accès SPARQL suivant (des requêtes types sont disponibles ici: *./requetes_sparql*) : https://dir.geohistoricaldata.org/
 
 * Il est aussi visualisable via l'interface cartographique suivante: https://soduco.geohistoricaldata.org/atelier_graphes_geohistoriques_annuaires/
-
