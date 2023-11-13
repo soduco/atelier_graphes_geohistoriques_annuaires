@@ -56,7 +56,7 @@ Détail :
     - alphaReduce : supprime les caractères spéciaux
     - normalizeChars : remplace les caractères accentués par des caractères non accentués
 
-#### Critères de comparaison
+#### Critères de comparaison (test 1)
 <table>
   <tr>
     <th>Clé</th>
@@ -92,10 +92,48 @@ Détail :
   </tr>
 </table>
 
+#### Critères de comparaison (test 2)
+<table>
+  <tr>
+    <th>Clé</th>
+    <th>Propriété 1</th>
+    <th>Distance</th>
+    <th>Propriété 2</th>
+    <th>Distance</th>
+    <th>Seuil de confiance global</th>
+  </tr>
+  <tr>
+    <td><b>Label / Activity<b></td>
+    <td>Label</td>
+    <td>levenshtein(0.1)</td>
+    <td>Activity</td>
+    <td>tokenwiseDistance(0.4)</td>
+    <td>10%</td>
+  </tr>
+  <tr>
+    <td><b>Label / Address<b></td>
+    <td>Label</td>
+    <td>levenshtein(0.1)</td>
+    <td>Address</td>
+    <td>streetname: levenshtein(0.3)<br>card: levenshtein(0.0)</td>
+    <td>0%</td>
+  </tr>
+  <tr>
+    <td><b>Address / Activity</b></td>
+    <td>Address</td>
+    <td>streetname: levenshtein(0.2)<br>card: levenshtein(0.0)</td>
+    <td>Activity</td>
+    <td>tokenwiseDistance(0.3)</td>
+    <td>0%</td>
+  </tr>
+</table>
+
 #### Aggrégation
 Pour chaque paire de propriété, le score conservé pour filtrer les liens est le plus faible score de similirité obtenu.
 
 ### Résultats avec Silk
+
+#### Test 1
 - NumEntry : 
     - Temps de calcul : quelques secondes
     - Nombre de liens : **159 402 liens**
@@ -104,13 +142,30 @@ Pour chaque paire de propriété, le score conservé pour filtrer les liens est 
     - Nombre de liens : **993 519 liens** (20 775 995)
 	- 0-9.99% : 39 968 liens | 10%-100% : 952 655 liens
 - Label / Address
-    - Temps de calcul : ~5 minute
+    - Temps de calcul : ~5 minutes
     - Nombre de liens : **222 374 liens** (507 1335 filtrés)
 - Address / Activity
-    - Temps de calcul : ~25 minute
+    - Temps de calcul : ~25 minutes
     - Nombre de liens : **298 466 liens** (11 207 085 filtrés)
 
 Nombre total de liens associant des ressources différentes (sans inférence) : **1 010 332 liens**
+
+#### Test
+- NumEntry : 
+    - Temps de calcul : quelques secondes
+    - Nombre de liens : **157 109 liens**
+- Label / Activity : 
+    - Temps de calcul : ~42 minutes
+    - Nombre de liens : **803 044 liens** (11 710 160)
+	- 0-19.99% : 30 125 liens | 20%-100% : 785 797 liens
+- Label / Address
+    - Temps de calcul : ~5 minutes
+    - Nombre de liens : **219 467 liens** (2 467 709 filtrés)
+- Address / Activity
+    - Temps de calcul : ~30 minutes
+    - Nombre de liens : **297 012 liens** (8 599 014 filtrés)
+
+Nombre total de liens associant des ressources différentes (sans inférence) : **841 609 liens**
 
 ## Liage avec données de la BNF
 Endpoint BNF : https://data.bnf.fr/sparql/
