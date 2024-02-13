@@ -6,7 +6,7 @@ Pour suivre cette procédure, vous devez disposer d'un compte utilisateur avec d
 
 2) Allez dans le schéma directories_graph.
    
-3) Testez les mots-clés qui vous semblent pertinents pour récupérer les entrées relatives à un type d'activité donné et affinez-les avant de procéder à l'export des données proprement dit. Pour cela, ouvrez le fichier *Test_keywords.sql* dans l'éditeur de requêtes, modifiez les mots-clés selon les entrées que vous recherchez et excéutez le. Affinez vos mots-clés par essais/erreurs pour obtenir les données souhaitées. La partie à modifier est situé sous le commentaire encadré par des étoiles:
+3) Testez les mots-clés qui vous semblent pertinents pour récupérer les entrées relatives à un type d'activité donné et affinez-les avant de procéder à l'export des données proprement dit. Pour cela, ouvrez le fichier *Test_keywords.sql* dans l'éditeur de requêtes, modifiez les mots-clés selon les entrées que vous recherchez et exécutez-le. Testez et affinez vos mots-clés pour obtenir les données souhaitées, en fonction des entrées renvoyées par la base de données. La partie du script à modifier est située sous le commentaire encadré par des étoiles:
 
 ```sql
 SELECT ...
@@ -19,7 +19,7 @@ WHERE (
 		act.act ILIKE '%opti%'
 		)
 ```
-Dans le fichier Test_keywords.sql on teste seulement trois mots-clés: photo, daguer et opti, précédés ou suivis de n'importe quelle chaîne de caractères. Des exemples plus élaborés sont proposés dans les fichiers *Create_tables_in_directories_graph.sql* et *Insert_into_tables_in_directories_graph.sql*. 
+Dans le fichier Test_keywords.sql, on teste seulement trois mots-clés: photo, daguer et opti, précédés ou suivis de n'importe quelle chaîne de caractères. Des exemples plus élaborés sont proposés dans les fichiers *Create_tables_in_directories_graph.sql* et *Insert_into_tables_in_directories_graph.sql*. 
 
 4) Importez les données correspondant aux mots-clés que vous avez préalablement identifiés comme valides dans la base de données SoDUCo. Pour cela, ouvrez le fichier *Insert_into_tables_in_directories_graph.sql* dans l'éditeur de requêtes, modifiez les parties indiquées sous les commentaires encadrés par des étoiles, et exécutez le. Parmi les modifications à effectuer, il faut:
    * changer les mots-clés à deux endroits (mettre les mêmes à chaque fois!)
