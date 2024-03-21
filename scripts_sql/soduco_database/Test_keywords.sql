@@ -38,7 +38,7 @@ LEFT JOIN LATERAL (
 	GROUP BY entry_uuid
 ) AS titles
 ON True
-WHERE (
+WHERE ((
 	/* ************************************************************* */
         /* Modifier la liste des mots-clés selon les données à extraire  */
         /* ************************************************************* */
@@ -54,4 +54,5 @@ WHERE (
 		AND act ILIKE '%nouv%'
    )
 )
-AND sources.liste_type = 'ListNoms'
+AND (sources.liste_type = 'ListNoms')
+AND ((length(entries.ner_xml) - length(replace(entries.ner_xml, '<PER>', '' ))) / length('<PER>') <= 1));
