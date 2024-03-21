@@ -31,17 +31,18 @@ INSERT INTO directories_graph.directories_content (uuid, person, activity,loc, c
 	) AS titles
 	ON True
 	WHERE (
-		/* ************************************************************* */
+	/* ************************************************************* */
         /* Modifier la liste des mots-clés selon les données à extraire  */
         /* ************************************************************* */
-		(act ILIKE '%atlas%' AND act ILIKE '%cart%')OR
+		((act ILIKE '%atlas%' AND act ILIKE '%cart%')OR
 		(act ILIKE '%cart%' AND act ILIKE '%géo%')OR
 		(act ILIKE '%cart%' AND act ILIKE '%geo%')OR
 		(act ILIKE '%cart%' AND act ILIKE '%marin%')OR
 		(act ILIKE '%plan%' AND act ILIKE '%topograph%')OR
 		(act ILIKE '%cart%' AND act ILIKE '%topograph%')
 	)
-	AND sources.liste_type = 'ListNoms';
+	AND (sources.liste_type = 'ListNoms')
+	AND ((length(entries.ner_xml) - length(replace(entries.ner_xml, '<PER>', '' ))) / length('<PER>') <= 1));
 	
 	
 	
@@ -77,17 +78,18 @@ SELECT  entries.uuid as entry_id, addresses.uuid as address_id, geocoded_address
 	) AS titles
 	ON True
 	WHERE (
-		/* ************************************************************* */
+	/* ************************************************************* */
         /* Modifier la liste des mots-clés selon les données à extraire  */
         /* ************************************************************* */
-		(act ILIKE '%atlas%' AND act ILIKE '%cart%')OR
+		((act ILIKE '%atlas%' AND act ILIKE '%cart%')OR
 		(act ILIKE '%cart%' AND act ILIKE '%géo%')OR
 		(act ILIKE '%cart%' AND act ILIKE '%geo%')OR
 		(act ILIKE '%cart%' AND act ILIKE '%marin%')OR
 		(act ILIKE '%plan%' AND act ILIKE '%topograph%')OR
 		(act ILIKE '%cart%' AND act ILIKE '%topograph%')
 	)
-	AND sources.liste_type = 'ListNoms';
+	AND (sources.liste_type = 'ListNoms')
+	AND ((length(entries.ner_xml) - length(replace(entries.ner_xml, '<PER>', '' ))) / length('<PER>') <= 1));
 
 -- Mise à jour des informations sur le nouveau graphe nommé (cad le nouveau jeu de données) ajouté à la base
 /* ****************************************************************************************************************************** */
