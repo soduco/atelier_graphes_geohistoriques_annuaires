@@ -43,7 +43,7 @@ CREATE TABLE directories_graph.directories_content AS (
 	/* ************************************************************* */
         /* Modifier la liste des mots-clés selon les données à extraire  */
         /* ************************************************************* */
-		act ILIKE '%nouveauté%' 
+		(act ILIKE '%nouveauté%' 
 		OR act ILIKE '%nouveaute%' 
 		OR act ILIKE '%nouvaute%' 
 		OR act ILIKE '%nouv.%'
@@ -55,7 +55,8 @@ CREATE TABLE directories_graph.directories_content AS (
 			AND act ILIKE '%nouv%'
    		)
 	)
-	AND sources.liste_type = 'ListNoms');
+	AND (sources.liste_type = 'ListNoms')
+	AND ((length(entries.ner_xml) - length(replace(entries.ner_xml, '<PER>', '' ))) / length('<PER>') <= 1));
 
 /*Création de la table geocoding*/
 CREATE TABLE directories_graph.geocoding AS (
@@ -93,7 +94,7 @@ CREATE TABLE directories_graph.geocoding AS (
 	/* ************************************************************* */
         /* Modifier la liste des mots-clés selon les données à extraire  */
         /* ************************************************************* */
-		act ILIKE '%nouveauté%' 
+		(act ILIKE '%nouveauté%' 
 		OR act ILIKE '%nouveaute%' 
 		OR act ILIKE '%nouvaute%' 
 		OR act ILIKE '%nouv.%'
@@ -105,7 +106,8 @@ CREATE TABLE directories_graph.geocoding AS (
 			AND act ILIKE '%nouv%'
    		)
 	)
-	AND sources.liste_type = 'ListNoms');
+	AND (sources.liste_type = 'ListNoms')
+	AND ((length(entries.ner_xml) - length(replace(entries.ner_xml, '<PER>', '' ))) / length('<PER>') <= 1));
 	
 -- Ajout d'une clé primaire à la table principale 
 ALTER TABLE directories_graph.directories_content ADD COLUMN entry_id uuid ;
