@@ -1,6 +1,7 @@
 SET SEARCH_PATH=directories_v2, public;
 
-SELECT  entries.uuid, 
+SELECT  DISTINCT ON (per, titre, act, loc, cardinal, sources.code_ouvrage, sources.liste_annee, sources.liste_type, entries.ner_xml)
+		entries.uuid, 
 		entries.ner_xml, 
 		per, 
 		titre, 
@@ -42,17 +43,10 @@ WHERE ((
 	/* ************************************************************* */
         /* Modifier la liste des mots-clés selon les données à extraire  */
         /* ************************************************************* */
-	act ILIKE '%nouveauté%' 
-	OR act ILIKE '%nouveaute%' 
-	OR act ILIKE '%nouvaute%' 
-	OR act ILIKE '%nouv.%'
-	OR (
-		act ILIKE '%march%' 
-		AND act ILIKE '%nouv%'
-	)
-	OR (act ILIKE '%magasin%'
-		AND act ILIKE '%nouv%'
-   )
+	act ILIKE '%photo%' 
+	OR act ILIKE '%daguer%' 
+	OR act ILIKE '%opti%' 
+	
 )
 AND (sources.liste_type = 'ListNoms')
-AND ((length(entries.ner_xml) - length(replace(entries.ner_xml, '<PER>', '' ))) / length('<PER>') <= 1));
+AND ner_xml like '%<PER>%');
