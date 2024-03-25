@@ -30,19 +30,17 @@ INSERT INTO directories_graph.directories_content (uuid, person, activity,loc, c
 		GROUP BY entry_uuid
 	) AS titles
 	ON True
-	WHERE (
+	WHERE ((
 	/* ************************************************************* */
-        /* Modifier la liste des mots-clés selon les données à extraire  */
-        /* ************************************************************* */
-		((act ILIKE '%atlas%' AND act ILIKE '%cart%')OR
-		(act ILIKE '%cart%' AND act ILIKE '%géo%')OR
-		(act ILIKE '%cart%' AND act ILIKE '%geo%')OR
-		(act ILIKE '%cart%' AND act ILIKE '%marin%')OR
-		(act ILIKE '%plan%' AND act ILIKE '%topograph%')OR
-		(act ILIKE '%cart%' AND act ILIKE '%topograph%')
-	)
-	AND (sources.liste_type = 'ListNoms')
-	AND ((length(entries.ner_xml) - length(replace(entries.ner_xml, '<PER>', '' ))) / length('<PER>') <= 1));
+    /* Modifier la liste des mots-clés selon les données à extraire  */
+    /* ************************************************************* */
+	act ILIKE '%photo%' 
+	OR act ILIKE '%daguer%' 
+	OR act ILIKE '%opti%' 	
+)
+AND (sources.liste_type = 'ListNoms')
+AND ner_xml like '%<PER>%'
+AND length(per)>2);
 	
 	
 	
@@ -77,24 +75,22 @@ SELECT  entries.uuid as entry_id, addresses.uuid as address_id, geocoded_address
 		GROUP BY entry_uuid
 	) AS titles
 	ON True
-	WHERE (
+	WHERE ((
 	/* ************************************************************* */
         /* Modifier la liste des mots-clés selon les données à extraire  */
         /* ************************************************************* */
-		((act ILIKE '%atlas%' AND act ILIKE '%cart%')OR
-		(act ILIKE '%cart%' AND act ILIKE '%géo%')OR
-		(act ILIKE '%cart%' AND act ILIKE '%geo%')OR
-		(act ILIKE '%cart%' AND act ILIKE '%marin%')OR
-		(act ILIKE '%plan%' AND act ILIKE '%topograph%')OR
-		(act ILIKE '%cart%' AND act ILIKE '%topograph%')
-	)
-	AND (sources.liste_type = 'ListNoms')
-	AND ((length(entries.ner_xml) - length(replace(entries.ner_xml, '<PER>', '' ))) / length('<PER>') <= 1));
+	act ILIKE '%photo%' 
+	OR act ILIKE '%daguer%' 
+	OR act ILIKE '%opti%' 	
+)
+AND (sources.liste_type = 'ListNoms')
+AND ner_xml like '%<PER>%'
+AND length(per)>2);
 
 -- Mise à jour des informations sur le nouveau graphe nommé (cad le nouveau jeu de données) ajouté à la base
 /* ****************************************************************************************************************************** */
 /* Modifier les propriétés du graphe nommmé selon les données extraites: identifiant, titre du jeu de données, date d'extraction  */
 /* ****************************************************************************************************************************** */
-UPDATE directories_graph.directories_content SET graph_name ='cartes_et_plans' WHERE graph_name ISNULL;
-UPDATE directories_graph.geocoding SET graph_name ='cartes_et_plans' WHERE graph_name ISNULL;
-INSERT INTO directories_graph.dataset VALUES ('Graveurs et marchands de cartes et plans', '2023-11-01', 'cartes_et_plans', gen_random_uuid ());
+UPDATE directories_graph.directories_content SET graph_name ='photographes_travail' WHERE graph_name ISNULL;
+UPDATE directories_graph.geocoding SET graph_name ='photographes_travail' WHERE graph_name ISNULL;
+INSERT INTO directories_graph.dataset VALUES ('Métiers de la photographie - travail en cours', '2024-03-25', 'photographes_travail', gen_random_uuid ());
