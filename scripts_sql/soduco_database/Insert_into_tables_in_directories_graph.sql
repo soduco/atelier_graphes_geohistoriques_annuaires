@@ -2,7 +2,18 @@
 SET SEARCH_PATH=directories_v2, public;
 
 INSERT INTO directories_graph.directories_content (uuid, person, activity,loc, cardinal,title,directory,published, fulladd, id_address, entry_id)
-	SELECT  entries.uuid, TRANSLATE(per,'.:;\-_\(\)\[\]?!$&*/','') AS person, TRANSLATE(act,'.:;\-_\(\)\[\]?!$&*/','') AS activity, loc, cardinal, titre AS title, sources.code_ouvrage AS directory, sources.liste_annee AS published, trim(concat(cardinal, ' ', loc)) AS fulladd, addresses.uuid as id_address,  gen_random_uuid () 
+	SELECT  DISTINCT ON (person, title, activity, loc, cardinal, directory, published)
+	entries.uuid, 
+	TRANSLATE(per,'.:;\-_\(\)\[\]?!$&*/','') AS person, 
+	TRANSLATE(act,'.:;\-_\(\)\[\]?!$&*/','') AS activity, 
+	loc, 
+	cardinal, 
+	titre AS title, 
+	sources.code_ouvrage AS directory, 
+	sources.liste_annee AS published, 
+	trim(concat(cardinal, ' ', loc)) AS fulladd, 
+	addresses.uuid as id_address,  
+	gen_random_uuid () 
 	FROM activities 
 	JOIN entries
 		ON activities.entry_uuid = entries.uuid
