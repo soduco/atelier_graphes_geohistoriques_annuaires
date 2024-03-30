@@ -56,7 +56,13 @@ AND length(per)>2);
 	
 	
 INSERT INTO directories_graph.geocoding 
-SELECT  entries.uuid as entry_id, addresses.uuid as address_id, geocoded_address_gazetteer.housenumber, geocoded_address_gazetteer.street, geocoded_address_gazetteer.locality, geocoded_address_gazetteer.source, ST_Transform(geocoded_address_gazetteer.geometry,4326) AS precise_geom
+SELECT  entries.uuid as entry_id, 
+	addresses.uuid as address_id, 
+	geocoded_address_gazetteer.housenumber, 
+	geocoded_address_gazetteer.street, 
+	geocoded_address_gazetteer.locality, 
+	geocoded_address_gazetteer.source, 
+	ST_Transform(geocoded_address_gazetteer.geometry,4326) AS precise_geom
 	FROM activities 
 	JOIN entries
 		ON activities.entry_uuid = entries.uuid
