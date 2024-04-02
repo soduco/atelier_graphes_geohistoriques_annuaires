@@ -1,6 +1,6 @@
 SET SEARCH_PATH=directories_v2, public;
 
-SELECT  DISTINCT ON (per, titre, act, loc, cardinal, sources.code_ouvrage, sources.liste_annee, sources.liste_type, entries.ner_xml)
+SELECT  DISTINCT ON (per, act, loc, cardinal, sources.code_ouvrage, sources.liste_annee, sources.liste_type)
 		entries.uuid, 
 		entries.ner_xml, 
 		per, 
