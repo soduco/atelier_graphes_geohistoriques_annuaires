@@ -2,7 +2,7 @@
 SET SEARCH_PATH=directories_v2, public;
 
 INSERT INTO directories_graph.directories_content (uuid, person, activity,loc, cardinal,title,directory,published, fulladd, id_address, entry_id)
-	SELECT  DISTINCT ON (person, title, activity, loc, cardinal, directory, published)
+	SELECT  DISTINCT ON (person, activity, loc, cardinal, directory, published)
 	entries.uuid, 
 	TRANSLATE(per,'.:;\-_\(\)\[\]?!$&*/','') AS person, 
 	TRANSLATE(act,'.:;\-_\(\)\[\]?!$&*/','') AS activity, 
