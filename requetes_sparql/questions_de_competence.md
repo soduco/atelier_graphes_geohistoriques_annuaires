@@ -1,4 +1,4 @@
-# CQ1: Quelle est l’adresse du photographe Gallino en 1861 ?
+# CQ1: Quelle est l’adresse du photographe Dubois en 1861 ?
 
 Réponse attendue: 25 boulevard de Sébastopol
 ```
@@ -14,11 +14,11 @@ select * where {
     ?directory pav:createdOn 1861. 
     ?e locn:address ?add.
     ?add locn:fullAddress ?fullAdd.
-    Filter regex(?label, "dubois").
+    Filter regex(?label, "Dubois").
 }
 ```
-# CQ2: Combien y a-t-il de "photographes" localisés rue de Rivoli en 1856 ? 
-Réponse attendue: 13
+# CQ2: Combien y a-t-il de "photographes" localisés rue de Rivoli en 1882 ? 
+Réponse attendue: 11
 ```
 PREFIX locn: <http://www.w3.org/ns/locn#>
 PREFIX ont: <http://rdf.geohistoricaldata.org/def/directory#>
@@ -28,10 +28,10 @@ PREFIX pav: <http://purl.org/pav/>
 select (count(?e) as ?nombre) where { 
     ?e a ont:Entry.
     ?e prov:wasDerivedFrom ?directory.
-    ?directory pav:createdOn 1856. 
+    ?directory pav:createdOn 1882. 
     ?e locn:address ?add.
     ?add locn:thoroughfare ?voie.
-    Filter regex(?voie, "rivoli").
+    Filter regex(?voie, "Rivoli").
 }
 ```
 # CQ3: Quels sont les photographes situés dans le rectangle englobant (Xmax=2.3385 Ymax= 48.8663 Xmin = 2.3360 Ymin= 48.8625) en 1875 ? 
