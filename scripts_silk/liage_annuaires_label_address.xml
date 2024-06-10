@@ -16,8 +16,8 @@
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/graveurs_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_et_plans"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/photographes_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/photographes_travail"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -29,8 +29,8 @@
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/graveurs_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_et_plans"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/photographes_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/photographes_travail"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -50,16 +50,15 @@
 				<RestrictTo>{ ?b rdf:type adb:Entry } .</RestrictTo>
 			</TargetDataset>
 <LinkageRule>
-<!--Key 2 : label and activity-->
+<!--Clé 2 : label et address -->
 <!--
-Conserve tous les cas où le score minimal de la combinaison de propriété Label-Activité est supérieur à 0
+Conserve tous les cas où le score minimal de la combinaison de propriété Label-Address est supérieur à 0
 -->
 <Aggregate id="min_label_address" required="true" weight="1" type="min">
-<Aggregate id="average_num_voie" required="true" weight="1" type="min">
 <!--
-Pour deux entrées : calcule la distance entre les adresses
+Pour deux entrées : calcule la distance tokenwise entre les noms de rues
 -->
-<Compare id="tokenwiseDistance_address_1" required="true" weight="1" metric="levenshtein" threshold="0.3">
+<Compare id="tokenwiseDistance_address_1" required="true" weight="1" metric="tokenwiseDistance" threshold="0.0">
 		<TransformInput id="lowerCase1" function="lowerCase">
 			<Input id="address1" path="?a/locn:thoroughfare"/>
 		</TransformInput>
@@ -68,8 +67,10 @@ Pour deux entrées : calcule la distance entre les adresses
 			<Input id="address2" path="?b/locn:thoroughfare"/>
 		</TransformInput>
 </Compare>
-
-<Compare id="equality_address_1" required="true" weight="1" metric="levenshtein" threshold="0.0">
+<!--
+Pour deux entrées : vérifie l'égalité des numéros de rues
+-->
+<Compare id="equality_address_1" required="true" weight="1" metric="equality" threshold="0.0">
 		<TransformInput id="lowerCase11" function="lowerCase">
 			<Input id="numaddress1" path="?a/locn:locatorDesignator"/>
 		</TransformInput>
@@ -78,11 +79,10 @@ Pour deux entrées : calcule la distance entre les adresses
 			<Input id="numaddress2" path="?b/locn:locatorDesignator"/>
 		</TransformInput>
 </Compare>
-</Aggregate>
 <!--
-Pour deux entrées : calcule la distance d'édition entre les valeurs de la propriété Label
+Pour deux entrées : calcule la distance qGrams entre les valeurs de la propriété Label
 -->
-<Compare id="levenshteinDistance_label_2" required="true" weight="1" metric="levenshtein" threshold="0.2">
+<Compare id="levenshteinDistance_label_2" required="true" weight="1" metric="qGrams" threshold="0.0">
 <TransformInput id="lowerCase3" function="lowerCase">
 <Input id="label3" path="?a/rdfs:label"/>
 </TransformInput>
@@ -93,13 +93,13 @@ Pour deux entrées : calcule la distance d'édition entre les valeurs de la prop
 </Compare>
 </Aggregate>
 </LinkageRule>
-<Filter limit="50"/>
+<Filter limit="25"/>
 <Outputs>
 <Output type="file" minConfidence="0.00">
 <!--
-Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8
+Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.0
 -->
-<Param name="file" value="labeladdress_accepted_links.nt"/>
+<Param name="file" value="labeladdress_accepted_links_00.nt"/>
 <Param name="format" value="ntriples"/>
 </Output>
 </Outputs>
