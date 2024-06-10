@@ -16,8 +16,8 @@
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/graveurs_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_et_plans"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/photographes_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/photographes_travail"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -29,8 +29,8 @@
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/graveurs_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_et_plans"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/photographes_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/photographes_travail"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -50,56 +50,63 @@
 				<RestrictTo>{ ?b rdf:type adb:Entry } .</RestrictTo>
 			</TargetDataset>
 <LinkageRule>
-<!--Key 2 : label and activity-->
+<!--Clé 4 : label et activity-->
 <!--
 Conserve tous les cas où le score minimal de la combinaison de propriété Label-Activité est supérieur à 0
 -->
-<Aggregate id="min_label_activity" required="true" weight="1" type="min">
+<Aggregate id="min_1" weight="1" type="min">
 <!--
 Pour deux entrées : calcule la distance d'édition Tokenwise entre les valeurs de la propriété Activité
 -->
-<Compare id="tokenwiseDistance_activity_1" required="true" weight="1" metric="tokenwiseDistance" threshold="0.3">
-<!--Distance maximale = 0.6-->
+<Compare id="tokenwiseDistance_activity_1" weight="1" metric="tokenwiseDistance" threshold="0.0">
 <!--
 Transformation des valeurs : passage en minuscules
 -->
-<TransformInput id="transfo_activity_source_1_lower" function="lowerCase">
+<TransformInput id="lowerCase1" function="lowerCase">
 <Input id="source_activity_1" path="?a/rda:P50104"/>
 </TransformInput>
 <!--
 Transformation des valeurs : passage en minuscules
 -->
-<TransformInput id="transfo_activity_target_2_lower" function="lowerCase">
+<TransformInput id="lowerCase2" function="lowerCase">
 <Input id="target_activity_1" path="?b/rda:P50104"/>
 </TransformInput>
 </Compare>
 <!--
-Pour deux entrées : calcule la distance d'édition Tokenwise entre les valeurs de la propriété Label
+Pour deux entrées : calcule la distance d'édition qGrams entre les valeurs de la propriété Label
 -->
-<Compare id="levenshteinDistance_label_2" required="true" weight="1" metric="levenshtein" threshold="0.2">
-<!--Distance maximale = 0.7-->
+<Compare id="qGrams_label_2" weight="1" metric="qGrams" threshold="0.0">
 <!--
 Transformation des valeurs : passage en minuscules
 -->
-<TransformInput id="transfo_label_source_2_lower" function="lowerCase">
+<TransformInput id="lowerCase3" function="lowerCase">
 <Input id="source_label_2" path="?a/rdfs:label"/>
 </TransformInput>
 <!--
 Transformation des valeurs : passage en minuscules
 -->
-<TransformInput id="transfo_label_target_2_lower" function="lowerCase">
+<TransformInput id="lowerCase4" function="lowerCase">
 <Input id="target_label_2" path="?b/rdfs:label"/>
 </TransformInput>
 </Compare>
+<!--
+Pour deux entrées, compare l'écart temporel de publication qui doit rester inférieur à 7 ans
+-->
+<Compare id="num1" weight="1" metric="num" threshold="7.0" indexing="true">
+<Input id="source_issued" path="?a/dcterms:issued"/>
+<Input id="target_issued" path="?b/dcterms:issued"/>
+<Param name="minValue" value="-Infinity" />
+<Param name="maxValue" value="Infinity" />
+</Compare>
 </Aggregate>
 </LinkageRule>
-<Filter limit="50"/>
+<Filter limit="25"/>
 <Outputs>
 <Output type="file" minConfidence="0.00">
 <!--
-Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8
+Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.0
 -->
-<Param name="file" value="labelactivity_accepted_links.nt"/>
+<Param name="file" value="labelactivity_accepted_links_00_7.nt"/>
 <Param name="format" value="ntriples"/>
 </Output>
 </Outputs>
