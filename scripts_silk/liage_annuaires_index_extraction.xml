@@ -16,8 +16,8 @@
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/graveurs_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_et_plans"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/photographes_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/photographes_travail"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -29,8 +29,8 @@
 		  <Param name="pageSize" value="1000"></Param>
 		  <Param name="pauseTime" value="0"></Param>
 		  <Param name="retryCount" value="3"></Param>
-		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/graveurs_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
-		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/cartes_et_plans"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
+		  <Param name="endpointURI" value="http://DESKTOP-PFPG9LI:7200/repositories/photographes_local"></Param><!--Mettre l'adresse du répertoire GraphDB où se trouvent les données des annuaires-->
+		  <Param name="graph" value="http://rdf.geohistoricaldata.org/id/directories/photographes_travail"></Param><!--Mettre l'URI du graphe nommé où se trouvent les données sur lesquelles on travaille-->
 		  <Param name="retryPause" value="1000"></Param>
 		  <Param name="queryParameters" value=""/>
 		  <Param name="login" value=""/>
@@ -51,9 +51,9 @@
 			</TargetDataset>
 			<LinkageRule>
 			<!--Score maximal-->
-				<Aggregate id="max_score" required="true"  weight="1" type="max">
+				<Aggregate id="max_score" required="true"  weight="1" type="min">
 				<!-- : Compare les numéro d'extraction des entrées (utile dans le cas où l'entrée extraite comporte plusieurs adresses ou activités) -->
-				<Compare id="levenshtein_numEntry" required="true" weight="1" metric="levenshtein" threshold="0.0">
+				<Compare id="sim_numEntry" required="true" weight="1" metric="equality" threshold="0.0">
 					<TransformInput id="transfo_1" function="lowerCase">
 						<Input id="source_numEntry" path="?a/adb:numEntry"/>
 					</TransformInput>
@@ -66,7 +66,7 @@
 			<Filter limit="150"/>
 			<Outputs>
 				<Output type="file" minConfidence="0.00">
-				<!--Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.8-->
+				<!--Fichier RDF où sont sauvegardés les liens sameAS "sûrs" pour lesquels la confiance est supérieure ou égale à 0.0-->
 					<Param name="file" value="numEntry_accepted_links.nt"/>
 					<Param name="format" value="ntriples"/>
 				</Output>
