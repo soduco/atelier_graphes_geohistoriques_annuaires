@@ -76,7 +76,7 @@ map.on(L.Draw.Event.CREATED, function (e) {
     "Jacoubet (1836)":wmsJacoubet,
     "Andriveau (1849)":wmsAndriveau,
     "Atlas municipal (1888)":wmsbhdv,
-    "Plan IGN (2022)":GeoportailFrance_plan,
+    "Plan IGN (2024)":GeoportailFrance_plan,
     "Open Data Paris (2023)":openDataParis
 }
 
