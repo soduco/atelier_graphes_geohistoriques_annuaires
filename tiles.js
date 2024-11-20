@@ -14,15 +14,23 @@ var wmsbhdv = L.tileLayer.wms('https://geohistoricaldata.org/geoserver/ows?SERVI
     attribution: 'Atlas municipal - 1888 © <a target="_blank" href="https://geohistoricaldata.org/">GeoHistoricalData</a>'
     });
 
-var GeoportailFrance_plan = L.tileLayer('https://wxs.ign.fr/{apikey}/geoportail/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&STYLE={style}&TILEMATRIXSET=PM&FORMAT={format}&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}', {
-    attribution: '<a target="_blank" href="https://www.geoportail.gouv.fr/">Geoportail France</a>',
-    bounds: [[-75, -180], [81, 180]],
-    minZoom: 2,
-    maxZoom: 18,
-    apikey: 'choisirgeoportail',
-    format: 'image/png',
-    style: 'normal'
-});
+var GeoportailFrance_plan = L.tileLayer(
+    "https://data.geopf.fr/wmts?" +
+    "&REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0" +
+    "&STYLE=normal" +
+    "&TILEMATRIXSET=PM" +
+    "&FORMAT=image/png"+
+    "&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2"+
+    "&TILEMATRIX={z}" +
+    "&TILEROW={y}" +
+    "&TILECOL={x}",
+    {
+        minZoom : 0,
+        maxZoom : 18,
+        attribution : "IGN-F/Geoportail",
+        tileSize : 256 // les tuiles du Géooportail font 256x256px
+    }
+);
 
 /////////////// VECTOR LAYER
 
